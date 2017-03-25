@@ -22,6 +22,8 @@ namespace IotHello.Uwp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ViewModels.MainViewModel VM = new ViewModels.MainViewModel();
+
         public MainPage()
         {
             this.InitializeComponent();
