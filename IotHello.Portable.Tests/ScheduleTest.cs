@@ -17,7 +17,7 @@ namespace IotHello.Portable.Tests
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14)));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19)));
-            Models.Controller.Current = new TestController();
+            Models.Controller.Current = new TestController() { Status = Models.GenStatus.Invalid };
         }
 
         [TestMethod]
@@ -62,5 +62,28 @@ namespace IotHello.Portable.Tests
 
             Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
         }
+
+        [TestMethod]
+        public async Task Midnight()
+        {
+            Clock.Now = new DateTime(2017, 3, 1, 11, 59, 58);
+            await Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 2, 00, 00, 01);
+            await Models.Schedule.Current.Tick();
+
+            Assert.AreEqual(Models.GenStatus.Invalid, Models.Controller.Current.Status);
+        }
+
+        [TestMethod]
+        public async Task DuringPeriodNoChange()
+        {
+            Clock.Now = new DateTime(2017, 3, 1, 07, 59, 58);
+            await Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 2, 08, 00, 01);
+            await Models.Schedule.Current.Tick();
+
+            Assert.AreEqual(Models.GenStatus.Invalid, Models.Controller.Current.Status);
+        }
+
     }
 }
