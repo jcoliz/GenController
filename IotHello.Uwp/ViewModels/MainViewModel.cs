@@ -15,14 +15,9 @@ namespace IotHello.Uwp.ViewModels
 
         public string CurrentTime { get; set; }
 
-        public string Status => Models.GenController.Current.FullStatus;
+        public string Status => Models.Controller.Current.FullStatus;
 
-        public ObservableCollection<Models.GenPeriod> Periods = new ObservableCollection<Models.GenPeriod>()
-        {
-            new Models.GenPeriod(TimeSpan.FromHours(7),TimeSpan.FromHours(9)),
-            new Models.GenPeriod(TimeSpan.FromHours(12),TimeSpan.FromHours(14)),
-            new Models.GenPeriod(TimeSpan.FromHours(17),TimeSpan.FromHours(19))
-        };
+        public ObservableCollection<Models.GenPeriod> Periods => Models.Schedule.Current.Periods;
 
         public Models.Action On =
             new Models.Action() { Label = "On", Command = new DelegateCommand(TurnOn), Color = "Green" };
@@ -32,12 +27,12 @@ namespace IotHello.Uwp.ViewModels
 
         private static async void TurnOn(object obj)
         {
-            await Models.GenController.Current.Start();
+            await Models.Controller.Current.Start();
         }
 
         private static async void TurnOff(object obj)
         {
-            await Models.GenController.Current.Stop();
+            await Models.Controller.Current.Stop();
         }
 
         public void Update()

@@ -15,7 +15,7 @@ namespace IotHello.Uwp.Models
     /// * Stop relay
     /// * IsRunning input
     /// </remarks>
-    public class GenController
+    public class Controller
     {
         public GenStatus Status { get; private set; } = GenStatus.Stopped;
 
@@ -59,16 +59,16 @@ namespace IotHello.Uwp.Models
 
             Status = GenStatus.Stopped;
         }
-        public static GenController Current
+        public static Controller Current
         {
             get
             {
                 if (null == _Current)
-                    _Current = new GenController();
+                    _Current = new Controller();
                 return _Current;
             }
         }
-        static GenController _Current = null;
+        static Controller _Current = null;
 
         // http://www.magnum-dimensions.com/sites/default/files/MagAGS/ME-AGS-Onan-Models-HGJAD-HGJAE-HGJAF-Rev-12-02-08.pdf
 

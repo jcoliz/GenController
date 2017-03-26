@@ -100,8 +100,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Action.cs" />
-    <Compile Include="Models\GenController.cs" />
+    <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
