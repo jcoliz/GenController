@@ -12,5 +12,6 @@ namespace IotHello.Uwp.Models
     {
         public DelegateCommand Command { get; set; }
         public string Label { get; set; }
+        public string Color { get; set; }
     }
 }

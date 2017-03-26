@@ -15,13 +15,14 @@ namespace IotHello.Uwp.ViewModels
 
         public string CurrentTime { get; set; } = "12:34:56";
 
-        public ObservableCollection<string> Infos = new ObservableCollection<string>() { $"0700{Environment.NewLine}0900", $"1200{Environment.NewLine}1400", $"1700{Environment.NewLine}1900", "+Add" };
+        public ObservableCollection<string> Infos = new ObservableCollection<string>()
+            { $"0700{Environment.NewLine}0900", $"1200{Environment.NewLine}1400", $"1700{Environment.NewLine}1900", "+Add" };
 
-        public ObservableCollection<Models.Action> Actions = new ObservableCollection<Models.Action>()
-        {
-            new Models.Action() { Label = "On", Command = new DelegateCommand(TurnOn) },
-            new Models.Action() { Label = "Off", Command = new DelegateCommand(TurnOff) }
-        };
+        public Models.Action On =
+            new Models.Action() { Label = "On", Command = new DelegateCommand(TurnOn), Color = "Green" };
+
+        public Models.Action Off =
+            new Models.Action() { Label = "Off", Command = new DelegateCommand(TurnOff), Color = "Red" };
 
         private static void TurnOn(object obj)
         {

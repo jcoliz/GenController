@@ -11,17 +11,21 @@
 
     <Page.Resources>
         <DataTemplate x:Key="List_Action" x:DataType="lm:Action">
-            <Button HorizontalAlignment="Stretch" Content="{x:Bind Label}" Command="{x:Bind Command}" Margin="10"/>
+            <Button HorizontalAlignment="Stretch" Command="{x:Bind Command}" Margin="10" Background="{x:Bind Color}" Height="100">
+                <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+            </Button>
         </DataTemplate>
         <DataTemplate x:Key="List_Info" x:DataType="s:String">
             <Border Padding="10" Margin="10" Background="RoyalBlue" Width="200" Height="200">
-                <TextBlock Text="{x:Bind}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+                <TextBlock Text="{x:Bind}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Border>
         </DataTemplate>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+            <!-- Title Bar -->
+            <RowDefinition Height="Auto"/>
             <!-- Clock -->
             <RowDefinition Height="Auto"/>
             <!-- Info Display -->
@@ -29,11 +33,27 @@
             <!-- Commands -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <!-- Clock -->
-        <TextBlock Text="0:00:00" FontSize="100" HorizontalAlignment="Center"/>
+        <TextBlock Margin="0,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" Text="0:00:00" FontSize="120" HorizontalAlignment="Center"/>
+        <!-- Title Bar -->
+        <Border  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10" Background="DarkBlue" Height="50"/>
+        <StackPanel Orientation="Horizontal">
+            <Image Margin="20,0" Width="40" Height="40" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Foreground="White" Text="Gen Control 1.0" VerticalAlignment="Center" FontSize="25"/>
+        </StackPanel>
+        <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0" Text="Status: Stopped"/>
         <!-- Info Display -->
-        <GridView Grid.Row="1" ItemsSource="{x:Bind VM.Infos}" ItemTemplate="{StaticResource List_Info}" />
+        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Infos}" ItemTemplate="{StaticResource List_Info}" HorizontalAlignment="Center" />
         <!-- Commands -->
-        <ItemsControl Grid.Row="2" ItemsSource="{x:Bind VM.Actions}" ItemTemplate="{StaticResource List_Action}" />
+        <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.On.Command}" Margin="10" Background="{x:Bind VM.On.Color}" Height="100">
+            <TextBlock Text="{x:Bind VM.On.Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Command="{x:Bind VM.Off.Command}" Margin="10" Background="{x:Bind VM.Off.Color}" Height="100">
+            <TextBlock Text="{x:Bind VM.Off.Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+        </Button>
     </Grid>
 </Page>
