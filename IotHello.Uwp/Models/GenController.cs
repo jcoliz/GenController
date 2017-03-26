@@ -6,29 +6,17 @@ using System.Threading.Tasks;
 
 namespace IotHello.Uwp.Models
 {
+    /// <summary>
+    /// Controls the hardware interface to the generator
+    /// </summary>
+    /// <remarks>
+    /// Hardware schematic:
+    /// * Start relay
+    /// * Stop relay
+    /// * IsRunning input
+    /// </remarks>
     public class GenController
     {
-        public static GenController Current
-        {
-            get
-            {
-                if (null == _Current)
-                    _Current = new GenController();
-                return _Current;
-            }
-        }
-        static GenController _Current = null;
-
-        // http://www.magnum-dimensions.com/sites/default/files/MagAGS/ME-AGS-Onan-Models-HGJAD-HGJAE-HGJAF-Rev-12-02-08.pdf
-
-        private readonly TimeSpan StopPinHigh = TimeSpan.FromSeconds(10);
-        private readonly TimeSpan StartPinHigh = TimeSpan.FromSeconds(10);
-        private readonly TimeSpan DelayBetweenStartAndStop = TimeSpan.FromSeconds(4);
-        private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromSeconds(4);
-
-        private bool StopPin = false;
-        private bool StartPin = false;
-
         public GenStatus Status { get; private set; } = GenStatus.Stopped;
 
         public string FullStatus
@@ -71,8 +59,30 @@ namespace IotHello.Uwp.Models
 
             Status = GenStatus.Stopped;
         }
+        public static GenController Current
+        {
+            get
+            {
+                if (null == _Current)
+                    _Current = new GenController();
+                return _Current;
+            }
+        }
+        static GenController _Current = null;
+
+        // http://www.magnum-dimensions.com/sites/default/files/MagAGS/ME-AGS-Onan-Models-HGJAD-HGJAE-HGJAF-Rev-12-02-08.pdf
+
+        private readonly TimeSpan StopPinHigh = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan StartPinHigh = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan DelayBetweenStartAndStop = TimeSpan.FromSeconds(4);
+        private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromSeconds(4);
+
+        private bool StopPin = false;
+        private bool StartPin = false;
+
     }
 
     public enum GenStatus { Invalid = 0, Stopped, Starting, Running, Stopping };
+
 
 }
