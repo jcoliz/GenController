@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,22 @@ namespace IotHello.Portable.Models
     /// * Stop relay
     /// * IsRunning input
     /// </remarks>
-    public class Controller : IController
+    public class Controller : IController, INotifyPropertyChanged
     {
-        public GenStatus Status { get; private set; } = GenStatus.Stopped;
+        public GenStatus Status
+        {
+            get
+            {
+                return _Status;
+            }
+            private set
+            {
+                _Status = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
+            }
+        }
+        private GenStatus _Status = GenStatus.Stopped;
 
         public string FullStatus
         {
@@ -25,10 +39,10 @@ namespace IotHello.Portable.Models
             {
                 string result = Status.ToString();
 
-                if (StartPin)
+                if (_StartPin)
                     result += " P1";
 
-                if (StopPin)
+                if (_StopPin)
                     result += " P2";
 
                 return result;
@@ -83,9 +97,28 @@ namespace IotHello.Portable.Models
         private readonly TimeSpan DelayBetweenStartAndStop = TimeSpan.FromSeconds(4);
         private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromSeconds(4);
 
-        private bool StopPin = false;
-        private bool StartPin = false;
+        private bool StopPin
+        {
+            set
+            {
+                _StopPin = value;
 
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
+            }
+        }
+        private bool _StopPin = false;
+        private bool StartPin
+        {
+            set
+            {
+                _StartPin = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
+            }
+        }
+        private bool _StartPin = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public enum GenStatus { Invalid = 0, Stopped, Starting, Running, Stopping };

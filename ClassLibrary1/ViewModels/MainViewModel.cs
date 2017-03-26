@@ -15,7 +15,7 @@ namespace IotHello.Portable.ViewModels
 
         public string CurrentTime { get; set; }
 
-        public string Status => Models.Controller.Current.FullStatus;
+        public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
         public ObservableCollection<Models.GenPeriod> Periods => Models.Schedule.Current.Periods;
 
@@ -42,9 +42,7 @@ namespace IotHello.Portable.ViewModels
                 CurrentTime = DateTime.Now.ToString("H\\:mm\\:ss");
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
 
-                var update = await Models.Schedule.Current.Tick();
-                if (update)
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
+                await Models.Schedule.Current.Tick();
             }
             catch (Exception ex)
             {

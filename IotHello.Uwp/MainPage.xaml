@@ -47,7 +47,7 @@
         </StackPanel>
         <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0">
             <Run Text="Status:"/>
-            <Run Text="{x:Bind VM.Status,Mode=OneWay}"/>
+            <Run Text="{x:Bind VM.Controller.FullStatus,Mode=OneWay}"/>
         </TextBlock>
         <!-- Periods Display -->
         <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None"
