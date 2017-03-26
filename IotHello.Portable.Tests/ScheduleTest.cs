@@ -30,5 +30,37 @@ namespace IotHello.Portable.Tests
 
             Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
         }
+
+        [TestMethod]
+        public async Task StoppingEdge()
+        {
+            Clock.Now = new DateTime(2017, 3, 1, 08, 59, 58);
+            await Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 1, 09, 00, 01);
+            await Models.Schedule.Current.Tick();
+
+            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
+        }
+        [TestMethod]
+        public async Task LastStartingEdge()
+        {
+            Clock.Now = new DateTime(2017, 3, 1, 16, 59, 58);
+            await Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 1, 17, 00, 01);
+            await Models.Schedule.Current.Tick();
+
+            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+        }
+
+        [TestMethod]
+        public async Task LastStoppingEdge()
+        {
+            Clock.Now = new DateTime(2017, 3, 1, 18, 59, 58);
+            await Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 1, 19, 00, 01);
+            await Models.Schedule.Current.Tick();
+
+            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
+        }
     }
 }
