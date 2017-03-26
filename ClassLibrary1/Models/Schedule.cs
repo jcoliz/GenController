@@ -9,12 +9,19 @@ namespace IotHello.Portable.Models
 {
     public class Schedule
     {
-        public ObservableCollection<Models.GenPeriod> Periods = new ObservableCollection<Models.GenPeriod>()
+        public ObservableCollection<Models.GenPeriod> Periods = new ObservableCollection<Models.GenPeriod>();
+        /*
         {
             new Models.GenPeriod(TimeSpan.FromHours(7),TimeSpan.FromHours(9)),
             new Models.GenPeriod(TimeSpan.FromHours(12),TimeSpan.FromHours(14)),
             new Models.GenPeriod(TimeSpan.FromHours(17),TimeSpan.FromHours(19))
         };
+        */
+
+        /// <summary>
+        /// Dependency injection for how to get the current time.
+        /// </summary>
+        public IClock Clock { get; set; }
 
         /// <summary>
         /// Call this regularly to test the schedule to see if it's time to change
@@ -22,7 +29,7 @@ namespace IotHello.Portable.Models
         /// </summary>
         public async Task Tick()
         {
-            var now = DateTime.Now;
+            var now = Clock.Now;
             var elapsed = now - LastTick;
 
             // Don't take action if we are currently TRYING to start or stop
