@@ -47,7 +47,8 @@
         </StackPanel>
         <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0" Text="Status: Stopped"/>
         <!-- Info Display -->
-        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Infos}" ItemTemplate="{StaticResource List_Info}" HorizontalAlignment="Center" />
+        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Infos}" SelectionMode="None"
+                  ItemTemplate="{StaticResource List_Info}" HorizontalAlignment="Center" />
         <!-- Commands -->
         <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.On.Command}" Margin="10" Background="{x:Bind VM.On.Color}" Height="100">
             <TextBlock Text="{x:Bind VM.On.Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
