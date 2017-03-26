@@ -5,17 +5,17 @@
     xmlns:local="using:IotHello.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:lm="using:IotHello.Uwp.Models"
+    xmlns:pm="using:IotHello.Portable.Models"
     xmlns:s="using:System"
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Key="List_Action" x:DataType="lm:Action">
+        <DataTemplate x:Key="List_Action" x:DataType="pm:Action">
             <Button HorizontalAlignment="Stretch" Command="{x:Bind Command}" Margin="10" Background="{x:Bind Color}" Height="100">
                 <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Button>
         </DataTemplate>
-        <DataTemplate x:Key="List_Info" x:DataType="lm:GenPeriod">
+        <DataTemplate x:Key="List_Info" x:DataType="pm:GenPeriod">
             <Border Padding="10" Margin="10" Background="RoyalBlue" Width="200" Height="200">
                 <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Border>

@@ -1,4 +1,4 @@
-﻿using ManiaLabs.Helpers;
+﻿using Common.Portable.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace IotHello.Uwp.Models
+namespace IotHello.Portable.Models
 {
     public class Action
     {

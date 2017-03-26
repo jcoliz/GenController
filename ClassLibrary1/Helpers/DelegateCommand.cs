@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ManiaLabs.Helpers
+namespace Common.Portable.Helpers
 {
     /// <summary>
     /// Quick and reusable ICommand

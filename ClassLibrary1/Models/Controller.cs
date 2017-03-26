@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotHello.Uwp.Models
+namespace IotHello.Portable.Models
 {
     /// <summary>
     /// Controls the hardware interface to the generator

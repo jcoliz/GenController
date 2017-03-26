@@ -1,4 +1,4 @@
-﻿using ManiaLabs.Helpers;
+﻿using Common.Portable.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotHello.Uwp.ViewModels
+namespace IotHello.Portable.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {

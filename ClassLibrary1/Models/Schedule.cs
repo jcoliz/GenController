@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotHello.Uwp.Models
+namespace IotHello.Portable.Models
 {
     public class Schedule
     {

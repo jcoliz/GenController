@@ -22,7 +22,7 @@ namespace IotHello.Uwp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public ViewModels.MainViewModel VM = new ViewModels.MainViewModel();
+        public Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();
         private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
 
         public MainPage()
