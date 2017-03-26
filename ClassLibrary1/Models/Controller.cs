@@ -15,7 +15,7 @@ namespace IotHello.Portable.Models
     /// * Stop relay
     /// * IsRunning input
     /// </remarks>
-    public class Controller
+    public class Controller : IController
     {
         public GenStatus Status { get; private set; } = GenStatus.Stopped;
 
@@ -59,7 +59,7 @@ namespace IotHello.Portable.Models
 
             Status = GenStatus.Stopped;
         }
-        public static Controller Current
+        public static IController Current
         {
             get
             {
@@ -67,8 +67,14 @@ namespace IotHello.Portable.Models
                     _Current = new Controller();
                 return _Current;
             }
+            
+            set
+            {
+                // Setting the controller is allowed for platform injection during tests
+                _Current = value;
+            }
         }
-        static Controller _Current = null;
+        static IController _Current = null;
 
         // http://www.magnum-dimensions.com/sites/default/files/MagAGS/ME-AGS-Onan-Models-HGJAD-HGJAE-HGJAF-Rev-12-02-08.pdf
 
