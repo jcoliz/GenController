@@ -38,7 +38,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!-- Clock -->
-        <TextBlock Margin="0,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" Text="0:00:00" FontSize="120" HorizontalAlignment="Center"/>
+        <TextBlock Margin="0,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="120" HorizontalAlignment="Center" Text="{x:Bind VM.CurrentTime,Mode=OneWay}"/>
         <!-- Title Bar -->
         <Border  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10" Background="DarkBlue" Height="50"/>
         <StackPanel Orientation="Horizontal">

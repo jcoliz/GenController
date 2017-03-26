@@ -13,7 +13,7 @@ namespace IotHello.Uwp.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string CurrentTime { get; set; } = "12:34:56";
+        public string CurrentTime { get; set; }
 
         public ObservableCollection<string> Infos = new ObservableCollection<string>()
             { $"0700{Environment.NewLine}0900", $"1200{Environment.NewLine}1400", $"1700{Environment.NewLine}1900", "+Add" };
@@ -34,6 +34,15 @@ namespace IotHello.Uwp.ViewModels
 
         public void Update()
         {
+            try
+            {
+                CurrentTime = DateTime.Now.ToString("H\\:mm\\:ss");
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

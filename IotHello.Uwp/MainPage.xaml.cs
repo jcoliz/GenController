@@ -23,10 +23,25 @@ namespace IotHello.Uwp
     public sealed partial class MainPage : Page
     {
         public ViewModels.MainViewModel VM = new ViewModels.MainViewModel();
+        private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
 
         public MainPage()
         {
             this.InitializeComponent();
+            Timer.Tick += (s,e) => { VM.Update(); };
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            VM.Update();
+            Timer.Start();
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            Timer.Stop();
+            base.OnNavigatedFrom(e);
         }
     }
 }
