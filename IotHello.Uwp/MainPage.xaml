@@ -45,7 +45,10 @@
             <Image Margin="20,0" Width="40" Height="40" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBlock Foreground="White" Text="Gen Control 1.0" VerticalAlignment="Center" FontSize="25"/>
         </StackPanel>
-        <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0" Text="Status: Stopped"/>
+        <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0">
+            <Run Text="Status:"/>
+            <Run Text="{x:Bind VM.Status,Mode=OneWay}"/>
+        </TextBlock>
         <!-- Periods Display -->
         <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None"
                   ItemTemplate="{StaticResource List_Info}" HorizontalAlignment="Center" />

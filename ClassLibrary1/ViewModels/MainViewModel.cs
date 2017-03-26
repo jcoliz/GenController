@@ -35,12 +35,16 @@ namespace IotHello.Portable.ViewModels
             await Models.Controller.Current.Stop();
         }
 
-        public void Update()
+        public async Task Update()
         {
             try
             {
                 CurrentTime = DateTime.Now.ToString("H\\:mm\\:ss");
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
+
+                var update = await Models.Schedule.Current.Tick();
+                if (update)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
             }
             catch (Exception ex)
             {

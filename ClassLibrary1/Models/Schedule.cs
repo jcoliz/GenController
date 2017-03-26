@@ -27,8 +27,12 @@ namespace IotHello.Portable.Models
         /// Call this regularly to test the schedule to see if it's time to change
         /// state.
         /// </summary>
-        public async Task Tick()
+        /// <remarks>
+        /// Whether something changed
+        /// </remarks>
+        public async Task<bool> Tick()
         {
+            bool result = false;
             var now = Clock.Now;
             var elapsed = now - LastTick;
 
@@ -51,17 +55,21 @@ namespace IotHello.Portable.Models
                         if (LastTick < startat && now >= startat)
                         {
                             await Controller.Current.Start();
+                            result = true;
                             break;
                         }
                         if (LastTick < stopat && now >= stopat)
                         {
                             await Controller.Current.Stop();
+                            result = true;
                             break;
                         }
                     }
                 }
             }
             LastTick = now;
+
+            return result;
         }
 
         private DateTime LastTick = DateTime.MinValue;

@@ -28,12 +28,12 @@ namespace IotHello.Uwp
         public MainPage()
         {
             this.InitializeComponent();
-            Timer.Tick += (s,e) => { VM.Update(); };
+            Timer.Tick += (s,e) => { var background = VM.Update(); };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            VM.Update();
+            var background = VM.Update();
             Timer.Start();
             base.OnNavigatedTo(e);
         }

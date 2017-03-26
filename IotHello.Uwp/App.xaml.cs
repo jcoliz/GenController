@@ -45,6 +45,31 @@ namespace IotHello.Uwp
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            try
+            {
+                Portable.Models.Schedule.Current.Clock = new Platform.Clock();
+
+                /* This is the REAL schedule
+                Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
+                Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14)));
+                Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19)));
+                */
+
+                /* This is the crazy testing schedule. Once every minute!! */
+                var current = TimeSpan.FromHours(5);
+                var period = TimeSpan.FromMinutes(1);
+                var ending = TimeSpan.FromHours(22);
+                while( current < ending)
+                {
+                    Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period));
+                    current += period + period;
+                }
+            }
+            catch (Exception)
+            {
+                // Swallow for now
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
