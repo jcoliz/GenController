@@ -15,9 +15,9 @@
                 <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Button>
         </DataTemplate>
-        <DataTemplate x:Key="List_Info" x:DataType="s:String">
+        <DataTemplate x:Key="List_Info" x:DataType="lm:GenPeriod">
             <Border Padding="10" Margin="10" Background="RoyalBlue" Width="200" Height="200">
-                <TextBlock Text="{x:Bind}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+                <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Border>
         </DataTemplate>
     </Page.Resources>
@@ -46,8 +46,8 @@
             <TextBlock Foreground="White" Text="Gen Control 1.0" VerticalAlignment="Center" FontSize="25"/>
         </StackPanel>
         <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0" Text="Status: Stopped"/>
-        <!-- Info Display -->
-        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Infos}" SelectionMode="None"
+        <!-- Periods Display -->
+        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None"
                   ItemTemplate="{StaticResource List_Info}" HorizontalAlignment="Center" />
         <!-- Commands -->
         <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.On.Command}" Margin="10" Background="{x:Bind VM.On.Color}" Height="100">
