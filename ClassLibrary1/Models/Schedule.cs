@@ -30,18 +30,36 @@ namespace IotHello.Portable.Models
         /// <remarks>
         /// Whether something changed
         /// </remarks>
-        public async Task<bool> Tick()
+        public Task Tick()
         {
-            bool result = false;
+            Task result = null;
             var now = Clock.Now;
             var elapsed = now - LastTick;
+            var status = Controller.Current.Status;
+
+            // Managed failed starts
+            if (status == GenStatus.FailedToStart)
+            {
+                // If this is the first we've heard about it, start the timer
+                if (FirstFailedAt == null)
+                    FirstFailedAt = now;
+                else
+                {
+                    var elapsedfailed = now - FirstFailedAt;
+                    if (elapsedfailed > TimeSpan.FromMinutes(2))
+                    {
+                        // Try again!!
+                        FirstFailedAt = null;
+                        result = Controller.Current.Start();
+                    }
+                }
+            }
+            else if (FirstFailedAt != null)
+                FirstFailedAt = null;
 
             // Don't take action if we are currently TRYING to start or stop
-            if (Controller.Current.Status != GenStatus.Starting && Controller.Current.Status != GenStatus.Stopping)
+            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.FailedToStart)
             {
-                // TODO: Deal with failed starts. This will require getting the input line from the
-                // generator itself.
-
                 // Only take action if we've been called recently
                 if (elapsed < TimeSpan.FromSeconds(5))
                 {
@@ -54,14 +72,12 @@ namespace IotHello.Portable.Models
 
                         if (LastTick < startat && now >= startat)
                         {
-                            await Controller.Current.Start();
-                            result = true;
+                            result = Controller.Current.Start();
                             break;
                         }
                         if (LastTick < stopat && now >= stopat)
                         {
-                            await Controller.Current.Stop();
-                            result = true;
+                            result = Controller.Current.Stop();
                             break;
                         }
                     }
@@ -73,6 +89,7 @@ namespace IotHello.Portable.Models
         }
 
         private DateTime LastTick = DateTime.MinValue;
+        private DateTime? FirstFailedAt = null;
 
         public static Schedule Current
         {

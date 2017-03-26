@@ -39,10 +39,10 @@ namespace IotHello.Portable.Models
             {
                 string result = Status.ToString();
 
-                if (_StartPin)
+                if (_StartRelay)
                     result += " P1";
 
-                if (_StopPin)
+                if (_StopRelay)
                     result += " P2";
 
                 return result;
@@ -53,23 +53,30 @@ namespace IotHello.Portable.Models
         {
             Status = GenStatus.Starting;
 
-            StopPin = true;
+            StopRelay = true;
             await Task.Delay(StopPinHigh);
-            StopPin = false;
+            StopRelay = false;
             await Task.Delay(DelayBetweenStartAndStop);
-            StartPin = true;
+            StartRelay = true;
             await Task.Delay(StartPinHigh);
-            StartPin = false;
+            StartRelay = false;
+            await Task.Delay(DelayBetweenStartAndCheck);
 
-            Status = GenStatus.Running;
+            // TODO: This could be brittle, only checking the run signal ONCE.
+            // Instead, we should check it every tick during the delay time.
+            // If it comes on even once during those checks, we are running!!
+            if (RunSignal)
+                Status = GenStatus.Running;
+            else
+                Status = GenStatus.FailedToStart;
         }
         public async Task Stop()
         {
             Status = GenStatus.Stopping;
 
-            StopPin = true;
+            StopRelay = true;
             await Task.Delay(StopPinHigh);
-            StopPin = false;
+            StopRelay = false;
 
             Status = GenStatus.Stopped;
         }
@@ -90,38 +97,69 @@ namespace IotHello.Portable.Models
         }
         static IController _Current = null;
 
+        #region Hardware Interface
+
+        // See wiring and timing diagram here:
         // http://www.magnum-dimensions.com/sites/default/files/MagAGS/ME-AGS-Onan-Models-HGJAD-HGJAE-HGJAF-Rev-12-02-08.pdf
 
         private readonly TimeSpan StopPinHigh = TimeSpan.FromSeconds(10);
         private readonly TimeSpan StartPinHigh = TimeSpan.FromSeconds(10);
         private readonly TimeSpan DelayBetweenStartAndStop = TimeSpan.FromSeconds(4);
-        private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromSeconds(4);
+        private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromMinutes(2);
+        private readonly TimeSpan DelayBetweenStartAndCheck = TimeSpan.FromSeconds(10);
 
-        private bool StopPin
+        /// <summary>
+        /// Controls the hardware relay pin to close the 'stop' line to the generator
+        /// </summary>
+        private bool StopRelay
         {
             set
             {
-                _StopPin = value;
+                _StopRelay = value;
+
+                // Temporary, until there is really a run signal hooked up
+                if (value)
+                    RunSignal = false;
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
             }
         }
-        private bool _StopPin = false;
-        private bool StartPin
+        private bool _StopRelay = false;
+
+        /// <summary>
+        /// Controls the hardware relay pin to close the 'start' line to the generator
+        /// </summary>
+        private bool StartRelay
         {
             set
             {
-                _StartPin = value;
+                _StartRelay = value;
+
+                // Temporary, until there is really a run signal hooked up
+                if (value)
+                    RunSignal = true;
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
             }
         }
-        private bool _StartPin = false;
+        private bool _StartRelay = false;
 
+        /// <summary>
+        /// The hardware input line coming from the generator.
+        /// </summary>
+        /// <remarks>
+        /// For now, this is stubbed out to assume all starts always work.
+        /// </remarks>
+        private bool RunSignal { get; set; }
+
+        #endregion
+
+        #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 
-    public enum GenStatus { Invalid = 0, Stopped, Starting, Running, Stopping };
+    public enum GenStatus { Invalid = 0, Stopped, Starting, Running, Stopping, FailedToStart };
 
 
 }
