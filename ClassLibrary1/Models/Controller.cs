@@ -51,6 +51,9 @@ namespace IotHello.Portable.Models
 
         public async Task Start()
         {
+            if (Status == GenStatus.Running && RunSignal)
+                return;
+
             Status = GenStatus.Starting;
 
             StopRelay = true;
@@ -151,6 +154,8 @@ namespace IotHello.Portable.Models
         /// </summary>
         /// <remarks>
         /// For now, this is stubbed out to assume all starts always work.
+        /// TODO: Probably should filter this runsignal, checking its value over time, so I don't
+        /// overreact to one bad reading.
         /// </remarks>
         private bool RunSignal { get; set; }
 
