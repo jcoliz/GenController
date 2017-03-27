@@ -47,8 +47,8 @@
             <Run Text="{x:Bind VM.Controller.FullStatus,Mode=OneWay}"/>
         </TextBlock>
         <!-- Periods Display -->
-        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None"
-                  ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" />
+        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" ScrollViewer.IsVerticalRailEnabled="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled"
+                  ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" x:Name="PeriodsView" />
         <!-- Commands -->
         <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.StartCommand}" Margin="10" Background="Green" Height="100">
             <TextBlock Text="Start" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
