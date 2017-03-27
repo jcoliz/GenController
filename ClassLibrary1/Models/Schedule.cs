@@ -10,13 +10,6 @@ namespace IotHello.Portable.Models
     public class Schedule
     {
         public ObservableCollection<Models.GenPeriod> Periods = new ObservableCollection<Models.GenPeriod>();
-        /*
-        {
-            new Models.GenPeriod(TimeSpan.FromHours(7),TimeSpan.FromHours(9)),
-            new Models.GenPeriod(TimeSpan.FromHours(12),TimeSpan.FromHours(14)),
-            new Models.GenPeriod(TimeSpan.FromHours(17),TimeSpan.FromHours(19))
-        };
-        */
 
         /// <summary>
         /// Dependency injection for how to get the current time.

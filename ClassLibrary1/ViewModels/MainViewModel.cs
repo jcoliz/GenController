@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace IotHello.Portable.ViewModels
 {
@@ -13,38 +14,42 @@ namespace IotHello.Portable.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string CurrentTime { get; set; }
+        public DateTime CurrentTime => DateTime.Now;
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
         public ObservableCollection<Models.GenPeriod> Periods => Models.Schedule.Current.Periods;
 
-        public Models.Action On =
-            new Models.Action() { Label = "On", Command = new DelegateCommand(TurnOn), Color = "Green" };
-
-        public Models.Action Off =
-            new Models.Action() { Label = "Off", Command = new DelegateCommand(TurnOff), Color = "Red" };
-
-        private static async void TurnOn(object obj)
+        public ICommand StartCommand => new DelegateCommand(async _ => 
         {
-            await Models.Controller.Current.Start();
-        }
-
-        private static async void TurnOff(object obj)
+            try
+            {
+                await Models.Controller.Current.Start();
+            }
+            catch (Exception)
+            {
+            }
+        });
+        public ICommand StopCommand => new DelegateCommand(async _ =>
         {
-            await Models.Controller.Current.Stop();
-        }
+            try
+            {
+                await Models.Controller.Current.Stop();
+            }
+            catch (Exception)
+            {
+            }
+        });
+
 
         public void Update()
         {
             try
             {
-                CurrentTime = DateTime.Now.ToString("H\\:mm\\:ss");
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
             }
             catch (Exception)
             {
-
             }
         }
     }

@@ -118,8 +118,14 @@ namespace IotHello.Uwp
 
         private void Timer_Tick(object sender, object e)
         {
-            Portable.Models.Schedule.Current.Tick();
-            this.Tick?.Invoke(this, e);
+            try
+            {
+                Portable.Models.Schedule.Current.Tick();
+                this.Tick?.Invoke(this, e);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>

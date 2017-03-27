@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\DelegateCommand.cs" />
-    <Compile Include="Models\Action.cs" />
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />
     <Compile Include="Models\IClock.cs" />

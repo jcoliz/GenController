@@ -10,7 +10,7 @@ namespace IotHello.Portable.Tests
     /// <summary>
     /// Mimic the controller interface for use in testing
     /// </summary>
-    public class TestController : Models.IController
+    public class TestController : IController
     {
         public string FullStatus
         {

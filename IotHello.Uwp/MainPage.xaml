@@ -6,16 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pm="using:IotHello.Portable.Models"
+    xmlns:lc="using:IotHello.Uwp.Converters"
     xmlns:s="using:System"
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Key="List_Action" x:DataType="pm:Action">
-            <Button HorizontalAlignment="Stretch" Command="{x:Bind Command}" Margin="10" Background="{x:Bind Color}" Height="100">
-                <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
-            </Button>
-        </DataTemplate>
-        <DataTemplate x:Key="List_Info" x:DataType="pm:GenPeriod">
+        <lc:DateFormatConverter x:Key="DateFormatConverter"/>
+        <DataTemplate x:Key="List_Period" x:DataType="pm:GenPeriod">
             <Border Padding="10" Margin="10" Background="RoyalBlue" Width="200" Height="200">
                 <TextBlock Text="{x:Bind Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Border>
@@ -38,7 +35,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!-- Clock -->
-        <TextBlock Margin="0,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="120" HorizontalAlignment="Center" Text="{x:Bind VM.CurrentTime,Mode=OneWay}"/>
+        <TextBlock Margin="0,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="120" HorizontalAlignment="Center" Text="{x:Bind VM.CurrentTime,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='HH\:mm\:ss'}"/>
         <!-- Title Bar -->
         <Border  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10" Background="DarkBlue" Height="50"/>
         <StackPanel Orientation="Horizontal">
@@ -51,13 +48,13 @@
         </TextBlock>
         <!-- Periods Display -->
         <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None"
-                  ItemTemplate="{StaticResource List_Info}" HorizontalAlignment="Center" />
+                  ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" />
         <!-- Commands -->
-        <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.On.Command}" Margin="10" Background="{x:Bind VM.On.Color}" Height="100">
-            <TextBlock Text="{x:Bind VM.On.Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+        <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.StartCommand}" Margin="10" Background="Green" Height="100">
+            <TextBlock Text="Start" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
-        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Command="{x:Bind VM.Off.Command}" Margin="10" Background="{x:Bind VM.Off.Color}" Height="100">
-            <TextBlock Text="{x:Bind VM.Off.Label}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Command="{x:Bind VM.StopCommand}" Margin="10" Background="Red" Height="100">
+            <TextBlock Text="Stop" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
     </Grid>
 </Page>
