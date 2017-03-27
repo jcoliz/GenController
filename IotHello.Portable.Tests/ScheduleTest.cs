@@ -33,6 +33,9 @@ namespace IotHello.Portable.Tests
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 07, 00, 01);
             Models.Schedule.Current.Tick();
+            Controller.RunSignal = true;
+            Clock.Now = new DateTime(2017, 3, 1, 07, 00, 02);
+            Models.Schedule.Current.Tick();
 
             Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
         }
@@ -53,6 +56,9 @@ namespace IotHello.Portable.Tests
             Clock.Now = new DateTime(2017, 3, 1, 16, 59, 58);
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 17, 00, 01);
+            Models.Schedule.Current.Tick();
+            Controller.RunSignal = true;
+            Clock.Now = new DateTime(2017, 3, 1, 17, 00, 02);
             Models.Schedule.Current.Tick();
 
             Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
@@ -98,13 +104,12 @@ namespace IotHello.Portable.Tests
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 07, 00, 01);
             Models.Schedule.Current.Tick();
-            Controller.Status = Models.GenStatus.FailedToStart;
             Clock.Now = new DateTime(2017, 3, 1, 07, 00, 02);
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 07, 01, 03);
             Models.Schedule.Current.Tick();
 
-            Assert.AreEqual(Models.GenStatus.FailedToStart, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Confirming, Models.Controller.Current.Status);
         }
 
         [TestMethod]
@@ -114,10 +119,12 @@ namespace IotHello.Portable.Tests
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 07, 00, 01);
             Models.Schedule.Current.Tick();
-            Controller.Status = Models.GenStatus.FailedToStart;
             Clock.Now = new DateTime(2017, 3, 1, 07, 00, 02);
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 07, 02, 03);
+            Models.Schedule.Current.Tick();
+            Controller.RunSignal = true;
+            Clock.Now = new DateTime(2017, 3, 1, 07, 02, 04);
             Models.Schedule.Current.Tick();
 
             Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);

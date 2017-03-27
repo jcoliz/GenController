@@ -22,14 +22,22 @@ namespace IotHello.Portable.Tests
 
         public GenStatus Status { get; set; } = GenStatus.Invalid;
 
+        public bool RunSignal { get; set; } = false;
+
         public async Task Start()
         {
-            Status = GenStatus.Running;
+            Status = GenStatus.Confirming;
         }
 
         public async Task Stop()
         {
             Status = GenStatus.Stopped;
+        }
+
+        public void Confirm()
+        {
+            if (Status == GenStatus.Confirming && RunSignal)
+                Status = GenStatus.Running;
         }
     }
 }

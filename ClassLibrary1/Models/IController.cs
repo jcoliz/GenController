@@ -9,5 +9,6 @@ namespace IotHello.Portable.Models
 
         Task Start();
         Task Stop();
+        void Confirm();
     }
 }

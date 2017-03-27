@@ -60,15 +60,8 @@ namespace IotHello.Portable.Models
             StartRelay = true;
             await Task.Delay(StartPinHigh);
             StartRelay = false;
-            await Task.Delay(DelayBetweenStartAndCheck);
 
-            // TODO: This could be brittle, only checking the run signal ONCE.
-            // Instead, we should check it every tick during the delay time.
-            // If it comes on even once during those checks, we are running!!
-            if (RunSignal)
-                Status = GenStatus.Running;
-            else
-                Status = GenStatus.FailedToStart;
+            Status = GenStatus.Confirming;
         }
         public async Task Stop()
         {
@@ -80,6 +73,15 @@ namespace IotHello.Portable.Models
 
             Status = GenStatus.Stopped;
         }
+        /// <summary>
+        /// Generator should be running, let's check on it
+        /// </summary>
+        public void Confirm()
+        {
+            if (Status == GenStatus.Confirming && RunSignal)
+                Status = GenStatus.Running;
+        }
+
         public static IController Current
         {
             get
@@ -159,7 +161,7 @@ namespace IotHello.Portable.Models
         #endregion
     }
 
-    public enum GenStatus { Invalid = 0, Stopped, Starting, Running, Stopping, FailedToStart };
+    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping };
 
 
 }

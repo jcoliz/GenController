@@ -38,27 +38,30 @@ namespace IotHello.Portable.Models
             var status = Controller.Current.Status;
 
             // Managed failed starts
-            if (status == GenStatus.FailedToStart)
+            if (status == GenStatus.Confirming)
             {
+                // Confirm whether the generator is running now
+                Controller.Current.Confirm();
+
                 // If this is the first we've heard about it, start the timer
-                if (FirstFailedAt == null)
-                    FirstFailedAt = now;
+                if (StartedConfirmingAt == null)
+                    StartedConfirmingAt = now;
                 else
                 {
-                    var elapsedfailed = now - FirstFailedAt;
+                    var elapsedfailed = now - StartedConfirmingAt;
                     if (elapsedfailed > TimeSpan.FromMinutes(2))
                     {
                         // Try again!!
-                        FirstFailedAt = null;
+                        StartedConfirmingAt = null;
                         result = Controller.Current.Start();
                     }
                 }
             }
-            else if (FirstFailedAt != null)
-                FirstFailedAt = null;
+            else if (StartedConfirmingAt != null)
+                StartedConfirmingAt = null;
 
             // Don't take action if we are currently TRYING to start or stop
-            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.FailedToStart)
+            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming)
             {
                 // Only take action if we've been called recently
                 if (elapsed < TimeSpan.FromSeconds(5))
@@ -89,7 +92,7 @@ namespace IotHello.Portable.Models
         }
 
         private DateTime LastTick = DateTime.MinValue;
-        private DateTime? FirstFailedAt = null;
+        private DateTime? StartedConfirmingAt = null;
 
         public static Schedule Current
         {
