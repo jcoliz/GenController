@@ -41,8 +41,6 @@ namespace IotHello.Portable.ViewModels
             {
                 CurrentTime = DateTime.Now.ToString("H\\:mm\\:ss");
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
-
-                Models.Schedule.Current.Tick();
             }
             catch (Exception)
             {

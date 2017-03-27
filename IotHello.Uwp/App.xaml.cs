@@ -23,6 +23,14 @@ namespace IotHello.Uwp
     sealed partial class App : Application
     {
         /// <summary>
+        /// Timer to run everything in the background
+        /// </summary>
+        private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+        public event EventHandler<object> Tick;
+
+        public static new App Current { get; private set; }
+
+        /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
@@ -30,6 +38,7 @@ namespace IotHello.Uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            Current = this;
         }
 
         /// <summary>
@@ -64,6 +73,9 @@ namespace IotHello.Uwp
                     Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period));
                     current += period + period;
                 }
+
+                Timer.Tick += Timer_Tick;
+                Timer.Start();
             }
             catch (Exception)
             {
@@ -102,6 +114,12 @@ namespace IotHello.Uwp
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            Portable.Models.Schedule.Current.Tick();
+            this.Tick?.Invoke(this, e);
         }
 
         /// <summary>

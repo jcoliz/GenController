@@ -51,7 +51,12 @@ namespace IotHello.Portable.Models
 
         public async Task Start()
         {
+            // Already running? Don't do another stop/start cycle
             if (Status == GenStatus.Running && RunSignal)
+                return;
+
+            // Already processing a starting/stopping operation? Skip it
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping)
                 return;
 
             Status = GenStatus.Starting;
@@ -68,6 +73,10 @@ namespace IotHello.Portable.Models
         }
         public async Task Stop()
         {
+            // Already processing a starting/stopping operation? Skip it
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping)
+                return;
+
             Status = GenStatus.Stopping;
 
             StopRelay = true;
