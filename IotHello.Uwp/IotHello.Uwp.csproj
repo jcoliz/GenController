@@ -101,7 +101,9 @@
     </Compile>
     <Compile Include="Platform\Rtc3231.cs" />
     <Compile Include="Platform\Uwp.Clock.cs" />
+    <Compile Include="Platform\Uwp.Httpd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebPages\Index.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

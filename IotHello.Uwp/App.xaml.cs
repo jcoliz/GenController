@@ -27,6 +27,7 @@ namespace IotHello.Uwp
         /// </summary>
         private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
         public event EventHandler<object> Tick;
+        private Platform.Httpd WebServer = new Platform.Httpd();
 
         public static new App Current { get; private set; }
 
@@ -76,6 +77,8 @@ namespace IotHello.Uwp
 
                 Timer.Tick += Timer_Tick;
                 Timer.Start();
+
+                var background = WebServer.StartServer();
             }
             catch (Exception)
             {
