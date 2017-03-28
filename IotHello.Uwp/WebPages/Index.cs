@@ -50,14 +50,18 @@ namespace IotHello.Uwp.WebPages
                 ".button { display: block; line-height: 46px; width: 350px; font-size: 20px; font-weight: bold; font-family: Helvetica, sans-serif; color: #fff; text-decoration: none; text-align: center; margin: 10px auto; }",
                 ".red { background-color: red }",
                 ".green { background-color: green }",
+                "ul { padding: 0; margin-top:0; margin-left: auto; margin-right: auto; margin-bottom:17px; font-size:17px; font-family: Helvetica; font-weight:bold; color:black; width: 350px; background-color: white; border-width: 1px; border-style:solid ; border-color:rgb(217,217,217); -webkit-border-radius: 8px; }",
+                "li { list-style-type: none; border-top-width:1px; border-top-style:solid; border-top-color:rgb(217,217,217); padding:10px; }",
                 "</style>",
                 "</head>",
                 "<body>",
                 $"<h1>{VM.CurrentTime.ToString("HH\\:mm\\:ss")} <span class=\"big\">{VM.Controller.FullStatus}</span></h1>",
+                "<ul>"
             };
 
-            html.AddRange(VM.Periods.Take(10).Select(p => $"<p>{p.Label}</p>"));
+            html.AddRange(VM.Periods.Take(10).Select(p => $"<li>{p.Label}</li>"));
             html.AddRange(new List<string>() { 
+                "</ul>",
                 "<button class=\"green button\" id=\"start\">Start</button>",
                 "<button class=\"red button\" id=\"stop\">Stop</button>",
                 "</body></html>"
