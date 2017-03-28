@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace IotHello.Portable.Models
@@ -27,8 +28,8 @@ namespace IotHello.Portable.Models
             private set
             {
                 _Status = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
+                DoPropertyChanged(nameof(FullStatus));
+                DoPropertyChanged(nameof(Status));
             }
         }
         private GenStatus _Status = GenStatus.Stopped;
@@ -48,6 +49,8 @@ namespace IotHello.Portable.Models
                 return result;
             }
         }
+
+        private SynchronizationContext Context = SynchronizationContext.Current; 
 
         public async Task Start()
         {
@@ -135,7 +138,7 @@ namespace IotHello.Portable.Models
                 if (value)
                     RunSignal = false;
 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
+                DoPropertyChanged(nameof(FullStatus));
             }
         }
         private bool _StopRelay = false;
@@ -153,7 +156,7 @@ namespace IotHello.Portable.Models
                 if (value)
                     RunSignal = true;
 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullStatus)));
+                DoPropertyChanged(nameof(FullStatus));
             }
         }
         private bool _StartRelay = false;
@@ -172,6 +175,16 @@ namespace IotHello.Portable.Models
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
+        public void DoPropertyChanged(string name)
+        {
+            if (Context != null)
+                Context.Post((o) => 
+                {
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+                }, null);
+            else
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         #endregion
     }
 
