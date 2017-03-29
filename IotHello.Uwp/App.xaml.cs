@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,6 +29,13 @@ namespace IotHello.Uwp
         private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
         public event EventHandler<object> Tick;
         private Platform.Httpd WebServer = new Platform.Httpd();
+
+        /// <summary>
+        /// Task running our HTTPD server
+        /// </summary>
+        private static IAsyncAction ServerTask;
+
+        private Catnap.Server.HttpServer httpServer;
 
         public static new App Current { get; private set; }
 
@@ -78,7 +86,23 @@ namespace IotHello.Uwp
                 Timer.Tick += Timer_Tick;
                 Timer.Start();
 
-                var background = WebServer.StartServer();
+                
+                    httpServer = new Catnap.Server.HttpServer();
+                    httpServer.restHandler.RegisterController(new Controllers.StatusController());
+
+                    ServerTask =
+                        ThreadPool.RunAsync(async (w) =>
+                        {
+                            try
+                            {
+                                await httpServer.StartServer();
+                            }
+                            catch (Exception)
+                            {
+                            
+                            }
+                        });
+
             }
             catch (Exception)
             {
