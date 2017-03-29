@@ -95,17 +95,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\LogsController.cs" />
-    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="WebPageControllers\LogsController.cs" />
+    <Compile Include="WebPageControllers\StatusController.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Platform\Rtc3231.cs" />
     <Compile Include="Platform\Uwp.Clock.cs" />
-    <Compile Include="Platform\Uwp.Httpd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebPages\Index.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

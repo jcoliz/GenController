@@ -31,7 +31,6 @@ namespace IotHello.Uwp
         /// </summary>
         private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
         public event EventHandler<object> Tick;
-        private Platform.Httpd WebServer = new Platform.Httpd();
 
         /// <summary>
         /// Task running our HTTPD server
