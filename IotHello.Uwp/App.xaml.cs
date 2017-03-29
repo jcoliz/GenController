@@ -87,7 +87,7 @@ namespace IotHello.Uwp
                 Timer.Start();
 
                 
-                    httpServer = new Catnap.Server.HttpServer();
+                    httpServer = new Catnap.Server.HttpServer(1339);
                     httpServer.restHandler.RegisterController(new Controllers.StatusController());
 
                     ServerTask =
