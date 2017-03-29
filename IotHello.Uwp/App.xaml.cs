@@ -17,13 +17,14 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
 
 namespace IotHello.Uwp
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    sealed partial class App : Application, ManiaLabs.IApp
     {
         /// <summary>
         /// Timer to run everything in the background
@@ -40,6 +41,58 @@ namespace IotHello.Uwp
         private Catnap.Server.HttpServer httpServer;
 
         public static new App Current { get; private set; }
+
+        public string Title
+        {
+            get
+            {
+                var package = Package.Current;
+
+                return package?.DisplayName ?? string.Empty;
+            }
+        }
+        public string Version
+        {
+            get
+            {
+                var package = Package.Current;
+                var packageid = package?.Id;
+                var version = packageid?.Version;
+
+                var result = string.Empty;
+                if (version != null)
+                {
+                    result = $"{version.Value.Major}.{version.Value.Minor}.{version.Value.Build}";
+                }
+
+                return result;
+            }
+        }
+        public IMeasurement Measurement => ManiaLabs.Platform.Get<IMeasurement>();
+
+        public string DeviceUniqueID
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string PurchasesInfo
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Launches
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -70,6 +123,7 @@ namespace IotHello.Uwp
                 ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
+                ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
 
                 Portable.Models.Schedule.Current.Clock = new Platform.Clock();
 
@@ -183,6 +237,21 @@ namespace IotHello.Uwp
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        public void GoBack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetResourceString(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Stream> OpenStreamForReadFromApplicationAsync(string Pathname)
+        {
+            throw new NotImplementedException();
         }
     }
 }

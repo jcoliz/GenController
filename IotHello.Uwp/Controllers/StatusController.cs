@@ -1,4 +1,5 @@
 ﻿using Catnap.Server;
+using ManiaLabs.Portable.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace IotHello.Uwp.Controllers
         [Route]
         public HttpResponse Get()
         {
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Status");
+
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
             htmlBuilder.AppendLine("<head>");
@@ -80,6 +83,8 @@ namespace IotHello.Uwp.Controllers
             });
             var content = string.Join("\r\n", html);
 
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StatusOK",$"Status={VM.Controller.FullStatus}");
+
             return new HttpResponse(HttpStatusCode.Ok, content);
         }
 
@@ -87,7 +92,9 @@ namespace IotHello.Uwp.Controllers
         [Route("start")]
         public HttpResponse Start([Body] string postContent)
         {
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Start");
             VM.StartCommand.Execute(this);
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StartOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Starting...");
         }
 
@@ -95,7 +102,9 @@ namespace IotHello.Uwp.Controllers
         [Route("stop")]
         public HttpResponse Stop([Body] string postContent)
         {
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Stop");
             VM.StopCommand.Execute(this);
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StopOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Stopping...");
         }
     }
