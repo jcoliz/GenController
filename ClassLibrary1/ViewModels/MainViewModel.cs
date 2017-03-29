@@ -1,4 +1,5 @@
 ﻿using Common.Portable.Helpers;
+using ManiaLabs.Portable.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,8 +27,9 @@ namespace IotHello.Portable.ViewModels
             {
                 await Models.Controller.Current.Start();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("MV1", ex);
             }
         });
         public ICommand StopCommand => new DelegateCommand(async _ =>
@@ -36,8 +38,9 @@ namespace IotHello.Portable.ViewModels
             {
                 await Models.Controller.Current.Stop();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("MV2", ex);
             }
         });
 
@@ -48,8 +51,9 @@ namespace IotHello.Portable.ViewModels
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("MV3", ex);
             }
         }
     }

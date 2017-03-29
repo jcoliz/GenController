@@ -157,16 +157,16 @@ namespace IotHello.Uwp
                             {
                                 await httpServer.StartServer();
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                            
+                                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP3", ex);
                             }
                         });
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Swallow for now
+                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP2", ex);
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -210,8 +210,9 @@ namespace IotHello.Uwp
                 Portable.Models.Schedule.Current.Tick();
                 this.Tick?.Invoke(this, e);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP1", ex);
             }
         }
 
