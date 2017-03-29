@@ -149,8 +149,9 @@ namespace IotHello.Uwp
                 
                     httpServer = new Catnap.Server.HttpServer(1339);
                     httpServer.restHandler.RegisterController(new Controllers.StatusController());
+                    httpServer.restHandler.RegisterController(new Controllers.LogsController());
 
-                    ServerTask =
+                ServerTask =
                         ThreadPool.RunAsync(async (w) =>
                         {
                             try
