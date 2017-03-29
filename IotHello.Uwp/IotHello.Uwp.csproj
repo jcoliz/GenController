@@ -136,6 +136,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Allowance\ManiaLabs.Common\ManiaLabs.NET\ManiaLabs.NET.csproj">
+      <Project>{622af662-21e6-4a0f-825d-882b056470b0}</Project>
+      <Name>ManiaLabs.NET</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Allowance\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
+      <Project>{689e267b-b673-46e3-97f9-841fec302a39}</Project>
+      <Name>ManiaLabs.Portable.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
       <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
       <Name>Catnap.Server</Name>

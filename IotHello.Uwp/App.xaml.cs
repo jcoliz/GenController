@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ManiaLabs.Models;
+using ManiaLabs.Portable.Base;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,6 +67,10 @@ namespace IotHello.Uwp
 #endif
             try
             {
+                ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
+                ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
+                ManiaLabs.Platform.Get<IMeasurement>().StartSession();
+
                 Portable.Models.Schedule.Current.Clock = new Platform.Clock();
 
                 /* This is the REAL schedule
