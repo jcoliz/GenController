@@ -135,6 +135,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
+      <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
+      <Name>Catnap.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClassLibrary1\IotHello.Portable.csproj">
       <Project>{29e03921-5641-4845-b02f-f1071bcc4408}</Project>
       <Name>IotHello.Portable</Name>

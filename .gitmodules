@@ -1,0 +1,3 @@
+[submodule "Catnap.Server"]
+	path = Catnap.Server
+	url = git@github.com:jcoliz/Catnap.Server.git
