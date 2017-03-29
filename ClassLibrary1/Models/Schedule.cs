@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManiaLabs.Portable.Base;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -45,13 +46,17 @@ namespace IotHello.Portable.Models
                     if (elapsedfailed > TimeSpan.FromMinutes(2))
                     {
                         // Try again!!
+                        Log("Schedule.RetryStart");
                         StartedConfirmingAt = null;
                         result = Controller.Current.Start();
                     }
                 }
             }
             else if (StartedConfirmingAt != null)
+            {
+                Log("Schedule.ConfirmedStart");
                 StartedConfirmingAt = null;
+            }
 
             // Don't take action if we are currently TRYING to start or stop
             if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming)
@@ -68,11 +73,13 @@ namespace IotHello.Portable.Models
 
                         if (LastTick < startat && now >= startat)
                         {
+                            Log("Schedule.Start");
                             result = Controller.Current.Start();
                             break;
                         }
                         if (LastTick < stopat && now >= stopat)
                         {
+                            Log("Schedule.Stop");
                             result = Controller.Current.Stop();
                             break;
                         }
@@ -86,6 +93,12 @@ namespace IotHello.Portable.Models
 
         private DateTime LastTick = DateTime.MinValue;
         private DateTime? StartedConfirmingAt = null;
+
+        private void Log(string what)
+        {
+            var Measurement = ManiaLabs.Platform.TryGet<IMeasurement>();
+            Measurement?.LogEvent(what);
+        }
 
         public static Schedule Current
         {

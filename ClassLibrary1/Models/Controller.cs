@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManiaLabs.Portable.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace IotHello.Portable.Models
                 _Status = value;
                 DoPropertyChanged(nameof(FullStatus));
                 DoPropertyChanged(nameof(Status));
+                ManiaLabs.Platform.Get<IMeasurement>().LogEvent(_Status.ToString());
             }
         }
         private GenStatus _Status = GenStatus.Stopped;
