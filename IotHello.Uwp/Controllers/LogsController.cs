@@ -17,6 +17,8 @@ namespace IotHello.Uwp.Controllers
         [Route]
         public async Task<HttpResponse> Get()
         {
+            await ManiaLabs.Platform.Get<IMeasurement>().LogEventAsync("Web.Logs");
+
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
             htmlBuilder.AppendLine("<head>");
@@ -36,9 +38,10 @@ namespace IotHello.Uwp.Controllers
             htmlBuilder.AppendLine("<h1>Logs</h1>");
             htmlBuilder.AppendLine("<ul>");
             var logs = await SimpleMeasurement.GetLogs();
-            logs.ToList().Sort((x, y) => y.CompareTo(x));
+            var sorted = logs.ToList();
+            sorted.Sort((x, y) => y.CompareTo(x));
 
-            foreach (var log in logs)
+            foreach (var log in sorted)
             {
                 var text = log.Split('.')[0];
                 long binary = Convert.ToInt64(text, 16);
@@ -60,6 +63,8 @@ namespace IotHello.Uwp.Controllers
         {
             long binary = Convert.ToInt64(param1, 16);
             DateTime dt = DateTime.FromBinary(binary);
+
+            await ManiaLabs.Platform.Get<IMeasurement>().LogEventAsync("Web.GetLog", $"Log={dt}");
 
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
