@@ -203,11 +203,13 @@ namespace IotHello.Uwp
             }
         }
 
-        private void Timer_Tick(object sender, object e)
+        private async void Timer_Tick(object sender, object e)
         {
             try
             {
-                Portable.Models.Schedule.Current.Tick();
+                var t = Portable.Models.Schedule.Current.Tick();
+                if (t != null)
+                    await t;
                 this.Tick?.Invoke(this, e);
             }
             catch (Exception ex)
