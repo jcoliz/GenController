@@ -15,7 +15,7 @@ namespace IotHello.Portable.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DateTime CurrentTime => DateTime.Now;
+        public DateTime CurrentTime => ManiaLabs.Platform.Get<Models.IClock>().Now;
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
