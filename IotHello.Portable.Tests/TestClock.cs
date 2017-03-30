@@ -9,5 +9,10 @@ namespace IotHello.Portable.Tests
     public class TestClock: Models.IClock
     {
         public DateTime Now { get; set; }
+
+        public async Task Delay(TimeSpan t)
+        {
+            Now += t;
+        }
     }
 }

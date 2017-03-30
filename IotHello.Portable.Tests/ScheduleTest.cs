@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using IotHello.Portable.Models;
 
 // Not needed to await here in the tests, because the TestController executes generator control commands
 // immediately.
@@ -12,14 +13,14 @@ namespace IotHello.Portable.Tests
     [TestClass]
     public class ScheduleTest
     {
-        private TestClock Clock = new TestClock();
+        private TestClock Clock { get; set; }
         private TestController Controller;
 
         [TestInitialize]
         public void SetUp()
         {
             new Models.Schedule();
-            Models.Schedule.Current.Clock = Clock;
+            ManiaLabs.Platform.Set<Models.IClock>(Clock = new TestClock());
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14)));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19)));

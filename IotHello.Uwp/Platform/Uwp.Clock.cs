@@ -9,5 +9,7 @@ namespace IotHello.Uwp.Platform
     public class Clock : Portable.Models.IClock
     {
         public DateTime Now => DateTime.Now;
+
+        public Task Delay(TimeSpan t) => Task.Delay(t);
     }
 }

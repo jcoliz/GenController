@@ -15,7 +15,7 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Dependency injection for how to get the current time.
         /// </summary>
-        public IClock Clock { get; set; }
+        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
 
         /// <summary>
         /// Call this regularly to test the schedule to see if it's time to change

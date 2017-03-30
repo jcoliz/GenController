@@ -119,12 +119,11 @@ namespace IotHello.Uwp
 #endif
             try
             {
+                ManiaLabs.Platform.Set<Portable.Models.IClock>(new Platform.Clock());
                 ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
                 ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
-
-                Portable.Models.Schedule.Current.Clock = new Platform.Clock();
 
                 /* This is the REAL schedule
                 Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));

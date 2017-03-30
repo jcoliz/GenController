@@ -67,11 +67,11 @@ namespace IotHello.Portable.Models
             Status = GenStatus.Starting;
 
             StopRelay = true;
-            await Task.Delay(StopPinHigh);
+            await Clock.Delay(StopPinHigh);
             StopRelay = false;
-            await Task.Delay(DelayBetweenStartAndStop);
+            await Clock.Delay(DelayBetweenStartAndStop);
             StartRelay = true;
-            await Task.Delay(StartPinHigh);
+            await Clock.Delay(StartPinHigh);
             StartRelay = false;
 
             Status = GenStatus.Confirming;
@@ -85,7 +85,7 @@ namespace IotHello.Portable.Models
             Status = GenStatus.Stopping;
 
             StopRelay = true;
-            await Task.Delay(StopPinHigh);
+            await Clock.Delay(StopPinHigh);
             StopRelay = false;
 
             Status = GenStatus.Stopped;
@@ -175,6 +175,8 @@ namespace IotHello.Portable.Models
 
         #endregion
 
+        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void DoPropertyChanged(string name)
@@ -191,6 +193,4 @@ namespace IotHello.Portable.Models
     }
 
     public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping };
-
-
 }

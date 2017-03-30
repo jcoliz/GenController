@@ -85,5 +85,10 @@ namespace IotHello.Iot.Platform
         {
             return (byte)(((int)val / 16 * 10) + ((int)val % 16));
         }
+
+        public Task Delay(TimeSpan t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
