@@ -27,10 +27,16 @@ namespace IotHello.Uwp
     sealed partial class App : Application, ManiaLabs.IApp
     {
         /// <summary>
-        /// Timer to run everything in the background
+        /// Timer to run scheduled program logic and UI updates
         /// </summary>
-        private DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+        private DispatcherTimer Timer;
+
         public event EventHandler<object> Tick;
+
+        /// <summary>
+        /// High-resolutoin timer only for hardware timing
+        /// </summary>
+        private ThreadPoolTimer HardwareTimer;
 
         /// <summary>
         /// Task running our HTTPD server
@@ -141,8 +147,12 @@ namespace IotHello.Uwp
                     current += period + period;
                 }
 
+                Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
                 Timer.Tick += Timer_Tick;
                 Timer.Start();
+
+                //TODO: Enable me when we are on real hardware!
+                //HardwareTimer = ThreadPoolTimer.CreatePeriodicTimer(HardwareTick, TimeSpan.FromMilliseconds(50));
 
                 
                     httpServer = new Catnap.Server.HttpServer(1339);
@@ -200,6 +210,15 @@ namespace IotHello.Uwp
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        /// <summary>
+        /// Execute the high-resolution timer for hardware timing
+        /// </summary>
+        /// <param name="timer"></param>
+        private void HardwareTick(ThreadPoolTimer timer)
+        {
+            (Portable.Models.Controller.Current as Portable.Models.Controller).HardwareTick();
         }
 
         private async void Timer_Tick(object sender, object e)

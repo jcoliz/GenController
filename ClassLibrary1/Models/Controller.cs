@@ -173,6 +173,30 @@ namespace IotHello.Portable.Models
         /// </remarks>
         private bool RunSignal { get; set; }
 
+        /// <summary>
+        /// Call this very frequently. This will debounce the runsignal line. It looks for
+        /// 31 consecutive readings opposite the previous reading.
+        /// </summary>
+        public void HardwareTick()
+        {
+            RunSignalBits <<= 1;
+            RunSignalBits |= RunSignalLine;
+
+            if (RunSignalBits == RunSignalOffEdge)
+                RunSignal = false;
+            else if (RunSignalBits == RunSignalOnEdge)
+                RunSignal = true;
+        }
+
+        private UInt32 RunSignalBits = 0;
+        private const UInt32 RunSignalOffEdge = 1u << 31;
+        private const UInt32 RunSignalOnEdge = UInt32.MaxValue >> 1;
+
+        /// <summary>
+        /// The actual GPIO line coming from the generator run signal. Only valid values are
+        /// 1 and 0
+        /// </summary>
+        private byte RunSignalLine => 0;
         #endregion
 
         private IClock Clock => ManiaLabs.Platform.Get<IClock>();
