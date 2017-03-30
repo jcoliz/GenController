@@ -101,7 +101,13 @@ namespace IotHello.Uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += App_Resuming;
             Current = this;
+        }
+
+        private void App_Resuming(object sender, object e)
+        {
+            ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Resuming");
         }
 
         /// <summary>
@@ -224,7 +230,7 @@ namespace IotHello.Uwp
         /// <param name="e">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP4", e.Exception);
         }
 
         /// <summary>
@@ -238,7 +244,14 @@ namespace IotHello.Uwp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Suspending");
             deferral.Complete();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Activated");
+            base.OnActivated(args);
         }
 
         public void GoBack()
