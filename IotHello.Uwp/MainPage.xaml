@@ -34,16 +34,23 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <!-- Clock -->
-        <TextBlock Margin="0,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="120" HorizontalAlignment="Center" Text="{x:Bind VM.CurrentTime,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='HH\:mm\:ss'}"/>
         <!-- Title Bar -->
-        <Border  Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10" Background="DarkBlue" Height="50"/>
-        <StackPanel Orientation="Horizontal">
-            <Image Margin="20,0" Width="40" Height="40" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Foreground="White" Text="Gen Control 1.0" VerticalAlignment="Center" FontSize="25"/>
-        </StackPanel>
-        <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Right" Margin="20,0">
-            <Run Text="Status:"/>
+        <CommandBar Grid.ColumnSpan="2" Background="DarkBlue" Foreground="White" Margin="10" IsOpen="True">
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal" Margin="5,5" >
+                    <Image Width="40" Height="40" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="White" Text="Gen Control 1.0" VerticalAlignment="Center" FontSize="30"/>
+                </StackPanel>
+            </CommandBar.Content>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Clock" Icon="Clock" Foreground="White"/>
+                <AppBarButton Label="Logs" Icon="List" Foreground="White"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+        <!-- Clock -->
+        <TextBlock Margin="20,-20,0,0" Grid.Row="1" FontSize="120" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   Text="{x:Bind VM.CurrentTime,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='HH\:mm\:ss'}"/>
+        <TextBlock Margin="0,-20,20,0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="120" HorizontalAlignment="Right">
             <Run Text="{x:Bind VM.Controller.FullStatus,Mode=OneWay}"/>
         </TextBlock>
         <!-- Periods Display -->
