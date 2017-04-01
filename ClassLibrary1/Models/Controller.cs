@@ -130,17 +130,22 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Controls the hardware relay pin to close the 'stop' line to the generator
         /// </summary>
-        private bool StopRelay
+        public bool StopRelay
         {
-            set
+            get { return _StopRelay; }
+            private set
             {
-                _StopRelay = value;
+                if (value != _StopRelay)
+                {
+                    _StopRelay = value;
 
-                // Temporary, until there is really a run signal hooked up
-                if (value)
-                    RunSignal = false;
+                    // Temporary, until there is really a run signal hooked up
+                    if (value)
+                        RunSignal = false;
 
-                DoPropertyChanged(nameof(FullStatus));
+                    DoPropertyChanged(nameof(FullStatus));
+                    DoPropertyChanged(nameof(StopRelay));
+                }
             }
         }
         private bool _StopRelay = false;
@@ -148,17 +153,22 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Controls the hardware relay pin to close the 'start' line to the generator
         /// </summary>
-        private bool StartRelay
+        public bool StartRelay
         {
-            set
+            get { return _StartRelay; }
+            private set
             {
-                _StartRelay = value;
+                if (value != _StartRelay)
+                {
+                    _StartRelay = value;
 
-                // Temporary, until there is really a run signal hooked up
-                if (value)
-                    RunSignal = true;
+                    // Temporary, until there is really a run signal hooked up
+                    if (value)
+                        RunSignal = true;
 
-                DoPropertyChanged(nameof(FullStatus));
+                    DoPropertyChanged(nameof(FullStatus));
+                    DoPropertyChanged(nameof(StartRelay));
+                }
             }
         }
         private bool _StartRelay = false;
@@ -171,7 +181,19 @@ namespace IotHello.Portable.Models
         /// TODO: Probably should filter this runsignal, checking its value over time, so I don't
         /// overreact to one bad reading.
         /// </remarks>
-        private bool RunSignal { get; set; }
+        public bool RunSignal
+        {
+            get { return _RunSignal; }
+            private set
+            {
+                if (_RunSignal != value)
+                {
+                    _RunSignal = value;
+                    DoPropertyChanged(nameof(RunSignal));
+                }
+            }
+        }
+        private bool _RunSignal = false;
 
         /// <summary>
         /// Call this very frequently. This will debounce the runsignal line. It looks for

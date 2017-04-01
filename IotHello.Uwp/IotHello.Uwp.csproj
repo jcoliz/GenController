@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanBrushConverter.cs" />
     <Compile Include="WebPageControllers\LogsController.cs" />
     <Compile Include="WebPageControllers\StatusController.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
