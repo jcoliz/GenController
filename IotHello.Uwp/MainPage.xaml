@@ -31,11 +31,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <!-- Title Bar -->
-        <CommandBar Grid.ColumnSpan="2" Background="DarkBlue" Foreground="White" Margin="10" IsOpen="True">
+        <CommandBar Grid.ColumnSpan="4" Background="DarkBlue" Foreground="White" Margin="10" IsOpen="True">
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal" Margin="5,5" >
                     <Image Width="40" Height="40" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -48,20 +50,34 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
         <!-- Clock -->
-        <TextBlock Margin="20,-20,0,0" Grid.Row="1" FontSize="120" HorizontalAlignment="Left" VerticalAlignment="Center" 
+        <TextBlock Margin="20,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="120" HorizontalAlignment="Left" VerticalAlignment="Center" 
                    Text="{x:Bind VM.CurrentTime,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='HH\:mm\:ss'}"/>
-        <TextBlock Margin="0,-20,20,0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="120" HorizontalAlignment="Right">
+        <TextBlock Margin="0,-20,20,0" Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Center" FontSize="120" HorizontalAlignment="Right">
             <Run Text="{x:Bind VM.Controller.FullStatus,Mode=OneWay}"/>
         </TextBlock>
         <!-- Periods Display -->
-        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" ScrollViewer.IsVerticalRailEnabled="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled"
+        <GridView Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" ScrollViewer.IsVerticalRailEnabled="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled"
                   ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" x:Name="PeriodsView" />
         <!-- Commands -->
-        <Button Grid.Row="3" HorizontalAlignment="Stretch" Command="{x:Bind VM.StartCommand}" Margin="10" Background="Green" Height="100">
+        <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100">
+            <SymbolIcon Symbol="Setting" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <SymbolIcon.RenderTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
+                </SymbolIcon.RenderTransform>
+            </SymbolIcon>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Stretch" Command="{x:Bind VM.StartCommand}" Margin="10" Background="Green" Height="100">
             <TextBlock Text="Start" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
-        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Command="{x:Bind VM.StopCommand}" Margin="10" Background="Red" Height="100">
+        <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" Command="{x:Bind VM.StopCommand}" Margin="10" Background="Red" Height="100">
             <TextBlock Text="Stop" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100">
+            <SymbolIcon Symbol="List" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <SymbolIcon.RenderTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
+                </SymbolIcon.RenderTransform>
+            </SymbolIcon>
         </Button>
     </Grid>
 </Page>
