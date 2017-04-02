@@ -114,10 +114,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Click="OK_Button_Click">
+            <Button HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Click="OK_Button_Click">
                 <TextBlock Text="OK" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Button>
-            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Click="Back_Button_Click">
+            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Click="Back_Button_Click">
                 <TextBlock Text="Cancel" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Button>
         </Grid>
