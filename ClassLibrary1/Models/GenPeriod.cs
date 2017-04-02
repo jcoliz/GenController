@@ -9,7 +9,7 @@ namespace IotHello.Portable.Models
     /// <summary>
     /// Describes a period of time during the day when the generator should be on
     /// </summary>
-    public class GenPeriod
+    public class GenPeriod: IComparable<GenPeriod>
     {
         /// <summary>
         /// Offset from midnight when the generator should start
@@ -28,5 +28,10 @@ namespace IotHello.Portable.Models
         }
 
         public string Label => StartAt.ToString("hh\\:mm") + Environment.NewLine + StopAt.ToString("hh\\:mm");
+
+        public int CompareTo(GenPeriod other)
+        {
+            return StartAt.CompareTo(other.StartAt);
+        }
     }
 }

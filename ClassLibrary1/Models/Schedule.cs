@@ -1,4 +1,5 @@
-﻿using ManiaLabs.Portable.Base;
+﻿using ManiaLabs.Helpers;
+using ManiaLabs.Portable.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ namespace IotHello.Portable.Models
 {
     public class Schedule
     {
-        public ObservableCollection<Models.GenPeriod> Periods = new ObservableCollection<Models.GenPeriod>();
+        public RangeObservableCollection<Models.GenPeriod> Periods = new RangeObservableCollection<Models.GenPeriod>();
 
         /// <summary>
         /// Dependency injection for how to get the current time.
@@ -89,6 +90,44 @@ namespace IotHello.Portable.Models
             LastTick = now;
 
             return result;
+        }
+
+        /// <summary>
+        /// Replaces the given old scehdule with the provided replacement
+        /// </summary>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if replacing this would cause overlapping schedules
+        /// </exception>
+        /// <param name="old"></param>
+        /// <param name="replacement"></param>
+        public void Replace(GenPeriod old, GenPeriod replacement)
+        {
+            if (replacement.StartAt < TimeSpan.Zero || replacement.StartAt >= TimeSpan.FromDays(1) ||
+                replacement.StopAt < TimeSpan.Zero || replacement.StartAt >= TimeSpan.FromDays(1))
+            {
+                throw new ArgumentException("Invalid start or stop time", nameof(replacement));
+            }
+
+            if (replacement.StopAt - replacement.StartAt < TimeSpan.FromMinutes(30))
+                throw new ArgumentException("Generator must run at least 30 minutes", nameof(replacement));
+
+            var proposed = Periods.ToList();
+            proposed.Remove(old);
+            proposed.Add(replacement);
+            proposed.Sort();
+
+            TimeSpan laststop = TimeSpan.FromDays(-1);
+            foreach(var p in proposed)
+            {
+                if (p.StartAt < laststop)
+                    throw new ArgumentException("Replacement period overlaps an existing period", nameof(replacement));
+                if (p.StartAt - laststop < TimeSpan.FromMinutes(30))
+                    throw new ArgumentException("Generator must wait 30 minutes before starting again", nameof(replacement));
+                laststop = p.StopAt;
+            }
+
+            Periods.Clear();
+            Periods.AddRange(proposed);
         }
 
         private DateTime LastTick = DateTime.MinValue;

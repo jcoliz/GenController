@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -124,11 +125,17 @@ namespace IotHello.Uwp.Screens
         {
             Frame.GoBack();
         }
-        private void OK_Button_Click(object sender, RoutedEventArgs e)
+        private async void OK_Button_Click(object sender, RoutedEventArgs e)
         {
-            Original.StartAt = Period.StartAt;
-            Original.StopAt = Period.StopAt;
-            Frame.GoBack();
+            try
+            {
+                Portable.Models.Schedule.Current.Replace(Original, Period);
+                Frame.GoBack();
+            }
+            catch (Exception ex)
+            {
+                await new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
+            }
         }
     }
 }
