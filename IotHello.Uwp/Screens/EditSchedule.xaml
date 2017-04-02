@@ -30,7 +30,7 @@
             <StackPanel Orientation="Horizontal" Margin="10" >
                 <Image Width="50" Height="50" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Foreground="White" VerticalAlignment="Center" FontSize="40">
-                    <Run Text="{x:Bind VM.App}"/>: <Run Text="{x:Bind Purpose,Mode=OneWay}"/>
+                    <Run Text="{x:Bind MainVM.App}"/>: <Run Text="{x:Bind Purpose,Mode=OneWay}"/>
                 </TextBlock>
             </StackPanel>
         </Border>
@@ -40,11 +40,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Ellipse Grid.Column="0" Width="30" Height="30" Stroke="White" Fill="{x:Bind VM.Controller.StartRelay,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
+            <Ellipse Grid.Column="0" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.StartRelay,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
             <TextBlock Margin="0,-2,0,0" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind VM.Controller.StopRelay,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
+            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.StopRelay,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
             <TextBlock Margin="0,-2,0,0" Grid.Column="1" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind VM.Controller.RunSignal,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
+            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.RunSignal,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
             <TextBlock Margin="0,-2,0,0" Grid.Column="2" Foreground="White" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
         </Grid>
 
@@ -73,57 +73,57 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="1" Grid.Column="0" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Text="{x:Bind Period.StartAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='hh'}"/>
+                   Text="{x:Bind VM.Period.StartAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='hh'}"/>
             <TextBlock Grid.Row="1" Grid.Column="1" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=":"/>
             <TextBlock Grid.Row="1" Grid.Column="2" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Text="{x:Bind Period.StartAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='mm'}"/>
+                   Text="{x:Bind VM.Period.StartAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='mm'}"/>
 
             <TextBlock Grid.Row="1" Grid.Column="3" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="to" Margin="20,0"/>
             <TextBlock Grid.Row="1" Grid.Column="4" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Text="{x:Bind Period.StopAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='hh'}"/>
+                   Text="{x:Bind VM.Period.StopAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='hh'}"/>
             <TextBlock Grid.Row="1" Grid.Column="5" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=":"/>
             <TextBlock Grid.Row="1" Grid.Column="6" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Text="{x:Bind Period.StopAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='mm'}"/>
+                   Text="{x:Bind VM.Period.StopAt,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='mm'}"/>
 
-            <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind AddCommand}" CommandParameter="-Hfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="-Hfrom" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White" />
             </Button>
-            <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind AddCommand}" CommandParameter="-Mfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="-Mfrom" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind AddCommand}" CommandParameter="-Hto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="-Hto" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind AddCommand}" CommandParameter="-Mto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="-Mto" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            
-            <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind AddCommand}" CommandParameter="+Hfrom" HorizontalAlignment="Center" Width="120" Height="100">
+
+            <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="+Hfrom" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind AddCommand}" CommandParameter="+Mfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="+Mfrom" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind AddCommand}" CommandParameter="+Hto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="+Hto" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind AddCommand}" CommandParameter="+Mto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="+Mto" HorizontalAlignment="Center" Width="120" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
 
             <TextBlock Grid.Row="3" Grid.ColumnSpan="7" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   TextWrapping="WrapWholeWords" Margin="0,10" TextAlignment="Center" Visibility="{x:Bind WillDelete,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}" >
+                   TextWrapping="WrapWholeWords" Margin="0,10" TextAlignment="Center" Visibility="{x:Bind VM.WillDelete,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}" >
                 <Run Text="This item will be deleted."/>
                 <LineBreak/>
                 <Run Text="Press 'Cancel' to abort."/>
             </TextBlock>
         </Grid>
 
-        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="120" Click="Delete_Button_Click"
-                Visibility="{x:Bind WillAdd,Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=True}">
+        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="120" Command="{x:Bind VM.DeleteMeCommand}"
+                Visibility="{x:Bind VM.WillAdd,Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=True}">
             <SymbolIcon Symbol="Delete" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
                     <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>

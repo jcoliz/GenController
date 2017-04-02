@@ -17,106 +17,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace IotHello.Uwp.Screens
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class EditSchedule : Page, INotifyPropertyChanged
+    public sealed partial class EditSchedule : Page
     {
-        public Portable.Models.GenPeriod Period { get; private set; }
 
-        private Portable.Models.GenPeriod Original;
+        Portable.ViewModels.EditScheduleViewModel VM = new Portable.ViewModels.EditScheduleViewModel();
+        Portable.ViewModels.MainViewModel MainVM = new Portable.ViewModels.MainViewModel();
 
-        Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private string Purpose => WillAdd ? "Add Schedule Block" : "Edit Schedule";
-
-        private bool WillDelete { get; set; }
-
-        private bool WillAdd { get; set; }
-
-        public ICommand AddCommand => new DelegateCommand((x) =>
-        {
-            string what = x as string;
-            char direction = what[0];
-            int add = 1;
-            if (direction == '-')
-                add = -1;
-            switch (what.Substring(1))
-            {
-                case "Hfrom":
-                    Period.StartAt = Period.StartAt.Add(TimeSpan.FromHours(add));
-                    if (Period.StartAt < TimeSpan.Zero)
-                    {
-                        Period.StartAt += TimeSpan.FromDays(1);
-                    }
-                    else if (Period.StartAt >= TimeSpan.FromDays(1))
-                    {
-                        Period.StartAt -= TimeSpan.FromDays(1);
-                    }
-                    if (Period.StartAt > Period.StopAt)
-                    {
-                        Period.StopAt = Period.StartAt;
-                    }
-                    break;
-                case "Mfrom":
-                    Period.StartAt = Period.StartAt.Add(TimeSpan.FromMinutes(add * 5));
-                    if (Period.StartAt < TimeSpan.Zero)
-                    {
-                        Period.StartAt += TimeSpan.FromDays(1);
-                    }
-                    else if (Period.StartAt >= TimeSpan.FromDays(1))
-                    {
-                        Period.StartAt -= TimeSpan.FromDays(1);
-                    }
-                    if (Period.StartAt > Period.StopAt)
-                    {
-                        Period.StopAt = Period.StartAt;
-                    }
-                    break;
-                case "Hto":
-                    Period.StopAt = Period.StopAt.Add(TimeSpan.FromHours(add));
-                    if (Period.StopAt < TimeSpan.Zero)
-                    {
-                        Period.StopAt += TimeSpan.FromDays(1);
-                    }
-                    else if (Period.StopAt >= TimeSpan.FromDays(1))
-                    {
-                        Period.StopAt -= TimeSpan.FromDays(1);
-                    }
-                    if (Period.StartAt > Period.StopAt)
-                    {
-                        Period.StartAt = Period.StopAt;
-                    }
-                    break;
-                case "Mto":
-                    Period.StopAt = Period.StopAt.Add(TimeSpan.FromMinutes(add * 5));
-                    if (Period.StopAt < TimeSpan.Zero)
-                    {
-                        Period.StopAt += TimeSpan.FromDays(1);
-                    }
-                    else if (Period.StopAt >= TimeSpan.FromDays(1))
-                    {
-                        Period.StopAt -= TimeSpan.FromDays(1);
-                    }
-                    if (Period.StartAt > Period.StopAt)
-                    {
-                        Period.StartAt = Period.StopAt;
-                    }
-                    break;
-           }
-
-            Bindings.Update();
-        });
+        private string Purpose => VM.WillAdd ? "Add Schedule Block" : "Edit Schedule";
 
         public EditSchedule()
         {
-            Period = new Portable.Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(13));
             this.InitializeComponent();
         }
 
@@ -124,16 +36,7 @@ namespace IotHello.Uwp.Screens
         {
             if (e.Parameter != null && e.Parameter is Portable.Models.GenPeriod)
             {
-                Original = e.Parameter as Portable.Models.GenPeriod;
-                Period = new Portable.Models.GenPeriod(Original.StartAt, Original.StopAt);
-                Bindings.Update();
-            }
-            else
-            {
-                // If not, we are ADDING a new one.
-                WillAdd = true;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Purpose)));
-                Period = new Portable.Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(13));
+                VM.Original = e.Parameter as Portable.Models.GenPeriod;
             }
             base.OnNavigatedTo(e);
         }
@@ -145,25 +48,13 @@ namespace IotHello.Uwp.Screens
         {
             try
             {
-                if (WillDelete)
-                    Portable.Models.Schedule.Current.Remove(Original);
-                else if (WillAdd)
-                    Portable.Models.Schedule.Current.Add(Period);
-                else
-                    Portable.Models.Schedule.Current.Replace(Original, Period);
-
+                VM.Commit();
                 Frame.GoBack();
             }
             catch (Exception ex)
             {
                 await new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
             }
-        }
-
-        private void Delete_Button_Click(object sender, RoutedEventArgs e)
-        {
-            WillDelete = !WillDelete;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WillDelete)));            
         }
     }
 }
