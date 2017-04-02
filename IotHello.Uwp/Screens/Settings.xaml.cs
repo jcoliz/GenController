@@ -24,7 +24,15 @@ namespace IotHello.Uwp.Screens
     /// </summary>
     public sealed partial class Settings : Page
     {
+        /// <summary>
+        /// DateTime currently being edited
+        /// </summary>
         DateTime DT { get; set; }
+
+        /// <summary>
+        /// DateTime last we checked
+        /// </summary>
+        DateTime LastDT;
 
         Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();
 
@@ -64,9 +72,33 @@ namespace IotHello.Uwp.Screens
         {
             this.InitializeComponent();
 
-            var clock = ManiaLabs.Platform.Get<Portable.Models.IClock>();
-            DT = clock.Now;
+            DT = LastDT = Clock.Now;
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            App.Current.Tick += App_Tick;
+            base.OnNavigatedTo(e);
+        }
+
+        private void App_Tick(object sender, object e)
+        {
+            var now = Clock.Now;
+
+            var diff = now - LastDT;
+            DT = DT.Add(diff);
+            Bindings.Update();
+
+            LastDT = now;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            App.Current.Tick -= App_Tick;
+            base.OnNavigatedFrom(e);
+        }
+
+        private Portable.Models.IClock Clock => ManiaLabs.Platform.Get<Portable.Models.IClock>();
 
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
