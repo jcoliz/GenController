@@ -27,12 +27,22 @@ namespace IotHello.Uwp.Screens
         /// <summary>
         /// DateTime currently being edited
         /// </summary>
-        DateTime DT { get; set; }
+        DateTime DT
+        {
+            get
+            {
+                return Clock.Now + Delta;
+            }
+            set
+            {
+                Delta = value - Clock.Now;
+            }
+        }
 
         /// <summary>
-        /// DateTime last we checked
+        /// How much we have changed the time since we started
         /// </summary>
-        DateTime LastDT;
+        TimeSpan Delta;
 
         Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();
 
@@ -72,7 +82,7 @@ namespace IotHello.Uwp.Screens
         {
             this.InitializeComponent();
 
-            DT = LastDT = Clock.Now;
+            Delta = TimeSpan.Zero;           
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -83,13 +93,7 @@ namespace IotHello.Uwp.Screens
 
         private void App_Tick(object sender, object e)
         {
-            var now = Clock.Now;
-
-            var diff = now - LastDT;
-            DT = DT.Add(diff);
             Bindings.Update();
-
-            LastDT = now;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -102,6 +106,11 @@ namespace IotHello.Uwp.Screens
 
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
+            Frame.GoBack();
+        }
+        private void OK_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Clock.Now = DT;
             Frame.GoBack();
         }
     }
