@@ -146,7 +146,7 @@ namespace IotHello.Uwp
 
                 /* This is the crazy testing schedule. Once every minute!! */
                 var current = TimeSpan.FromHours(5);
-                var period = TimeSpan.FromMinutes(1);
+                var period = TimeSpan.FromMinutes(5);
                 var ending = TimeSpan.FromHours(22);
                 while( current < ending)
                 {

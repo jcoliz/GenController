@@ -15,19 +15,33 @@ namespace IotHello.Uwp.Converters
             if (parameter != null && (String)parameter != null)
                 format = (String)parameter;
 
-            DateTime? input = value as DateTime?;
-
             String result = "---";
-            if (input.HasValue)
+            if (value is DateTime?)
             {
-                if (format != null)
-                    result = input.Value.ToString(format);
-                else
-                    result = input.Value.ToString();
+                var input = value as DateTime?;
+
+                if (input.HasValue)
+                {
+                    if (format != null)
+                        result = input.Value.ToString(format);
+                    else
+                        result = input.Value.ToString();
+                }
+
             }
+            else if (value is TimeSpan?)
+            {
+                var input = value as TimeSpan?;
 
+                if (input.HasValue)
+                {
+                    if (format != null)
+                        result = input.Value.ToString(format);
+                    else
+                        result = input.Value.ToString();
+                }
+            }
             return result;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string culture)

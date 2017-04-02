@@ -96,6 +96,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanBrushConverter.cs" />
+    <Compile Include="Screens\EditSchedule.xaml.cs">
+      <DependentUpon>EditSchedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Logs.xaml.cs" />
     <Compile Include="Screens\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -137,6 +140,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\EditSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Logs.xaml">
       <Generator>MSBuild:Compile</Generator>

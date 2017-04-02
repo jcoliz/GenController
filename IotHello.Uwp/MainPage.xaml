@@ -65,6 +65,7 @@
         </TextBlock>
         <!-- Periods Display -->
         <GridView Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" ScrollViewer.IsVerticalRailEnabled="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled"
+                  IsItemClickEnabled="True" ItemClick="PeriodsView_ItemClick"
                   ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" x:Name="PeriodsView" />
         <!-- Commands -->
         <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100" Click="Button_Settings_Click">

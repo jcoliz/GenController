@@ -26,7 +26,9 @@
         <Border  Grid.ColumnSpan="4" Background="DarkBlue" Margin="10">
             <StackPanel Orientation="Horizontal" Margin="10" >
                 <Image Width="40" Height="40" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Foreground="White" Text="{x:Bind MainVM.App}" VerticalAlignment="Center" FontSize="30"/>
+                <TextBlock Foreground="White" VerticalAlignment="Center" FontSize="30">
+                    <Run Text="{x:Bind MainVM.App}"/><Run Text=": View Logs"/>
+                </TextBlock>
             </StackPanel>
         </Border>
         <Grid HorizontalAlignment="Right" Margin="30,0" VerticalAlignment="Center">

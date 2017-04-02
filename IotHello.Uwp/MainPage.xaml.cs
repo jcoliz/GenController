@@ -56,5 +56,10 @@ namespace IotHello.Uwp
         {
             Frame.Navigate(typeof(Screens.Logs));
         }
+
+        private void PeriodsView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(Screens.EditSchedule),e.ClickedItem);
+        }
     }
 }
