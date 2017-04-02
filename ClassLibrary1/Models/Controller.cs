@@ -60,8 +60,8 @@ namespace IotHello.Portable.Models
             if (Status == GenStatus.Running && RunSignal)
                 return;
 
-            // Already processing a starting/stopping operation? Skip it
-            if (Status == GenStatus.Starting || Status == GenStatus.Stopping)
+            // Already processing a starting/stopping operation? Or disabled? Skip it
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled)
                 return;
 
             Status = GenStatus.Starting;
@@ -78,8 +78,8 @@ namespace IotHello.Portable.Models
         }
         public async Task Stop()
         {
-            // Already processing a starting/stopping operation? Skip it
-            if (Status == GenStatus.Starting || Status == GenStatus.Stopping)
+            // Already processing a starting/stopping operation? Or Disabled? Skip it
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled)
                 return;
 
             Status = GenStatus.Stopping;
@@ -97,6 +97,12 @@ namespace IotHello.Portable.Models
         {
             if (Status == GenStatus.Confirming && RunSignal)
                 Status = GenStatus.Running;
+        }
+
+        public void Disable()
+        {
+            if (Status == GenStatus.Stopped)
+                Status = GenStatus.Disabled;
         }
 
         public static IController Current
@@ -238,5 +244,5 @@ namespace IotHello.Portable.Models
         #endregion
     }
 
-    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping };
+    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping, Disabled };
 }

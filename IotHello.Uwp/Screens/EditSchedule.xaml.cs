@@ -1,6 +1,7 @@
 ﻿using ManiaLabs.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,13 +24,17 @@ namespace IotHello.Uwp.Screens
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class EditSchedule : Page
+    public sealed partial class EditSchedule : Page, INotifyPropertyChanged
     {
         public Portable.Models.GenPeriod Period { get; private set; }
 
         private Portable.Models.GenPeriod Original;
 
         Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool WillDelete { get; set; }
 
         public ICommand AddCommand => new DelegateCommand((x) =>
         {
@@ -129,13 +134,25 @@ namespace IotHello.Uwp.Screens
         {
             try
             {
-                Portable.Models.Schedule.Current.Replace(Original, Period);
+                if (WillDelete)
+                    Portable.Models.Schedule.Current.Remove(Original);
+                else
+                    Portable.Models.Schedule.Current.Replace(Original, Period);
+
                 Frame.GoBack();
             }
             catch (Exception ex)
             {
                 await new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
             }
+        }
+
+        private void Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            WillDelete = !WillDelete;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WillDelete)));
+
+            
         }
     }
 }

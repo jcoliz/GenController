@@ -142,6 +142,12 @@ namespace IotHello.Portable.Models
             Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
         }
 
+        public void Remove(GenPeriod old)
+        {
+            Periods.Remove(old);
+            Setting.SetCompositeKey("Schedule", Periods.Select(GenPeriod.Serialize));
+        }
+
         private DateTime LastTick = DateTime.MinValue;
         private DateTime? StartedConfirmingAt = null;
 
