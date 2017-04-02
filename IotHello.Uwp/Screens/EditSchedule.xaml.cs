@@ -53,7 +53,16 @@ namespace IotHello.Uwp.Screens
             }
             catch (Exception ex)
             {
-                await new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
+                var dialog = new ContentDialog()
+                {
+                    Title = "Sorry",
+                    MaxWidth = this.ActualHeight,
+                    Content = new TextBlock() { Text = ex.Message },
+                    PrimaryButtonText = "OK",
+                    IsPrimaryButtonEnabled = true
+                };
+                await dialog.ShowAsync();
+                //await new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
             }
         }
     }
