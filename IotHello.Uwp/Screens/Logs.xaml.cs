@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -48,7 +49,12 @@ namespace IotHello.Uwp.Screens
         {
             base.OnNavigatedTo(e);
             App.Current.Measurement.LogEvent("Screen.Logs");
-            var ignore = VM.Load();
+            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => 
+            {
+                await VM.Load();
+                await Task.Delay(200);
+                await VM.SelectSession(VM.Sessions.First());
+            });
             VM.ExceptionRaised += VM_ExceptionRaised;
         }
 

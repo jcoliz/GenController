@@ -281,7 +281,7 @@ namespace IotHello.Uwp
 
         public string GetResourceString(string key)
         {
-            throw new NotImplementedException();
+            return key;
         }
 
         public Task<Stream> OpenStreamForReadFromApplicationAsync(string Pathname)
