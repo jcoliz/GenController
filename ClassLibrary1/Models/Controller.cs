@@ -99,10 +99,12 @@ namespace IotHello.Portable.Models
                 Status = GenStatus.Running;
         }
 
-        public void Disable()
+        public void ToggleDisable()
         {
             if (Status == GenStatus.Stopped)
                 Status = GenStatus.Disabled;
+            else if (Status == GenStatus.Disabled)
+                Status = GenStatus.Stopped;
         }
 
         public static IController Current

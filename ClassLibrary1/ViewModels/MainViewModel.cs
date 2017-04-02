@@ -19,7 +19,7 @@ namespace IotHello.Portable.ViewModels
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
-        public IList<Models.GenPeriod> Periods => Models.Schedule.Current.Periods.Take(5).ToList();
+        public IList<Models.GenPeriod> Periods => Models.Schedule.Current.Periods;
 
         public string App
         {

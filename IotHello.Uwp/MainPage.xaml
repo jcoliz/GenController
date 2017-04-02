@@ -64,10 +64,26 @@
             <Run Text="{x:Bind VM.Controller.Status,Mode=OneWay}"/>
         </TextBlock>
         <!-- Periods Display -->
-        <GridView Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" 
+        <GridView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" 
                   IsItemClickEnabled="True" ItemClick="PeriodsView_ItemClick" VerticalAlignment="Center"
                   ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" x:Name="PeriodsView" />
         <!-- Commands -->
+
+        <Button Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="120" Click="Button_Power_Click"                >
+            <SymbolIcon Symbol="Pause" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <SymbolIcon.RenderTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
+                </SymbolIcon.RenderTransform>
+            </SymbolIcon>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="120" Click="Button_Add_Click"                >
+            <SymbolIcon Symbol="Add" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <SymbolIcon.RenderTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
+                </SymbolIcon.RenderTransform>
+            </SymbolIcon>
+        </Button>
+
         <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Width="120" Click="Button_Settings_Click">
             <SymbolIcon Symbol="Setting" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>

@@ -34,7 +34,11 @@ namespace IotHello.Uwp.Screens
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string Purpose => WillAdd ? "Add Schedule Block" : "Edit Schedule";
+
         private bool WillDelete { get; set; }
+
+        private bool WillAdd { get; set; }
 
         public ICommand AddCommand => new DelegateCommand((x) =>
         {
@@ -124,6 +128,13 @@ namespace IotHello.Uwp.Screens
                 Period = new Portable.Models.GenPeriod(Original.StartAt, Original.StopAt);
                 Bindings.Update();
             }
+            else
+            {
+                // If not, we are ADDING a new one.
+                WillAdd = true;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Purpose)));
+                Period = new Portable.Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(13));
+            }
             base.OnNavigatedTo(e);
         }
         private void Back_Button_Click(object sender, RoutedEventArgs e)
@@ -136,6 +147,8 @@ namespace IotHello.Uwp.Screens
             {
                 if (WillDelete)
                     Portable.Models.Schedule.Current.Remove(Original);
+                else if (WillAdd)
+                    Portable.Models.Schedule.Current.Add(Period);
                 else
                     Portable.Models.Schedule.Current.Replace(Original, Period);
 
@@ -150,9 +163,7 @@ namespace IotHello.Uwp.Screens
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
         {
             WillDelete = !WillDelete;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WillDelete)));
-
-            
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WillDelete)));            
         }
     }
 }

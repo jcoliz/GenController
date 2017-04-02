@@ -18,10 +18,10 @@ namespace IotHello.Uwp.Converters
         /// </summary>
         public bool IsReversed { get; set; }
 
-        public object Convert(object value, Type typeName, object parameter, string language)
+        public object Convert(object value, Type typeName, object reversed, string language)
         {
             var val = System.Convert.ToBoolean(value);
-            if (this.IsReversed)
+            if (reversed != null && System.Convert.ToBoolean(reversed) == true)
             {
                 val = !val;
             }

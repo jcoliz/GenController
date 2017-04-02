@@ -122,7 +122,8 @@ namespace IotHello.Portable.Models
                 throw new ArgumentException("Generator must run at least 30 minutes", nameof(replacement));
 
             var proposed = Periods.ToList();
-            proposed.Remove(old);
+            if (old != null)
+                proposed.Remove(old);
             proposed.Add(replacement);
             proposed.Sort();
 
@@ -141,6 +142,8 @@ namespace IotHello.Portable.Models
 
             Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
         }
+
+        public void Add(GenPeriod item) => Replace(null, item);
 
         public void Remove(GenPeriod old)
         {
