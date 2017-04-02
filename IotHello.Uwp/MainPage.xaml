@@ -67,7 +67,7 @@
         <GridView Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{x:Bind VM.Periods}" SelectionMode="None" ScrollViewer.IsVerticalRailEnabled="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled"
                   ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" x:Name="PeriodsView" />
         <!-- Commands -->
-        <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100">
+        <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100" Click="Button_Settings_Click">
             <SymbolIcon Symbol="Setting" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
                     <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>

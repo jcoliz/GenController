@@ -46,5 +46,10 @@ namespace IotHello.Uwp
             App.Current.Tick -= App_Tick;
             base.OnNavigatedFrom(e);
         }
+
+        private void Button_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Screens.Settings));
+        }
     }
 }
