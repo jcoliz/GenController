@@ -110,7 +110,7 @@ namespace IotHello.Uwp.Screens
         }
         private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
-            //Clock.Now = DT;
+            Clock.Now = DT;
             Frame.GoBack();
         }
     }

@@ -11,7 +11,7 @@ namespace IotHello.Iot.Platform
     // http://stackoverflow.com/questions/34964682/windows-iot-and-ds3231-rtc-clock
     public class Rtc3231: Portable.Models.IClock
     {
-        public DateTime Now { get; private set; }
+        public DateTime Now { get; set; }
 
         public async Task Update()
         {

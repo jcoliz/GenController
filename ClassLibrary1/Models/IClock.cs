@@ -11,7 +11,7 @@ namespace IotHello.Portable.Models
     /// </summary>
     public interface IClock
     {
-        DateTime Now { get; }
+        DateTime Now { get; set; }
 
         Task Delay(TimeSpan t);
     }
