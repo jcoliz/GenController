@@ -21,6 +21,15 @@ namespace IotHello.Portable.ViewModels
 
         public ObservableCollection<Models.GenPeriod> Periods => Models.Schedule.Current.Periods;
 
+        public string App
+        {
+            get
+            {
+                var app = ManiaLabs.Platform.Get<ManiaLabs.IApp>();
+                return $"{app.Title} {app.Version}";
+            }
+        }
+
         public ICommand StartCommand => new DelegateCommand(async _ => 
         {
             try

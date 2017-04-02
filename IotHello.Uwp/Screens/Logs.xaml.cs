@@ -26,6 +26,9 @@ namespace IotHello.Uwp.Screens
     {
         public LogsViewModel VM { get; } = new LogsViewModel();
 
+        public MainViewModel MainVM { get; } = new MainViewModel();
+
+
         public Logs()
         {
             try

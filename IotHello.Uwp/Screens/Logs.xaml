@@ -6,8 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mh="using:ManiaLabs.Helpers"
+    xmlns:lc="using:IotHello.Uwp.Converters"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <lc:DateFormatConverter x:Key="DateFormatConverter"/>
+        <lc:BooleanBrushConverter x:Key="BooleanBrushConverter"/>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -20,10 +26,22 @@
         <Border  Grid.ColumnSpan="4" Background="DarkBlue" Margin="10">
             <StackPanel Orientation="Horizontal" Margin="10" >
                 <Image Width="40" Height="40" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Foreground="White" Text="Gen Control 1.0" VerticalAlignment="Center" FontSize="30"/>
+                <TextBlock Foreground="White" Text="{x:Bind MainVM.App}" VerticalAlignment="Center" FontSize="30"/>
             </StackPanel>
         </Border>
-
+        <Grid HorizontalAlignment="Right" Margin="30,0" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Grid.Column="0" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.StartRelay,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Margin="0,-2,0,0" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.StopRelay,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Margin="0,-2,0,0" Grid.Column="1" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.RunSignal,Converter={StaticResource BooleanBrushConverter},ConverterParameter='FFFF0000,FF000000',Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Margin="0,-2,0,0" Grid.Column="2" Foreground="White" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+        </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

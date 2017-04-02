@@ -131,6 +131,7 @@ namespace IotHello.Uwp
 #endif
             try
             {
+                ManiaLabs.Platform.Set<ManiaLabs.IApp>(this);
                 ManiaLabs.Platform.Set<Portable.Models.IClock>(new Platform.Clock());
                 ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
