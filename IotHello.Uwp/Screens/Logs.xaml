@@ -25,8 +25,8 @@
         <!-- Title Bar -->
         <Border  Grid.ColumnSpan="4" Background="DarkBlue" Margin="10">
             <StackPanel Orientation="Horizontal" Margin="10" >
-                <Image Width="40" Height="40" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Foreground="White" VerticalAlignment="Center" FontSize="30">
+                <Image Width="50" Height="50" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Foreground="White" VerticalAlignment="Center" FontSize="40">
                     <Run Text="{x:Bind MainVM.App}"/><Run Text=": View Logs"/>
                 </TextBlock>
             </StackPanel>
@@ -62,15 +62,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Grid.Column="2" VerticalAlignment="Stretch" Margin="10" Background="DarkGray" Width="100" Command="{x:Bind VM.PageUpCommand}">
+            <Button Grid.Column="2" VerticalAlignment="Stretch" Margin="10" Background="DarkGray" Width="120" Command="{x:Bind VM.PageUpCommand}">
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
             </Button>
-            <Button Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" Margin="10" Background="DarkGray" Width="100" Command="{x:Bind VM.PageDownCommand}">
+            <Button Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" Margin="10" Background="DarkGray" Width="120" Command="{x:Bind VM.PageDownCommand}">
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
             </Button>
         </Grid>
 
-        <Button Grid.Row="2" HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Click="Back_Button_Click">
+        <Button Grid.Row="2" HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Click="Back_Button_Click">
             <TextBlock Text="Back" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
 

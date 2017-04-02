@@ -40,8 +40,8 @@
         <!-- Title Bar -->
         <Border  Grid.ColumnSpan="4" Background="DarkBlue" Margin="10">
             <StackPanel Orientation="Horizontal" Margin="10" >
-                <Image Width="40" Height="40" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Foreground="White" Text="{x:Bind VM.App}" VerticalAlignment="Center" FontSize="30"/>
+                <Image Width="50" Height="50" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Foreground="White" Text="{x:Bind VM.App}" VerticalAlignment="Center" FontSize="40"/>
             </StackPanel>
         </Border>
         <Grid Grid.ColumnSpan="4" HorizontalAlignment="Right" Margin="30,0" VerticalAlignment="Center">
@@ -68,20 +68,20 @@
                   IsItemClickEnabled="True" ItemClick="PeriodsView_ItemClick" VerticalAlignment="Center"
                   ItemTemplate="{StaticResource List_Period}" HorizontalAlignment="Center" x:Name="PeriodsView" />
         <!-- Commands -->
-        <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100" Click="Button_Settings_Click">
+        <Button Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Width="120" Click="Button_Settings_Click">
             <SymbolIcon Symbol="Setting" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
                     <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>
-        <Button Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Stretch" Command="{x:Bind VM.StartCommand}" Margin="10" Background="Green" Height="100">
+        <Button Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Stretch" Command="{x:Bind VM.StartCommand}" Margin="10" Background="Green" Height="120">
             <TextBlock Text="Start" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
-        <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" Command="{x:Bind VM.StopCommand}" Margin="10" Background="Red" Height="100">
+        <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" Command="{x:Bind VM.StopCommand}" Margin="10" Background="Red" Height="120">
             <TextBlock Text="Stop" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
-        <Button Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100" Click="Button_Logs_Click">
+        <Button Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Width="120" Click="Button_Logs_Click">
             <SymbolIcon Symbol="List" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
                     <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
