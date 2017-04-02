@@ -1,4 +1,5 @@
 ﻿using ManiaLabs.Helpers;
+using ManiaLabs.Models;
 using ManiaLabs.Portable.Base;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,15 @@ namespace IotHello.Portable.Models
         /// Dependency injection for how to get the current time.
         /// </summary>
         private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+
+        /// <summary>
+        /// Load schedule from storage
+        /// </summary>
+        public void Load()
+        {
+            var storage = Setting.GetCompositeKey("Schedule");
+            Periods.AddRange(storage.Select(GenPeriod.Deserialize));
+        }
 
         /// <summary>
         /// Call this regularly to test the schedule to see if it's time to change
@@ -128,6 +138,8 @@ namespace IotHello.Portable.Models
 
             Periods.Clear();
             Periods.AddRange(proposed);
+
+            Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
         }
 
         private DateTime LastTick = DateTime.MinValue;

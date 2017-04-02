@@ -26,12 +26,35 @@ namespace IotHello.Portable.Models
             StartAt = start;
             StopAt = stop;
         }
+        public GenPeriod(string serializekey)
+        {
+            var split = serializekey.Split(' ');
+            StartAt = TimeSpan.Parse(split[0]);
+            StopAt = TimeSpan.Parse(split[1]);
+        }
 
         public string Label => StartAt.ToString("hh\\:mm") + Environment.NewLine + StopAt.ToString("hh\\:mm");
 
+        public string SerializeKey => StartAt.ToString("hh\\:mm") + " " + StopAt.ToString("hh\\:mm");
+
         public int CompareTo(GenPeriod other)
         {
-            return StartAt.CompareTo(other.StartAt);
+            var result = StartAt.CompareTo(other.StartAt);
+            if (result == 0)
+                result = StopAt.CompareTo(other.StopAt);
+
+            return result;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is GenPeriod))
+                return false;
+            return 0 == CompareTo(obj as GenPeriod);
+        }
+
+        static public string Serialize(GenPeriod x) => x.SerializeKey;
+
+        static public GenPeriod Deserialize(string x) => new GenPeriod(x);
     }
 }

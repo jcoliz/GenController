@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanBrushConverter.cs" />
+    <Compile Include="Platform\WindowsSettingsManager.cs" />
     <Compile Include="Screens\EditSchedule.xaml.cs">
       <DependentUpon>EditSchedule.xaml</DependentUpon>
     </Compile>
