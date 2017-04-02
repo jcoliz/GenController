@@ -51,5 +51,10 @@ namespace IotHello.Uwp
         {
             Frame.Navigate(typeof(Screens.Settings));
         }
+
+        private void Button_Logs_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Screens.Logs));
+        }
     }
 }

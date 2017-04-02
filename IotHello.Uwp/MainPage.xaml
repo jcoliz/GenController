@@ -80,7 +80,7 @@
         <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" Command="{x:Bind VM.StopCommand}" Margin="10" Background="Red" Height="100">
             <TextBlock Text="Stop" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Button>
-        <Button Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100">
+        <Button Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Width="100" Click="Button_Logs_Click">
             <SymbolIcon Symbol="List" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
                     <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>
