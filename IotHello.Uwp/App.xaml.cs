@@ -137,6 +137,7 @@ namespace IotHello.Uwp
                 ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
                 ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
+                ManiaLabs.Platform.Set<IPlatformSettingsManager>(new Platform.WindowsSettingsManager());
 
                 /* This is the REAL schedule
                 Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
@@ -144,14 +145,19 @@ namespace IotHello.Uwp
                 Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19)));
                 */
 
-                /* This is the crazy testing schedule. Once every minute!! */
-                var current = TimeSpan.FromHours(5);
-                var period = TimeSpan.FromHours(2);
-                var ending = TimeSpan.FromHours(22);
-                while( current < ending)
+                Portable.Models.Schedule.Current.Load();
+
+                if (Portable.Models.Schedule.Current.Periods.FirstOrDefault() == null)
                 {
-                    Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period));
-                    current += period + period;
+                    /* This is the crazy testing schedule. Once every minute!! */
+                    var current = TimeSpan.FromHours(5);
+                    var period = TimeSpan.FromHours(2);
+                    var ending = TimeSpan.FromHours(22);
+                    while (current < ending)
+                    {
+                        Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period));
+                        current += period + period;
+                    }
                 }
 
                 Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };

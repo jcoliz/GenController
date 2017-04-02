@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.Storage;
 
-namespace ManiaLabs.WindowsPlatform.Helpers
+namespace IotHello.Uwp.Platform
 {
     public class WindowsSettingsManager : IPlatformSettingsManager
     {
