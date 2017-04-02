@@ -87,40 +87,40 @@
                    Text="{x:Bind DT,Mode=OneWay,Converter={StaticResource DateFormatConverter},ConverterParameter='ss'}"/>
             
             <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind AddCommand}" CommandParameter="-month" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White" />
             </Button>
             <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind AddCommand}" CommandParameter="-day" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
             <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind AddCommand}" CommandParameter="-year" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
             <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind AddCommand}" CommandParameter="-hour" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
             <Button Grid.Row="0" Grid.Column="8" Command="{x:Bind AddCommand}" CommandParameter="-minute" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
             <Button Grid.Row="0" Grid.Column="10" Command="{x:Bind AddCommand}" CommandParameter="-second" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
             <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind AddCommand}" CommandParameter="+month" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
             <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind AddCommand}" CommandParameter="+day" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
             <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind AddCommand}" CommandParameter="+year" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
             <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind AddCommand}" CommandParameter="+hour" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
             <Button Grid.Row="2" Grid.Column="8" Command="{x:Bind AddCommand}" CommandParameter="+minute" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
             <Button Grid.Row="2" Grid.Column="10" Command="{x:Bind AddCommand}" CommandParameter="+second" HorizontalAlignment="Center" Width="100" Height="100">
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" />
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
         </Grid>
 

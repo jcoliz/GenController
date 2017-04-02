@@ -78,11 +78,38 @@ namespace IotHello.Portable.ViewModels
 
                 Log.Clear();
                 Log.AddRange(result);
+                SelectedItem = 0;
+                base.SetProperty(nameof(SelectedItem));
             }
             catch (Exception ex)
             {
                 SetError("LV2", ex);
             }
         }
+
+        public int SelectedItem { get; set; } = -1;
+
+        public ICommand PageUpCommand => new DelegateCommand(_ => 
+        {
+            int desired = SelectedItem - 15;
+            if (desired < 0)
+                desired = 0;
+            if (desired != SelectedItem)
+            {
+                SelectedItem = desired;
+                base.SetProperty(nameof(SelectedItem));
+            }
+        });
+        public ICommand PageDownCommand => new DelegateCommand(_ =>
+        {
+            int desired = SelectedItem + 15;
+            if (desired >= Log.Count)
+                desired = Log.Count - 1;
+            if (desired != SelectedItem)
+            {
+                SelectedItem = desired;
+                base.SetProperty(nameof(SelectedItem));
+            }
+        });
     }
 }

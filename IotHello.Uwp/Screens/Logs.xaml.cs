@@ -77,5 +77,14 @@ namespace IotHello.Uwp.Screens
         {
             Frame.GoBack();
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var lv = sender as ListView;
+            if (e.AddedItems?.FirstOrDefault() != null)
+            {
+                lv.ScrollIntoView(e.AddedItems.First());
+            }
+        }
     }
 }
