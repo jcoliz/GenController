@@ -1,7 +1,7 @@
 ﻿How much common code do I use?
 
 * SimpleMeasurement (only needed for logging. does need to load logs back up)
-* IPlatformFileSystem, WindowsFileSystem (used by measurement)
+* IPlatformFileSystem, WindowsFileSystem (used by measurement) -- probably just write a direct .NET logger
 * IClock (used throughout)
 * ValueConverters
 * DelegateCommand
