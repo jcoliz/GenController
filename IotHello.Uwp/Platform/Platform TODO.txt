@@ -7,5 +7,6 @@
 * DelegateCommand
 * ViewModelBase
 * RangeObservableCollection
+* Platform.Get/Set service locator
 
 Plan is to copy these out and/or rework them, so the project can be distributed without ALL my common code base
