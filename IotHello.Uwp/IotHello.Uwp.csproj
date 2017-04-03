@@ -103,14 +103,16 @@
     <Compile Include="Screens\EditSchedule.xaml.cs">
       <DependentUpon>EditSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Logs.xaml.cs" />
+    <Compile Include="Screens\Logs.xaml.cs">
+      <DependentUpon>Logs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="WebPageControllers\LogsController.cs" />
     <Compile Include="WebPageControllers\StatusController.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Screens\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Platform\Rtc3231.cs" />
@@ -140,7 +142,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Screens\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

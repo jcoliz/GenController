@@ -1,20 +1,7 @@
-﻿using ManiaLabs.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace IotHello.Uwp.Screens
@@ -45,7 +32,7 @@ namespace IotHello.Uwp.Screens
         {
             Frame.GoBack();
         }
-        private async void OK_Button_Click(object sender, RoutedEventArgs e)
+        private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
