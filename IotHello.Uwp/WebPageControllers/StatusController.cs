@@ -49,7 +49,7 @@ namespace IotHello.Uwp.Controllers
                 "</style>",
                 "</head>",
                 "<body>",
-                $"<h1>{VM.CurrentTime.ToString("HH\\:mm\\:ss")} <span class=\"big\">{VM.Controller.FullStatus}</span></h1>",
+                $"<h1>{VM.CurrentTime.ToString("HH\\:mm\\:ss")} <span class=\"big\">{VM.Controller.Status}</span></h1>",
                 "<ul>"
             };
 
@@ -62,7 +62,7 @@ namespace IotHello.Uwp.Controllers
             });
             var content = string.Join("\r\n", html);
 
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StatusOK",$"Status={VM.Controller.FullStatus}");
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StatusOK",$"Status={VM.Controller.Status}");
 
             return new HttpResponse(HttpStatusCode.Ok, content);
         }

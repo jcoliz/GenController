@@ -29,30 +29,11 @@ namespace IotHello.Portable.Models
             private set
             {
                 _Status = value;
-                DoPropertyChanged(nameof(FullStatus));
                 DoPropertyChanged(nameof(Status));
                 ManiaLabs.Platform.Get<IMeasurement>().LogEvent(_Status.ToString());
             }
         }
         private GenStatus _Status = GenStatus.Stopped;
-
-        public string FullStatus
-        {
-            get
-            {
-                string result = Status.ToString();
-
-                if (_StartRelay)
-                    result += " P1";
-
-                if (_StopRelay)
-                    result += " P2";
-
-                return result;
-            }
-        }
-
-        private SynchronizationContext Context = SynchronizationContext.Current; 
 
         public async Task Start()
         {
@@ -151,7 +132,6 @@ namespace IotHello.Portable.Models
                     if (value)
                         RunSignal = false;
 
-                    DoPropertyChanged(nameof(FullStatus));
                     DoPropertyChanged(nameof(StopRelay));
                 }
             }
@@ -174,7 +154,6 @@ namespace IotHello.Portable.Models
                     if (value)
                         RunSignal = true;
 
-                    DoPropertyChanged(nameof(FullStatus));
                     DoPropertyChanged(nameof(StartRelay));
                 }
             }
@@ -230,6 +209,7 @@ namespace IotHello.Portable.Models
         #endregion
 
         private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+        private SynchronizationContext Context = SynchronizationContext.Current;
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

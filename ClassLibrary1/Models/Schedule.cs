@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace IotHello.Portable.Models
 {
+    /// <summary>
+    /// The overall schedule of the generator, containing all the schedule blocks
+    /// </summary>
     public class Schedule
     {
-        public RangeObservableCollection<Models.GenPeriod> Periods = new RangeObservableCollection<Models.GenPeriod>();
-
         /// <summary>
-        /// Dependency injection for how to get the current time.
+        /// The actual schedule blocks
         /// </summary>
-        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+        public RangeObservableCollection<Models.GenPeriod> Periods = new RangeObservableCollection<Models.GenPeriod>();
 
         /// <summary>
         /// Load schedule from storage
@@ -143,23 +144,25 @@ namespace IotHello.Portable.Models
             Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
         }
 
+        /// <summary>
+        /// Add this block to the schedule
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(GenPeriod item) => Replace(null, item);
 
+        /// <summary>
+        /// Remove this block from the schedule
+        /// </summary>
+        /// <param name="old"></param>
         public void Remove(GenPeriod old)
         {
             Periods.Remove(old);
             Setting.SetCompositeKey("Schedule", Periods.Select(GenPeriod.Serialize));
         }
 
-        private DateTime LastTick = DateTime.MinValue;
-        private DateTime? StartedConfirmingAt = null;
-
-        private void Log(string what)
-        {
-            var Measurement = ManiaLabs.Platform.TryGet<IMeasurement>();
-            Measurement?.LogEvent(what);
-        }
-
+        /// <summary>
+        /// The current singleton
+        /// </summary>
         public static Schedule Current
         {
             get
@@ -170,5 +173,15 @@ namespace IotHello.Portable.Models
             }
         }
         static Schedule _Current = null;
+
+        private DateTime LastTick = DateTime.MinValue;
+        private DateTime? StartedConfirmingAt = null;
+
+        private void Log(string what) =>  ManiaLabs.Platform.TryGet<IMeasurement>()?.LogEvent(what);
+
+        /// <summary>
+        /// Service Locator for how to get the current time.
+        /// </summary>
+        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
     }
 }

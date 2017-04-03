@@ -53,6 +53,8 @@ namespace IotHello.Portable.Models
             return 0 == CompareTo(obj as GenPeriod);
         }
 
+        public override int GetHashCode() => StartAt.GetHashCode() ^ StopAt.GetHashCode();
+
         static public string Serialize(GenPeriod x) => x.SerializeKey;
 
         static public GenPeriod Deserialize(string x) => new GenPeriod(x);
