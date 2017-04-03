@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotHello.Portable.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catnap.Server", "Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj", "{1ED5F504-DBE7-45FE-A968-F3F71B26B67E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.Portable.Base", "..\Allowance\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj", "{689E267B-B673-46E3-97F9-841FEC302A39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.NET", "ManiaLabs.Common\ManiaLabs.NET\ManiaLabs.NET.csproj", "{622AF662-21E6-4A0F-825D-882B056470B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.NET", "..\Allowance\ManiaLabs.Common\ManiaLabs.NET\ManiaLabs.NET.csproj", "{622AF662-21E6-4A0F-825D-882B056470B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.Portable.Base", "ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj", "{689E267B-B673-46E3-97F9-841FEC302A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,22 +95,6 @@ Global
 		{1ED5F504-DBE7-45FE-A968-F3F71B26B67E}.Release|x64.Build.0 = Release|x64
 		{1ED5F504-DBE7-45FE-A968-F3F71B26B67E}.Release|x86.ActiveCfg = Release|x86
 		{1ED5F504-DBE7-45FE-A968-F3F71B26B67E}.Release|x86.Build.0 = Release|x86
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|ARM.Build.0 = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x64.Build.0 = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x86.Build.0 = Debug|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|ARM.ActiveCfg = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|ARM.Build.0 = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x64.ActiveCfg = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x64.Build.0 = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x86.ActiveCfg = Release|Any CPU
-		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x86.Build.0 = Release|Any CPU
 		{622AF662-21E6-4A0F-825D-882B056470B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{622AF662-21E6-4A0F-825D-882B056470B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622AF662-21E6-4A0F-825D-882B056470B0}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -127,6 +111,22 @@ Global
 		{622AF662-21E6-4A0F-825D-882B056470B0}.Release|x64.Build.0 = Release|Any CPU
 		{622AF662-21E6-4A0F-825D-882B056470B0}.Release|x86.ActiveCfg = Release|Any CPU
 		{622AF662-21E6-4A0F-825D-882B056470B0}.Release|x86.Build.0 = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|ARM.Build.0 = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x64.Build.0 = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Debug|x86.Build.0 = Debug|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|ARM.ActiveCfg = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|ARM.Build.0 = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x64.ActiveCfg = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x64.Build.0 = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x86.ActiveCfg = Release|Any CPU
+		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

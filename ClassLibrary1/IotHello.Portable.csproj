@@ -42,7 +42,6 @@
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />
-    <Compile Include="Models\IClock.cs" />
     <Compile Include="Models\IController.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,7 +50,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Allowance\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
+    <ProjectReference Include="..\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
       <Project>{689e267b-b673-46e3-97f9-841fec302a39}</Project>
       <Name>ManiaLabs.Portable.Base</Name>
     </ProjectReference>

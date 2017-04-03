@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManiaLabs.Portable.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using Windows.Devices.I2c;
 namespace IotHello.Iot.Platform
 {
     // http://stackoverflow.com/questions/34964682/windows-iot-and-ds3231-rtc-clock
-    public class Rtc3231: Portable.Models.IClock
+    public class Rtc3231: IClock
     {
         public DateTime Now { get; set; }
 

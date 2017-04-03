@@ -1,4 +1,5 @@
 ﻿using ManiaLabs.Helpers;
+using ManiaLabs.Portable.Base;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -102,7 +103,7 @@ namespace IotHello.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private Portable.Models.IClock Clock => ManiaLabs.Platform.Get<Portable.Models.IClock>();
+        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
 
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
