@@ -11,7 +11,8 @@
     <Page.Resources>
         <lc:DateFormatConverter x:Key="DateFormatConverter"/>
         <lc:BooleanBrushConverter x:Key="BooleanBrushConverter"/>
-        <lc:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <lc:DefaultVisibleXaml x:Key="DefaultVisibleXaml"/>
+        <lc:DefaultHiddenXaml x:Key="DefaultHiddenXaml"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -115,7 +116,7 @@
             </Button>
 
             <TextBlock Grid.Row="3" Grid.ColumnSpan="7" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   TextWrapping="WrapWholeWords" Margin="0,10" TextAlignment="Center" Visibility="{x:Bind VM.WillDelete,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}" >
+                   TextWrapping="WrapWholeWords" Margin="0,10" TextAlignment="Center" Visibility="{x:Bind VM.WillDelete,Mode=OneWay,Converter={StaticResource DefaultVisibleXaml}}" >
                 <Run Text="This item will be deleted."/>
                 <LineBreak/>
                 <Run Text="Press 'Cancel' to abort."/>
@@ -123,7 +124,7 @@
         </Grid>
 
         <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="120" Command="{x:Bind VM.DeleteMeCommand}"
-                Visibility="{x:Bind VM.WillAdd,Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=True}">
+                Visibility="{x:Bind VM.WillAdd,Converter={StaticResource DefaultHiddenXaml}}">
             <SymbolIcon Symbol="Delete" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
                     <ScaleTransform ScaleX="2" ScaleY="2" CenterX="8" CenterY="8"/>

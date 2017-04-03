@@ -99,6 +99,7 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Platform\MessageDialog.cs" />
     <Compile Include="Platform\WindowsSettingsManager.cs" />
+    <Compile Include="Platform\XamlValueConverter.cs" />
     <Compile Include="Screens\EditSchedule.xaml.cs">
       <DependentUpon>EditSchedule.xaml</DependentUpon>
     </Compile>
