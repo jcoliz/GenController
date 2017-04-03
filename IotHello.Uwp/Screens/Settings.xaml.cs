@@ -25,65 +25,13 @@ namespace IotHello.Uwp.Screens
     /// </summary>
     public sealed partial class Settings : Page
     {
-        /// <summary>
-        /// DateTime currently being edited
-        /// </summary>
-        DateTime DT
-        {
-            get
-            {
-                return Clock.Now + Delta;
-            }
-            set
-            {
-                Delta = value - Clock.Now;
-            }
-        }
+        public Portable.ViewModels.SettingsViewModel VM { get; } = new Portable.ViewModels.SettingsViewModel();
 
-        /// <summary>
-        /// How much we have changed the time since we started
-        /// </summary>
-        TimeSpan Delta;
-
-        Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();
-
-        public ICommand AddCommand => new DelegateCommand((x) => 
-        {
-            string what = x as string;
-            char direction = what[0];
-            int add = 1;
-            if (direction == '-')
-                add = -1;
-            switch(what.Substring(1))
-            {
-                case "year":
-                    DT = DT.AddYears(add);
-                    break;
-                case "month":
-                    DT = DT.AddMonths(add);
-                    break;
-                case "day":
-                    DT = DT.AddDays(add);
-                    break;
-                case "hour":
-                    DT = DT.AddHours(add);
-                    break;
-                case "minute":
-                    DT = DT.AddMinutes(add);
-                    break;
-                case "second":
-                    DT = DT.AddSeconds(add);
-                    break;
-            }
-
-            Bindings.Update();
-        });
+        Portable.ViewModels.MainViewModel MainVM = new Portable.ViewModels.MainViewModel();
 
         public Settings()
         {
             this.InitializeComponent();
-
-            Delta = TimeSpan.Zero;           
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -104,17 +52,14 @@ namespace IotHello.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
-
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.GoBack();
         }
         private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
-            Clock.Now = DT;
-            DT = Clock.Now;
-            App.Current.Measurement.LogEvent("Time.Set", $"Time={DT}");
+            VM.Commit();
+            App.Current.Measurement.LogEvent("Time.Set", $"Time={VM.DT}");
             Frame.GoBack();
         }
     }

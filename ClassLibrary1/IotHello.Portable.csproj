@@ -48,6 +48,7 @@
     <Compile Include="ViewModels\EditScheduleViewModel.cs" />
     <Compile Include="ViewModels\LogsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
