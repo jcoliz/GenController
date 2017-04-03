@@ -38,6 +38,7 @@ namespace IotHello.Uwp.Screens
             {
                 VM.Original = e.Parameter as Portable.Models.GenPeriod;
             }
+            App.Current.Measurement.LogEvent("Screen.EditSchedule",$"Add={VM.WillAdd}");
             base.OnNavigatedTo(e);
         }
         private void Back_Button_Click(object sender, RoutedEventArgs e)
@@ -49,10 +50,12 @@ namespace IotHello.Uwp.Screens
             try
             {
                 VM.Commit();
+                App.Current.Measurement.LogEvent("Schedule.Commit", $"Start={VM.Period.SerializeKey}",$"Delete={VM.WillDelete}");
                 Frame.GoBack();
             }
             catch (Exception ex)
             {
+                App.Current.Measurement.LogEvent("Schedule.CommitFailed",$"Reason={ex.Message}");
                 var dialog = new ContentDialog()
                 {
                     Title = "Sorry",

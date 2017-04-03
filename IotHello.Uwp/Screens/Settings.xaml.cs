@@ -88,6 +88,7 @@ namespace IotHello.Uwp.Screens
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            App.Current.Measurement.LogEvent("Screen.Settings");
             App.Current.Tick += App_Tick;
             base.OnNavigatedTo(e);
         }
@@ -112,6 +113,7 @@ namespace IotHello.Uwp.Screens
         private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
             Clock.Now = DT;
+            App.Current.Measurement.LogEvent("Time.Set", $"Time={DT}");
             Frame.GoBack();
         }
     }
