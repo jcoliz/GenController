@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pm="using:IotHello.Portable.Models"
     xmlns:lc="using:IotHello.Uwp.Converters"
+    xmlns:lctrl="using:IotHello.Uwp.Controls"
     xmlns:s="using:System"
     mc:Ignorable="d">
 
@@ -39,25 +40,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <!-- Title Bar -->
-        <Border  Grid.ColumnSpan="4" Background="DarkBlue" Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="10" >
-                <Image Width="50" Height="50" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Foreground="White" Text="{x:Bind VM.App}" VerticalAlignment="Center" FontSize="40"/>
-            </StackPanel>
-        </Border>
-        <Grid Grid.ColumnSpan="4" HorizontalAlignment="Right" Margin="30,0" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Ellipse Grid.Column="0" Width="30" Height="30" Stroke="White" Fill="{x:Bind VM.Controller.StartRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind VM.Controller.StopRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="1" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind VM.Controller.RunSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="2" Foreground="White" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-        </Grid>
+        <lctrl:TitleBar Grid.ColumnSpan="4"/>
         <!-- Clock -->
         <TextBlock Margin="20,-20,0,0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="120" HorizontalAlignment="Left" VerticalAlignment="Center" 
                    Text="{x:Bind VM.CurrentTime,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='HH\:mm\:ss'}"/>

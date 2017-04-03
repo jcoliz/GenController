@@ -10,7 +10,6 @@ namespace IotHello.Uwp.Screens
     {
 
         Portable.ViewModels.EditScheduleViewModel VM = new Portable.ViewModels.EditScheduleViewModel();
-        Portable.ViewModels.MainViewModel MainVM = new Portable.ViewModels.MainViewModel();
 
         private string Purpose => VM.WillAdd ? "Add Schedule Block" : "Edit Schedule";
 

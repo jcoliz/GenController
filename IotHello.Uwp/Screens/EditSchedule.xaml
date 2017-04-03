@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:lc="using:IotHello.Uwp.Converters"
+    xmlns:lctrl="using:IotHello.Uwp.Controls"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -27,29 +28,8 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Title Bar -->
-        <Border  Grid.ColumnSpan="2" Background="DarkBlue" Margin="10" >
-            <StackPanel Orientation="Horizontal" Margin="10" >
-                <Image Width="50" Height="50" Margin="10,0" Source="ms-appx:///Assets/ic_appicon.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Foreground="White" VerticalAlignment="Center" FontSize="40">
-                    <Run Text="{x:Bind MainVM.App}"/>: <Run Text="{x:Bind Purpose,Mode=OneWay}"/>
-                </TextBlock>
-            </StackPanel>
-        </Border>
-        <Grid Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="30,0" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Ellipse Grid.Column="0" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.StartRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.StopRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="1" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind MainVM.Controller.RunSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="2" Foreground="White" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-        </Grid>
-
+        <lctrl:TitleBar Grid.ColumnSpan="4" Title="{x:Bind Purpose,Mode=OneWay}"/>
+        
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <!-- Hour From-->

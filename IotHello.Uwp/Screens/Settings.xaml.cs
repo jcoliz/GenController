@@ -8,8 +8,6 @@ namespace IotHello.Uwp.Screens
     {
         public Portable.ViewModels.SettingsViewModel VM { get; } = new Portable.ViewModels.SettingsViewModel();
 
-        Portable.ViewModels.MainViewModel MainVM = new Portable.ViewModels.MainViewModel();
-
         public Settings()
         {
             this.InitializeComponent();
