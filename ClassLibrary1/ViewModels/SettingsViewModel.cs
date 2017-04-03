@@ -35,40 +35,54 @@ namespace IotHello.Portable.ViewModels
         /// </summary>
         public ICommand AddCommand => new DelegateCommand((x) =>
         {
-            string what = x as string;
-            char direction = what[0];
-            int add = 1;
-            if (direction == '-')
-                add = -1;
-            switch (what.Substring(1))
+            try
             {
-                case "year":
-                    DT = DT.AddYears(add);
-                    break;
-                case "month":
-                    DT = DT.AddMonths(add);
-                    break;
-                case "day":
-                    DT = DT.AddDays(add);
-                    break;
-                case "hour":
-                    DT = DT.AddHours(add);
-                    break;
-                case "minute":
-                    DT = DT.AddMinutes(add);
-                    break;
-                case "second":
-                    DT = DT.AddSeconds(add);
-                    break;
-            }
+                string what = x as string;
+                char direction = what[0];
+                int add = 1;
+                if (direction == '-')
+                    add = -1;
+                switch (what.Substring(1))
+                {
+                    case "year":
+                        DT = DT.AddYears(add);
+                        break;
+                    case "month":
+                        DT = DT.AddMonths(add);
+                        break;
+                    case "day":
+                        DT = DT.AddDays(add);
+                        break;
+                    case "hour":
+                        DT = DT.AddHours(add);
+                        break;
+                    case "minute":
+                        DT = DT.AddMinutes(add);
+                        break;
+                    case "second":
+                        DT = DT.AddSeconds(add);
+                        break;
+                }
 
-            base.SetProperty(nameof(DT));
+                base.SetProperty(nameof(DT));
+            }
+            catch (Exception ex)
+            {
+                base.SetError("SV1", ex);
+            }
         });
 
         public void Commit()
         {
-            Clock.Now = DT;
-            DT = Clock.Now;
+            try
+            {
+                Clock.Now = DT;
+                DT = Clock.Now;
+            }
+            catch (Exception ex)
+            {
+                base.SetError("SV2", ex);
+            }
         }
 
         /// <summary>

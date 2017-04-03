@@ -25,9 +25,8 @@ namespace IotHello.Uwp.Screens
             catch (Exception ex)
             {
                 string code = "LX0";
-                string message = ex.Message + $"(Code {code})";
                 App.Current.Measurement.Error(code, ex);
-                var ignore = new MessageDialog(message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
+                VM_ExceptionRaised(this, new ManiaLabs.Portable.Base.ExceptionArgs(ex, code));
             }
         }
 
@@ -42,6 +41,12 @@ namespace IotHello.Uwp.Screens
                 await VM.SelectSession(VM.Sessions.First());
             });
             VM.ExceptionRaised += VM_ExceptionRaised;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            VM.ExceptionRaised -= VM_ExceptionRaised;
+            base.OnNavigatedFrom(e);
         }
 
         private void VM_ExceptionRaised(object sender, ManiaLabs.Portable.Base.ExceptionArgs e)

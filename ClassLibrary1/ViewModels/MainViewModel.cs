@@ -11,10 +11,8 @@ using System.Windows.Input;
 
 namespace IotHello.Portable.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public DateTime CurrentTime => ManiaLabs.Platform.Get<IClock>().Now;
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
@@ -29,7 +27,7 @@ namespace IotHello.Portable.ViewModels
             }
             catch (Exception ex)
             {
-                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("MV1", ex);
+                base.SetError("MV1", ex);
             }
         });
         public ICommand StopCommand => new DelegateCommand(async _ =>
@@ -40,7 +38,7 @@ namespace IotHello.Portable.ViewModels
             }
             catch (Exception ex)
             {
-                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("MV2", ex);
+                base.SetError("MV2", ex);
             }
         });
 
@@ -49,11 +47,11 @@ namespace IotHello.Portable.ViewModels
         {
             try
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentTime)));
+                base.SetProperty((nameof(CurrentTime)));
             }
             catch (Exception ex)
             {
-                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("MV3", ex);
+                base.SetError("MV3", ex);
             }
         }
     }

@@ -91,24 +91,38 @@ namespace IotHello.Portable.ViewModels
 
         public ICommand PageUpCommand => new DelegateCommand(_ => 
         {
-            int desired = SelectedItem - 15;
-            if (desired < 0)
-                desired = 0;
-            if (desired != SelectedItem)
+            try
             {
-                SelectedItem = desired;
-                base.SetProperty(nameof(SelectedItem));
+                int desired = SelectedItem - 15;
+                if (desired < 0)
+                    desired = 0;
+                if (desired != SelectedItem)
+                {
+                    SelectedItem = desired;
+                    base.SetProperty(nameof(SelectedItem));
+                }
+            }
+            catch (Exception ex)
+            {
+                SetError("LV3", ex);
             }
         });
         public ICommand PageDownCommand => new DelegateCommand(_ =>
         {
-            int desired = SelectedItem + 15;
-            if (desired >= Log.Count)
-                desired = Log.Count - 1;
-            if (desired != SelectedItem)
+            try
             {
-                SelectedItem = desired;
-                base.SetProperty(nameof(SelectedItem));
+                int desired = SelectedItem + 15;
+                if (desired >= Log.Count)
+                    desired = Log.Count - 1;
+                if (desired != SelectedItem)
+                {
+                    SelectedItem = desired;
+                    base.SetProperty(nameof(SelectedItem));
+                }
+            }
+            catch (Exception ex)
+            {
+                SetError("LV4", ex);
             }
         });
     }
