@@ -56,16 +56,7 @@ namespace IotHello.Uwp.Screens
             catch (Exception ex)
             {
                 App.Current.Measurement.LogEvent("Schedule.CommitFailed",$"Reason={ex.Message}");
-                var dialog = new ContentDialog()
-                {
-                    Title = "Sorry",
-                    MaxWidth = this.ActualHeight,
-                    Content = new TextBlock() { Text = ex.Message },
-                    PrimaryButtonText = "OK",
-                    IsPrimaryButtonEnabled = true
-                };
-                await dialog.ShowAsync();
-                //await new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
+                var ignore = new MessageDialog(ex.Message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
             }
         }
     }
