@@ -138,7 +138,19 @@ namespace IotHello.Uwp
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
                 ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
                 ManiaLabs.Platform.Set<IPlatformSettingsManager>(new Platform.WindowsSettingsManager());
-                ManiaLabs.Platform.Set<Portable.Models.IGenerator>(new Portable.Models.MockGenerator());
+
+                Task.Run(async () => 
+                {
+                    try
+                    {
+                        var gen = await Platform.HardwareGenerator.Open();
+                        ManiaLabs.Platform.Set<Portable.Models.IGenerator>(gen);
+                    }
+                    catch (Exception ex)
+                    {
+                        ManiaLabs.Platform.Set<Portable.Models.IGenerator>(new Portable.Models.MockGenerator());
+                    }
+                });
 
                 /* This is the REAL schedule
                 Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));

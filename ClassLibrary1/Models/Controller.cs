@@ -121,17 +121,17 @@ namespace IotHello.Portable.Models
         private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromMinutes(2);
         private readonly TimeSpan DelayBetweenStartAndCheck = TimeSpan.FromSeconds(10);
 
-        private IGenerator Generator = ManiaLabs.Platform.Get<IGenerator>();
+        private IGenerator Generator = ManiaLabs.Platform.TryGet<IGenerator>();
 
         /// <summary>
         /// Controls the hardware relay pin to close the 'stop' line to the generator
         /// </summary>
         public bool StopRelay
         {
-            get { return Generator.StopOutput; }
+            get { return Generator?.StopOutput ?? false; }
             private set
             {
-                if (value != Generator.StopOutput)
+                if (null != Generator && value != Generator.StopOutput)
                 {
                     Generator.StopOutput = value;
                     DoPropertyChanged(nameof(StopRelay));
@@ -144,10 +144,10 @@ namespace IotHello.Portable.Models
         /// </summary>
         public bool StartRelay
         {
-            get { return Generator.StartOutput; }
+            get { return Generator?.StartOutput ?? false; }
             private set
             {
-                if (value != Generator.StartOutput)
+                if (null != Generator && value != Generator.StartOutput)
                 {
                     Generator.StartOutput = value;
                     DoPropertyChanged(nameof(StartRelay));
@@ -158,7 +158,7 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// The hardware input line coming from the generator.
         /// </summary>
-        public bool RunSignal => Generator.RunInput; 
+        public bool RunSignal => Generator?.RunInput ?? false; 
 
         /// <summary>
         /// Call this very frequently. This will debounce the runsignal line. It looks for

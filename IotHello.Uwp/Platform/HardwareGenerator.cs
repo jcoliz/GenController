@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Models
+namespace IotHello.Uwp.Platform
 {
     /// <summary>
     /// Controls the actual generator hooked up to real hardware
