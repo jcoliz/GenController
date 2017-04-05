@@ -59,6 +59,13 @@ namespace IotHello.Uwp.Platform
         {
             var result = new HardwareGenerator();
             result.Hat = await Pimoroni.MsIot.AutomationHat.Open();
+
+            // These lights are SO bright! Tone them down a bit
+            result.Hat.Light.Power.Value = 0.05;
+            result.Hat.Relay[0].NO.Light.Brightness = 0.05;
+            result.Hat.Relay[1].NO.Light.Brightness = 0.05;
+            result.Hat.Input[1].Light.Brightness = 0.05;
+            result.Hat.Input[2].Light.Brightness = 0.05;
             return result;
         }
 
