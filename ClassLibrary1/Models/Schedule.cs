@@ -20,6 +20,30 @@ namespace IotHello.Portable.Models
         /// </summary>
         public RangeObservableCollection<Models.GenPeriod> Periods = new RangeObservableCollection<Models.GenPeriod>();
 
+        public Schedule()
+        {
+            Periods.CollectionChanged += Periods_CollectionChanged;
+        }
+
+        private void Periods_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // Reorganize the schedule into a format that's easy for the scheduler to quickly determine what should be
+            // happening right now
+            InternalSchedule.Clear();
+            if (Periods.FirstOrDefault() != null)
+            {
+                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StartAt, DesiredState = GenStatus.Running }));
+                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StopAt, DesiredState = GenStatus.Stopped }));
+                InternalSchedule.Sort();
+
+                // Add tomorrow's first at the end, and yesterday's last at the start
+                var first = InternalSchedule.First();
+                var last = InternalSchedule.Last();
+                InternalSchedule.Add(new ScheduleItem() { Time = first.Time + TimeSpan.FromDays(1), DesiredState = first.DesiredState });
+                InternalSchedule.Insert(0, new ScheduleItem() { Time = last.Time - TimeSpan.FromDays(1), DesiredState = last.DesiredState });
+            }
+        }
+
         /// <summary>
         /// Load schedule from storage
         /// </summary>
@@ -73,33 +97,28 @@ namespace IotHello.Portable.Models
             // Don't take action if we are currently TRYING to start or stop
             if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming)
             {
-                // Only take action if we've been called recently
-                if (elapsed < TimeSpan.FromSeconds(5))
-                {
-                    // Check every edge
-                    foreach (var p in Periods)
-                    {
-                        var today = now.Date;
-                        DateTime startat = today + p.StartAt;
-                        DateTime stopat = today + p.StopAt;
+                // First, figure out what should be happening right now.
+                var found = InternalSchedule.BinarySearch(new ScheduleItem() { Time = now.TimeOfDay });
+                if (found < 0)
+                    found = (~found) - 1;
 
-                        if (LastTick < startat && now >= startat)
-                        {
-                            Log("Schedule.Start");
-                            result = Controller.Current.Start();
-                            break;
-                        }
-                        if (LastTick < stopat && now >= stopat)
-                        {
-                            Log("Schedule.Stop");
-                            result = Controller.Current.Stop();
-                            break;
-                        }
+                var desiredstate = InternalSchedule[found].DesiredState;
+
+                if (desiredstate != status)
+                {
+                    // Take action!!
+                    if (desiredstate == GenStatus.Running)
+                    {
+                        Log("Schedule.Start");
+                        result = Controller.Current.Start();
+                    }
+                    else if (desiredstate == GenStatus.Stopped)
+                    {
+                        Log("Schedule.Stop");
+                        result = Controller.Current.Stop();
                     }
                 }
             }
-            LastTick = now;
-
             return result;
         }
 
@@ -183,5 +202,20 @@ namespace IotHello.Portable.Models
         /// Service Locator for how to get the current time.
         /// </summary>
         private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+
+        class ScheduleItem: IComparable<ScheduleItem>, IComparable<TimeSpan>
+        {
+            public TimeSpan Time;
+            public GenStatus DesiredState;
+
+            public int CompareTo(ScheduleItem other) => Time.CompareTo(other.Time);
+            public int CompareTo(TimeSpan other) => Time.CompareTo(other);
+        }
+
+        /// <summary>
+        /// This is a decomposed copy of the schedule periods. It is stored in a format making it
+        /// easy to test.
+        /// </summary>
+        private List<ScheduleItem> InternalSchedule = new List<ScheduleItem>();
     }
 }

@@ -47,7 +47,10 @@ namespace IotHello.Portable.Tests
         {
             Clock.Now = new DateTime(2017, 3, 1, 08, 59, 58);
             Models.Schedule.Current.Tick();
+            Controller.RunSignal = true;
             Clock.Now = new DateTime(2017, 3, 1, 09, 00, 01);
+            Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 1, 09, 00, 02);
             Models.Schedule.Current.Tick();
 
             Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
@@ -69,6 +72,9 @@ namespace IotHello.Portable.Tests
         [TestMethod]
         public async Task LastStoppingEdge()
         {
+            Clock.Now = new DateTime(2017, 3, 1, 18, 59, 56);
+            Models.Schedule.Current.Tick();
+            Controller.RunSignal = true;
             Clock.Now = new DateTime(2017, 3, 1, 18, 59, 58);
             Models.Schedule.Current.Tick();
             Clock.Now = new DateTime(2017, 3, 1, 19, 00, 01);
@@ -85,7 +91,7 @@ namespace IotHello.Portable.Tests
             Clock.Now = new DateTime(2017, 3, 2, 00, 00, 01);
             Models.Schedule.Current.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Invalid, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
         }
 
         [TestMethod]
@@ -93,10 +99,11 @@ namespace IotHello.Portable.Tests
         {
             Clock.Now = new DateTime(2017, 3, 1, 07, 59, 58);
             Models.Schedule.Current.Tick();
+            Controller.RunSignal = true;
             Clock.Now = new DateTime(2017, 3, 2, 08, 00, 01);
             Models.Schedule.Current.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Invalid, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
         }
 
         [TestMethod]
