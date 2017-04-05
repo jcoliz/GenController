@@ -153,6 +153,7 @@ namespace IotHello.Portable.Tests
             Models.Schedule.Current.Tick();
 
             // Start the controller
+            Models.Schedule.Current.Override();
             await Controller.Start();
             Controller.RunSignal = true;
 
@@ -162,6 +163,37 @@ namespace IotHello.Portable.Tests
             Models.Schedule.Current.Tick();
 
             Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+        }
+
+        [TestMethod]
+        public async Task GetsPastManualStart()
+        {
+            // Make sure the schedule doesn't override the user's manual start
+            //
+            // I realized this is a bug in my new start/stop logic!!
+
+            // This is well within the period where the schedule says to be off
+            Clock.Now = new DateTime(2017, 3, 1, 10, 00, 01);
+            Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 1, 10, 00, 02);
+            Models.Schedule.Current.Tick();
+
+            // Start the controller
+            Models.Schedule.Current.Override();
+            await Controller.Start();
+            Controller.RunSignal = true;
+
+            Clock.Now = new DateTime(2017, 3, 1, 10, 01, 00);
+            Models.Schedule.Current.Tick();
+            Clock.Now = new DateTime(2017, 3, 1, 10, 01, 02);
+            Models.Schedule.Current.Tick();
+
+            // Now we are running
+            // Let's make sure we stop OK!
+            Clock.Now = new DateTime(2017, 3, 1, 14, 01, 02);
+            Models.Schedule.Current.Tick();
+
+            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
         }
 
     }

@@ -25,7 +25,7 @@ namespace IotHello.Portable.Models
             Periods.CollectionChanged += Periods_CollectionChanged;
         }
 
-        private void Periods_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Periods_CollectionChanged(object sender = null, System.Collections.Specialized.NotifyCollectionChangedEventArgs e = null)
         {
             // Reorganize the schedule into a format that's easy for the scheduler to quickly determine what should be
             // happening right now
@@ -34,6 +34,10 @@ namespace IotHello.Portable.Models
             {
                 InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StartAt, DesiredState = GenStatus.Running }));
                 InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StopAt, DesiredState = GenStatus.Stopped }));
+
+                if (_Override != null)
+                    InternalSchedule.Add(_Override);
+
                 InternalSchedule.Sort();
 
                 // Add tomorrow's first at the end, and yesterday's last at the start
@@ -104,8 +108,16 @@ namespace IotHello.Portable.Models
 
                 var desiredstate = InternalSchedule[found].DesiredState;
 
-                if (desiredstate != status)
+                // If the desired state is 'invalid', then we are in a schedule override mode, so we are ignoring
+                // the schedule as long as that lasts.
+                if (desiredstate != status && desiredstate != GenStatus.Invalid)
                 {
+                    if (_Override != null)
+                    {
+                        _Override = null;
+                        Periods_CollectionChanged();
+                    }
+
                     // Take action!!
                     if (desiredstate == GenStatus.Running)
                     {
@@ -168,6 +180,17 @@ namespace IotHello.Portable.Models
         /// </summary>
         /// <param name="item"></param>
         public void Add(GenPeriod item) => Replace(null, item);
+
+        /// <summary>
+        /// Override the schedule until the next scheduled start time
+        /// </summary>
+        public void Override()
+        {
+            _Override = new ScheduleItem() { Time = Clock.Now.TimeOfDay, DesiredState = GenStatus.Invalid };
+            Periods_CollectionChanged();
+        }
+
+        private ScheduleItem _Override;
 
         /// <summary>
         /// Remove this block from the schedule

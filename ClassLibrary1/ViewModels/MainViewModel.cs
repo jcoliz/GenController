@@ -23,6 +23,7 @@ namespace IotHello.Portable.ViewModels
         {
             try
             {
+                Models.Schedule.Current.Override();
                 await Models.Controller.Current.Start();
             }
             catch (Exception ex)
@@ -34,6 +35,7 @@ namespace IotHello.Portable.ViewModels
         {
             try
             {
+                Models.Schedule.Current.Override();
                 await Models.Controller.Current.Stop();
             }
             catch (Exception ex)
