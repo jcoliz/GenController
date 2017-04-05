@@ -11,15 +11,10 @@ namespace IotHello.Uwp.Platform
     /// </summary>
     public class HardwareGenerator : Portable.Models.IGenerator, IDisposable
     {
+        /// <summary>
+        /// Reads the 'F' line: Whether the generator is sufficiently primed to start
+        /// </summary>
         public bool PrimedInput
-        {
-            get
-            {
-                return Hat.Input[1].State;
-            }
-        }
-
-        public bool RunInput
         {
             get
             {
@@ -27,19 +22,21 @@ namespace IotHello.Uwp.Platform
             }
         }
 
-        public bool StartOutput
+        /// <summary>
+        /// Reads the 'E' line: Whether the generator is running
+        /// </summary>
+        public bool RunInput
         {
             get
             {
-                return Hat.Relay[0].State;
-            }
-            set
-            {
-                Hat.Relay[0].State = value;
+                return Hat.Input[1].State;
             }
         }
 
-        public bool StopOutput
+        /// <summary>
+        /// Connects 'C' to 'A' to start the generator
+        /// </summary>
+        public bool StartOutput
         {
             get
             {
@@ -48,6 +45,21 @@ namespace IotHello.Uwp.Platform
             set
             {
                 Hat.Relay[1].State = value;
+            }
+        }
+
+        /// <summary>
+        /// Connects 'B' to 'A' to stop the generator
+        /// </summary>
+        public bool StopOutput
+        {
+            get
+            {
+                return Hat.Relay[0].State;
+            }
+            set
+            {
+                Hat.Relay[0].State = value;
             }
         }
 
@@ -61,11 +73,11 @@ namespace IotHello.Uwp.Platform
             result.Hat = await Pimoroni.MsIot.AutomationHat.Open();
 
             // These lights are SO bright! Tone them down a bit
-            result.Hat.Light.Power.Value = 0.05;
-            result.Hat.Relay[0].NO.Light.Brightness = 0.05;
-            result.Hat.Relay[1].NO.Light.Brightness = 0.05;
-            result.Hat.Input[1].Light.Brightness = 0.05;
-            result.Hat.Input[2].Light.Brightness = 0.05;
+            result.Hat.Light.Power.Value = 0.2;
+            result.Hat.Relay[0].NO.Light.Brightness = 0.2;
+            result.Hat.Relay[1].NO.Light.Brightness = 0.2;
+            result.Hat.Input[1].Light.Brightness = 0.2;
+            result.Hat.Input[2].Light.Brightness = 0.2;
             return result;
         }
 
