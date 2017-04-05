@@ -31,11 +31,11 @@ namespace IotHello.Uwp.Platform
         {
             get
             {
-                return Hat.Relay[1].State;
+                return Hat.Relay[0].State;
             }
             set
             {
-                Hat.Relay[1].State = value;
+                Hat.Relay[0].State = value;
             }
         }
 
@@ -43,11 +43,11 @@ namespace IotHello.Uwp.Platform
         {
             get
             {
-                return Hat.Relay[2].State;
+                return Hat.Relay[1].State;
             }
             set
             {
-                Hat.Relay[2].State = value;
+                Hat.Relay[1].State = value;
             }
         }
 
