@@ -101,6 +101,7 @@
     <Compile Include="Converters\BooleanBrushConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DefaultConverter.cs" />
+    <Compile Include="Platform\HardwareGenerator.cs" />
     <Compile Include="Platform\MessageDialog.cs" />
     <Compile Include="Platform\WindowsSettingsManager.cs" />
     <Compile Include="Platform\XamlValueConverter.cs" />
@@ -169,6 +170,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\automation-hat-ms-iot\Pimoroni.MsIot.AutomationHat\Pimoroni.MsIot.AutomationHat.csproj">
+      <Project>{0bab3bd0-a6fd-4fb8-9f70-248435139630}</Project>
+      <Name>Pimoroni.MsIot.AutomationHat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
       <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
       <Name>Catnap.Server</Name>

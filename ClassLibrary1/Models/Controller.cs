@@ -105,6 +105,11 @@ namespace IotHello.Portable.Models
         }
         static IController _Current = null;
 
+        /// <summary>
+        /// Get the current controller if exists, but don't make a new one yet.
+        /// </summary>
+        public static IController TryCurrent => _Current;
+
         #region Hardware Interface
 
         // See wiring and timing diagram here:
@@ -116,71 +121,44 @@ namespace IotHello.Portable.Models
         private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromMinutes(2);
         private readonly TimeSpan DelayBetweenStartAndCheck = TimeSpan.FromSeconds(10);
 
+        private IGenerator Generator = ManiaLabs.Platform.Get<IGenerator>();
+
         /// <summary>
         /// Controls the hardware relay pin to close the 'stop' line to the generator
         /// </summary>
         public bool StopRelay
         {
-            get { return _StopRelay; }
+            get { return Generator.StopOutput; }
             private set
             {
-                if (value != _StopRelay)
+                if (value != Generator.StopOutput)
                 {
-                    _StopRelay = value;
-
-                    // Temporary, until there is really a run signal hooked up
-                    if (value)
-                        RunSignal = false;
-
+                    Generator.StopOutput = value;
                     DoPropertyChanged(nameof(StopRelay));
                 }
             }
         }
-        private bool _StopRelay = false;
 
         /// <summary>
         /// Controls the hardware relay pin to close the 'start' line to the generator
         /// </summary>
         public bool StartRelay
         {
-            get { return _StartRelay; }
+            get { return Generator.StartOutput; }
             private set
             {
-                if (value != _StartRelay)
+                if (value != Generator.StartOutput)
                 {
-                    _StartRelay = value;
-
-                    // Temporary, until there is really a run signal hooked up
-                    if (value)
-                        RunSignal = true;
-
+                    Generator.StartOutput = value;
                     DoPropertyChanged(nameof(StartRelay));
                 }
             }
         }
-        private bool _StartRelay = false;
 
         /// <summary>
         /// The hardware input line coming from the generator.
         /// </summary>
-        /// <remarks>
-        /// For now, this is stubbed out to assume all starts always work.
-        /// TODO: Probably should filter this runsignal, checking its value over time, so I don't
-        /// overreact to one bad reading.
-        /// </remarks>
-        public bool RunSignal
-        {
-            get { return _RunSignal; }
-            private set
-            {
-                if (_RunSignal != value)
-                {
-                    _RunSignal = value;
-                    DoPropertyChanged(nameof(RunSignal));
-                }
-            }
-        }
-        private bool _RunSignal = false;
+        public bool RunSignal => Generator.RunInput; 
 
         /// <summary>
         /// Call this very frequently. This will debounce the runsignal line. It looks for
@@ -189,23 +167,15 @@ namespace IotHello.Portable.Models
         public void HardwareTick()
         {
             RunSignalBits <<= 1;
-            RunSignalBits |= RunSignalLine;
+            RunSignalBits |= (RunSignal ? 1u : 0);
 
-            if (RunSignalBits == RunSignalOffEdge)
-                RunSignal = false;
-            else if (RunSignalBits == RunSignalOnEdge)
-                RunSignal = true;
+            if (RunSignalBits == RunSignalOffEdge || RunSignalBits == RunSignalOnEdge)
+                DoPropertyChanged(nameof(RunSignal));
         }
 
         private UInt32 RunSignalBits = 0;
         private const UInt32 RunSignalOffEdge = 1u << 31;
         private const UInt32 RunSignalOnEdge = UInt32.MaxValue >> 1;
-
-        /// <summary>
-        /// The actual GPIO line coming from the generator run signal. Only valid values are
-        /// 1 and 0
-        /// </summary>
-        private byte RunSignalLine => 0;
         #endregion
 
         private IClock Clock => ManiaLabs.Platform.Get<IClock>();

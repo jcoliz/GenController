@@ -138,6 +138,7 @@ namespace IotHello.Uwp
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
                 ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
                 ManiaLabs.Platform.Set<IPlatformSettingsManager>(new Platform.WindowsSettingsManager());
+                ManiaLabs.Platform.Set<Portable.Models.IGenerator>(new Portable.Models.MockGenerator());
 
                 /* This is the REAL schedule
                 Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
@@ -164,13 +165,11 @@ namespace IotHello.Uwp
                 Timer.Tick += Timer_Tick;
                 Timer.Start();
 
-                //TODO: Enable me when we are on real hardware!
-                //HardwareTimer = ThreadPoolTimer.CreatePeriodicTimer(HardwareTick, TimeSpan.FromMilliseconds(50));
-
+                HardwareTimer = ThreadPoolTimer.CreatePeriodicTimer(HardwareTick, TimeSpan.FromMilliseconds(50));
                 
-                    httpServer = new Catnap.Server.HttpServer(1339);
-                    httpServer.restHandler.RegisterController(new Controllers.StatusController());
-                    httpServer.restHandler.RegisterController(new Controllers.LogsController());
+                httpServer = new Catnap.Server.HttpServer(1339);
+                httpServer.restHandler.RegisterController(new Controllers.StatusController());
+                httpServer.restHandler.RegisterController(new Controllers.LogsController());
 
                 ServerTask =
                         ThreadPool.RunAsync(async (w) =>
@@ -231,7 +230,7 @@ namespace IotHello.Uwp
         /// <param name="timer"></param>
         private void HardwareTick(ThreadPoolTimer timer)
         {
-            (Portable.Models.Controller.Current as Portable.Models.Controller).HardwareTick();
+            (Portable.Models.Controller.TryCurrent as Portable.Models.Controller)?.HardwareTick();
         }
 
         private async void Timer_Tick(object sender, object e)

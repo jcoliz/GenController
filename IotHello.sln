@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.NET", "ManiaLabs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.Portable.Base", "ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj", "{689E267B-B673-46E3-97F9-841FEC302A39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pimoroni.MsIot.AutomationHat", "automation-hat-ms-iot\Pimoroni.MsIot.AutomationHat\Pimoroni.MsIot.AutomationHat.csproj", "{0BAB3BD0-A6FD-4FB8-9F70-248435139630}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,22 @@ Global
 		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x64.Build.0 = Release|Any CPU
 		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x86.ActiveCfg = Release|Any CPU
 		{689E267B-B673-46E3-97F9-841FEC302A39}.Release|x86.Build.0 = Release|Any CPU
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|ARM.Build.0 = Debug|ARM
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|x64.ActiveCfg = Debug|x64
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|x64.Build.0 = Debug|x64
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|x86.ActiveCfg = Debug|x86
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Debug|x86.Build.0 = Debug|x86
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|ARM.ActiveCfg = Release|ARM
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|ARM.Build.0 = Release|ARM
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|x64.ActiveCfg = Release|x64
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|x64.Build.0 = Release|x64
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|x86.ActiveCfg = Release|x86
+		{0BAB3BD0-A6FD-4FB8-9F70-248435139630}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
