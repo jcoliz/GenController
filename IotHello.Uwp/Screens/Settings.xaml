@@ -44,64 +44,64 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="{x:Bind VM.DT,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='MMMM'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=", "/>
-            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Margin="10,0"
                    Text="{x:Bind VM.DT,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='dd'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=" "/>
-            <TextBlock Grid.Row="1" Grid.Column="4" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="4" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.DT,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='yyyy'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="5" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="5" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=" " Margin="20,0"/>
-            <TextBlock Grid.Row="1" Grid.Column="6" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="6" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.DT,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='HH'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="7" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="7" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=":"/>
-            <TextBlock Grid.Row="1" Grid.Column="8" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="8" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.DT,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='mm'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="9" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="9" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=":"/>
-            <TextBlock Grid.Row="1" Grid.Column="10" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="10" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.DT,Mode=OneWay,Converter={StaticResource DateFormatConverterXaml},ConverterParameter='ss'}"/>
             
-            <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="-month" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="-month" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White" />
             </Button>
-            <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="-day" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="-day" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="-year" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="-year" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="-hour" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="-hour" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="8" Command="{x:Bind VM.AddCommand}" CommandParameter="-minute" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="0" Grid.Column="8" Command="{x:Bind VM.AddCommand}" CommandParameter="-minute" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="10" Command="{x:Bind VM.AddCommand}" CommandParameter="-second" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="0" Grid.Column="10" Command="{x:Bind VM.AddCommand}" CommandParameter="-second" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="+month" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="+month" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="+day" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="+day" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="+year" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="+year" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="+hour" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="+hour" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="8" Command="{x:Bind VM.AddCommand}" CommandParameter="+minute" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="2" Grid.Column="8" Command="{x:Bind VM.AddCommand}" CommandParameter="+minute" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="10" Command="{x:Bind VM.AddCommand}" CommandParameter="+second" HorizontalAlignment="Center" Width="120" Height="120">
+            <Button Grid.Row="2" Grid.Column="10" Command="{x:Bind VM.AddCommand}" CommandParameter="+second" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
         </Grid>
@@ -111,10 +111,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button HorizontalAlignment="Stretch" Margin="10,10,5,10" Background="DarkGray" Height="120" Click="OK_Button_Click">
+            <Button HorizontalAlignment="Stretch" Margin="10,10,5,10" Background="DarkGray" Height="100" Click="OK_Button_Click">
                 <TextBlock Text="OK" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Button>
-            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,10,10,10" Background="DarkGray" Height="120" Click="Back_Button_Click">
+            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,10,10,10" Background="DarkGray" Height="100" Click="Back_Button_Click">
                 <TextBlock Text="Cancel" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Button>
         </Grid>

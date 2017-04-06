@@ -104,7 +104,7 @@
             </TextBlock>
         </Grid>
 
-        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="120" Command="{x:Bind VM.DeleteMeCommand}"
+        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Margin="10,0" Background="DarkGray" Width="100" Command="{x:Bind VM.DeleteMeCommand}"
                 Visibility="{x:Bind VM.WillAdd,Converter={StaticResource DefaultHiddenXaml}}">
             <SymbolIcon Symbol="Delete" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <SymbolIcon.RenderTransform>
@@ -118,11 +118,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Click="OK_Button_Click">
-                <TextBlock Text="OK" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+            <Button HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Click="OK_Button_Click">
+                <TextBlock Text="OK" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
             </Button>
-            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="120" Click="Back_Button_Click">
-                <TextBlock Text="Cancel" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="10" Background="DarkGray" Height="100" Click="Back_Button_Click">
+                <TextBlock Text="Cancel" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
             </Button>
         </Grid>
 
