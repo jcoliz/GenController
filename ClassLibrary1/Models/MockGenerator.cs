@@ -11,7 +11,7 @@ namespace IotHello.Portable.Models
     /// </summary>
     public class MockGenerator : IGenerator
     {
-        public bool PrimedInput { get; set; }
+        public bool PanelLightInput { get; set; }
 
         public bool RunInput { get; set; }
 
@@ -42,10 +42,10 @@ namespace IotHello.Portable.Models
                 if (_StopOutput)
                 {
                     RunInput = false;
-                    PrimedInput = true;
+                    PanelLightInput = true;
                 }
                 else
-                    PrimedInput = false;
+                    PanelLightInput = false;
             }
         }
         private bool _StopOutput;

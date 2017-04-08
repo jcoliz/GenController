@@ -27,8 +27,8 @@ namespace IotHello.Portable.Models
         bool RunInput { get; }
         
         /// <summary>
-        /// Status of the "Primed" input line, true = high
+        /// Status of the "Panel Light" input line, true = high
         /// </summary>
-        bool PrimedInput { get; }
+        bool PanelLightInput { get; }
     }
 }

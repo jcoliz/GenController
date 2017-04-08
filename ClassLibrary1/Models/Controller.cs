@@ -45,6 +45,10 @@ namespace IotHello.Portable.Models
             if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled)
                 return;
 
+            // If tehre is no clock yet, we can't do anything
+            if (Clock == null)
+                return;
+
             Status = GenStatus.Starting;
 
             StopRelay = true;
@@ -61,6 +65,10 @@ namespace IotHello.Portable.Models
         {
             // Already processing a starting/stopping operation? Or Disabled? Skip it
             if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled)
+                return;
+
+            // If tehre is no clock yet, we can't do anything
+            if (Clock == null)
                 return;
 
             Status = GenStatus.Stopping;
@@ -156,9 +164,16 @@ namespace IotHello.Portable.Models
         }
 
         /// <summary>
-        /// The hardware input line coming from the generator.
+        /// The hardware input line coming from the generator indicating the generator
+        /// is running
         /// </summary>
-        public bool RunSignal => Generator?.RunInput ?? false; 
+        public bool RunSignal => Generator?.RunInput ?? false;
+
+        /// <summary>
+        /// The hardware input line coming from the generator indicating the generator
+        /// panel light should be lit
+        /// </summary>
+        public bool PanelLightSignal => Generator?.PanelLightInput ?? false;
 
         /// <summary>
         /// Call this very frequently. This will debounce the runsignal line. It looks for
@@ -169,16 +184,23 @@ namespace IotHello.Portable.Models
             RunSignalBits <<= 1;
             RunSignalBits |= (RunSignal ? 1u : 0);
 
-            if (RunSignalBits == RunSignalOffEdge || RunSignalBits == RunSignalOnEdge)
+            if (RunSignalBits == SignalOffEdge || RunSignalBits == SignalOnEdge)
+                DoPropertyChanged(nameof(RunSignal));
+
+            PanelLightSignalBits <<= 1;
+            PanelLightSignalBits |= (PanelLightSignal ? 1u : 0);
+
+            if (PanelLightSignalBits == SignalOffEdge || PanelLightSignalBits == SignalOnEdge)
                 DoPropertyChanged(nameof(RunSignal));
         }
 
         private UInt32 RunSignalBits = 0;
-        private const UInt32 RunSignalOffEdge = 1u << 31;
-        private const UInt32 RunSignalOnEdge = UInt32.MaxValue >> 1;
+        private UInt32 PanelLightSignalBits = 0;
+        private const UInt32 SignalOffEdge = 1u << 31;
+        private const UInt32 SignalOnEdge = UInt32.MaxValue >> 1;
         #endregion
 
-        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
         private SynchronizationContext Context = SynchronizationContext.Current;
 
         #region INotifyPropertyChanged

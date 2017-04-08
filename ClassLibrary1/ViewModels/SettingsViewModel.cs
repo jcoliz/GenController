@@ -88,6 +88,6 @@ namespace IotHello.Portable.ViewModels
         /// <summary>
         /// Service Locator for the clock
         /// </summary>
-        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
     }
 }

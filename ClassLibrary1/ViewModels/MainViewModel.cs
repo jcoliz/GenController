@@ -13,7 +13,7 @@ namespace IotHello.Portable.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public DateTime CurrentTime => ManiaLabs.Platform.Get<IClock>().Now;
+        public DateTime CurrentTime => ManiaLabs.Platform.TryGet<IClock>()?.Now ?? DateTime.MinValue;
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 

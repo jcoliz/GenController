@@ -66,6 +66,10 @@ namespace IotHello.Portable.Models
         /// </remarks>
         public Task Tick()
         {
+            // If tehre is no clock yet, we can't do anything
+            if (Clock == null)
+                return null;
+
             Task result = null;
             var now = Clock.Now;
             var elapsed = now - LastTick;
@@ -186,6 +190,10 @@ namespace IotHello.Portable.Models
         /// </summary>
         public void Override()
         {
+            // If tehre is no clock yet, we can't do anything
+            if (Clock == null)
+                return;
+
             _Override = new ScheduleItem() { Time = Clock.Now.TimeOfDay, DesiredState = GenStatus.Invalid };
             Periods_CollectionChanged();
         }
@@ -224,7 +232,7 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Service Locator for how to get the current time.
         /// </summary>
-        private IClock Clock => ManiaLabs.Platform.Get<IClock>();
+        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
 
         class ScheduleItem: IComparable<ScheduleItem>, IComparable<TimeSpan>
         {

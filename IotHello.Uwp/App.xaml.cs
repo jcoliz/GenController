@@ -133,10 +133,9 @@ namespace IotHello.Uwp
 #endif
             try
             {
-                // Set a Dot Net clock for starters, so everything has a clock.
-                ManiaLabs.Platform.Set<IClock>(new ManiaLabs.NET.Clock());
-
                 // Then try to start a hardware clock, and use that if available
+                //
+                // WARNING: This means that until Initialize comes back, we may not have a clock in the system!!
                 Task.Run(async () => 
                 {
                     try
@@ -148,10 +147,13 @@ namespace IotHello.Uwp
 
                         ManiaLabs.Platform.Set<IClock>(hc);
                         HardwareClock = hc;
+                        ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Hardware clock started.");
                     }
                     catch (Exception ex)
                     {
                         // Nevermind, no hardware clock available
+                        ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Hardware clock failed, using built-in clock.");
+                        ManiaLabs.Platform.Set<IClock>(new ManiaLabs.NET.Clock());
                     }
                 });
 

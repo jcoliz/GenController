@@ -14,7 +14,7 @@ namespace IotHello.Uwp.Platform
         /// <summary>
         /// Reads the 'F' line: Whether the generator is sufficiently primed to start
         /// </summary>
-        public bool PrimedInput
+        public bool PanelLightInput
         {
             get
             {
