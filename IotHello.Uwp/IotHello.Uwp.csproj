@@ -101,6 +101,7 @@
     <Compile Include="Converters\BooleanBrushConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DefaultConverter.cs" />
+    <Compile Include="Platform\HardwareClock.cs" />
     <Compile Include="Platform\HardwareGenerator.cs" />
     <Compile Include="Platform\MessageDialog.cs" />
     <Compile Include="Platform\WindowsSettingsManager.cs" />

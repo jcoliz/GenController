@@ -38,6 +38,8 @@ namespace IotHello.Uwp
         /// </summary>
         private ThreadPoolTimer HardwareTimer;
 
+        private Platform.HardwareClock HardwareClock;
+
         /// <summary>
         /// Task running our HTTPD server
         /// </summary>
@@ -131,8 +133,29 @@ namespace IotHello.Uwp
 #endif
             try
             {
-                ManiaLabs.Platform.Set<ManiaLabs.IApp>(this);
+                // Set a Dot Net clock for starters, so everything has a clock.
                 ManiaLabs.Platform.Set<IClock>(new ManiaLabs.NET.Clock());
+
+                // Then try to start a hardware clock, and use that if available
+                Task.Run(async () => 
+                {
+                    try
+                    {
+                        // Try to create a hardware clock (DS3231), or fall back to no clock
+                        var hc = new Platform.HardwareClock();
+                        await hc.Initialize();
+                        hc.Update();
+
+                        ManiaLabs.Platform.Set<IClock>(hc);
+                        HardwareClock = hc;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Nevermind, no hardware clock available
+                    }
+                });
+
+                ManiaLabs.Platform.Set<ManiaLabs.IApp>(this);
                 ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
@@ -249,6 +272,7 @@ namespace IotHello.Uwp
         {
             try
             {
+                HardwareClock?.Update();
                 var t = Portable.Models.Schedule.Current.Tick();
                 if (t != null)
                     await t;
