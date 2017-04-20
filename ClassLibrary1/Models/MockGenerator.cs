@@ -48,6 +48,11 @@ namespace IotHello.Portable.Models
                     PanelLightInput = false;
             }
         }
+
+        public bool CommsLight { get; set; } = false;
+
+        public bool WarningLight { get; set; } = true;
+
         private bool _StopOutput;
     }
 }

@@ -31,6 +31,12 @@ namespace IotHello.Portable.Models
                 _Status = value;
                 DoPropertyChanged(nameof(Status));
                 ManiaLabs.Platform.Get<IMeasurement>().LogEvent(_Status.ToString());
+
+                if (Generator != null)
+                {
+                    Generator.WarningLight = GenStatus.Initializing == value;
+                    Generator.CommsLight = GenStatus.Starting == value || GenStatus.Stopping == value;
+                }
             }
         }
         private GenStatus _Status = GenStatus.Initializing;

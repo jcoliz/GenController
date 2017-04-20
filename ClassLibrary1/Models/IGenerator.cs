@@ -30,5 +30,15 @@ namespace IotHello.Portable.Models
         /// Status of the "Panel Light" input line, true = high
         /// </summary>
         bool PanelLightInput { get; }
+
+        /// <summary>
+        /// Status of the "Comms" light on the control board
+        /// </summary>
+        bool CommsLight { set; }
+
+        /// <summary>
+        /// Status of the "Warn" light on the control board
+        /// </summary>
+        bool WarningLight { set; }
     }
 }

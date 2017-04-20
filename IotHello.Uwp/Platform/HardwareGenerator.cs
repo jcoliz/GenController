@@ -69,6 +69,28 @@ namespace IotHello.Uwp.Platform
             }
         }
 
+        /// <summary>
+        /// Status of the "Comms" light on the control board
+        /// </summary>
+        public bool CommsLight
+        {
+            set
+            {
+                Hat.Light.Comms.State = value;
+            }
+        }
+
+        /// <summary>
+        /// Status of the "Warn" light on the control board
+        /// </summary>
+        public bool WarningLight
+        {
+            set
+            {
+                Hat.Light.Warn.State = value;
+            }
+        }
+
         protected HardwareGenerator()
         {
         }
@@ -79,6 +101,9 @@ namespace IotHello.Uwp.Platform
             result.Hat = await Pimoroni.MsIot.AutomationHat.Open();
 
             // These lights are SO bright! Tone them down a bit
+            result.Hat.Light.Power.Value = 0.2;
+            result.Hat.Light.Warn.Value = 0.2;
+            result.Hat.Light.Comms.Brightness = 0.2;
             result.Hat.Light.Power.Value = 0.2;
             result.Hat.Relay[0].NO.Light.Brightness = 0.2;
             result.Hat.Relay[1].NO.Light.Brightness = 0.2;
