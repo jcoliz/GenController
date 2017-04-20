@@ -34,8 +34,12 @@ namespace IotHello.Portable.Models
 
                 if (Generator != null)
                 {
-                    Generator.WarningLight = GenStatus.Initializing == value;
-                    Generator.CommsLight = GenStatus.Starting == value || GenStatus.Stopping == value;
+                    Generator.WarningLight = GenStatus.Initializing == value || GenStatus.Disabled == value;
+                    Generator.CommsLight = GenStatus.Starting == value || GenStatus.Stopping == value || GenStatus.Disabled == value;
+                }
+                if (value == GenStatus.Initializing)
+                {
+                    StartedAt = null;
                 }
             }
         }
@@ -96,10 +100,10 @@ namespace IotHello.Portable.Models
 
         public void ToggleDisable()
         {
-            if (Status == GenStatus.Stopped)
+            if (Status == GenStatus.Stopped || Status == GenStatus.Initializing)
                 Status = GenStatus.Disabled;
             else if (Status == GenStatus.Disabled)
-                Status = GenStatus.Stopped;
+                Status = GenStatus.Initializing;
         }
 
         public static IController Current
