@@ -191,7 +191,7 @@ namespace IotHello.Portable.Models
             PanelLightSignalBits |= (PanelLightSignal ? 1u : 0);
 
             if (PanelLightSignalBits == SignalOffEdge || PanelLightSignalBits == SignalOnEdge)
-                DoPropertyChanged(nameof(RunSignal));
+                DoPropertyChanged(nameof(PanelLightSignal));
         }
 
         private UInt32 RunSignalBits = 0;
