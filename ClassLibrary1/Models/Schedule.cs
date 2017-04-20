@@ -103,7 +103,7 @@ namespace IotHello.Portable.Models
             }
 
             // Don't take action if we are currently TRYING to start or stop
-            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming)
+            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming && status != GenStatus.Initializing)
             {
                 // First, figure out what should be happening right now.
                 var found = InternalSchedule.BinarySearch(new ScheduleItem() { Time = now.TimeOfDay });

@@ -33,7 +33,7 @@ namespace IotHello.Portable.Models
                 ManiaLabs.Platform.Get<IMeasurement>().LogEvent(_Status.ToString());
             }
         }
-        private GenStatus _Status = GenStatus.Stopped;
+        private GenStatus _Status = GenStatus.Initializing;
 
         public async Task Start()
         {
@@ -42,7 +42,7 @@ namespace IotHello.Portable.Models
                 return;
 
             // Already processing a starting/stopping operation? Or disabled? Skip it
-            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled)
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled || Status == GenStatus.Initializing)
                 return;
 
             // If tehre is no clock yet, we can't do anything
@@ -64,7 +64,7 @@ namespace IotHello.Portable.Models
         public async Task Stop()
         {
             // Already processing a starting/stopping operation? Or Disabled? Skip it
-            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled)
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled || Status == GenStatus.Initializing)
                 return;
 
             // If tehre is no clock yet, we can't do anything
@@ -192,12 +192,29 @@ namespace IotHello.Portable.Models
 
             if (PanelLightSignalBits == SignalOffEdge || PanelLightSignalBits == SignalOnEdge)
                 DoPropertyChanged(nameof(PanelLightSignal));
+
+            if (Status == GenStatus.Initializing)
+            {
+                if (Clock != null)
+                {
+                    if (!StartedAt.HasValue)
+                    {
+                        // WARNING: Don't change the clock while initializing!!
+                        StartedAt = Clock.Now;
+                    }
+                    else if (Clock.Now - StartedAt.Value > TimeSpan.FromSeconds(30))
+                    {
+                        Status = RunSignal ? GenStatus.Running : GenStatus.Stopped;
+                    }
+                }
+            }
         }
 
         private UInt32 RunSignalBits = 0;
         private UInt32 PanelLightSignalBits = 0;
         private const UInt32 SignalOffEdge = 1u << 31;
         private const UInt32 SignalOnEdge = UInt32.MaxValue >> 1;
+        private DateTime? StartedAt;
         #endregion
 
         private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
@@ -218,5 +235,5 @@ namespace IotHello.Portable.Models
         #endregion
     }
 
-    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping, Disabled };
+    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping, Disabled, Initializing };
 }
