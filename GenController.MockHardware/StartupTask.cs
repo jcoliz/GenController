@@ -35,12 +35,12 @@ namespace GenController.MockHardware
         {
             Deferral = taskInstance.GetDeferral();
 
-            var StopAutoLight = new DirectLight(stop_autolight_pin) { State = false };
-            var StartAutoLight = new DirectLight(start_autolight_pin) { State = false };
+            var StopAutoLight = new DirectLight(stop_autolight_pin,false) { State = false };
+            var StartAutoLight = new DirectLight(start_autolight_pin,false) { State = false };
 
-            RunSignalLight = new DirectLight(run_signal_pin) { State = false };
-            PanelLight = new DirectLight(panel_light_pin) { State = false };
-            PowerLight = new DirectLight(power_light_pin) { State = true };
+            RunSignalLight = new DirectLight(run_signal_pin,false) { State = false };
+            PanelLight = new DirectLight(panel_light_pin,false) { State = false };
+            PowerLight = new DirectLight(power_light_pin,false) { State = true };
 
             StopButton = new Input(stop_button_pin,StopAutoLight,false);
             StopButton.Updated += (s, e) => 
