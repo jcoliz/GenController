@@ -45,6 +45,9 @@ namespace IotHello.Uwp.Platform
             set
             {
                 Hat.Relay[1].State = value;
+
+                // Also set the output. Testing to see if I can use outputs instead of relays.
+                Hat.Output[1].State = value;
             }
         }
 
@@ -58,8 +61,11 @@ namespace IotHello.Uwp.Platform
                 return Hat.Relay[0].State;
             }
             set
-            {
+            {                
                 Hat.Relay[0].State = value;
+
+                // Also set the output. Testing to see if I can use outputs instead of relays.
+                Hat.Output[0].State = value;
             }
         }
 
@@ -78,6 +84,8 @@ namespace IotHello.Uwp.Platform
             result.Hat.Relay[1].NO.Light.Brightness = 0.2;
             result.Hat.Input[1].Light.Brightness = 0.2;
             result.Hat.Input[2].Light.Brightness = 0.2;
+            result.Hat.Output[0].Light.Brightness = 0.2;
+            result.Hat.Output[1].Light.Brightness = 0.2;
             return result;
         }
 
