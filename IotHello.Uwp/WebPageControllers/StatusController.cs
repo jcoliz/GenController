@@ -27,7 +27,7 @@ namespace IotHello.Uwp.Controllers
             {
                 "<html>",
                 "<head>",
-                "<meta http-equiv=\"refresh\" content=\"5\"/>",
+                //"<meta http-equiv=\"refresh\" content=\"5\"/>",
                 "<meta http-equiv=\"expires\" content=\"-1\"/>",
                 "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>",
                 "<script src=\"https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js\"></script>",
@@ -58,6 +58,9 @@ namespace IotHello.Uwp.Controllers
                 "</ul>",
                 "<button class=\"green button\" id=\"start\">Start</button>",
                 "<button class=\"red button\" id=\"stop\">Stop</button>",
+                $"<p>{App.Current.Title} {App.Current.Version}</p>",
+                $"<p>Start:{VM.Controller.StartRelay} Stop:{VM.Controller.StopRelay} Run:{VM.Controller.RunSignal} Panel:{VM.Controller.PanelLightSignal} </p>",
+                "<p><a href=\"/logs\">View Logs</a></p>",
                 "</body></html>"
             });
             var content = string.Join("\r\n", html);
