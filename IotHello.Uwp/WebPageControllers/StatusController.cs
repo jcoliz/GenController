@@ -35,6 +35,7 @@ namespace IotHello.Uwp.Controllers
                 "$(document).ready(function(){",
                 "$(\"button#start\").click(function(){ $.post(\"status/start\",{},function(data,status){ alert (data); }); });",
                 "$(\"button#stop\").click(function(){ $.post(\"status/stop\",{},function(data,status){ alert (data); }); });",
+                "$(\"button#disable\").click(function(){ $.post(\"status/disable\",{},function(data,status){ alert (data); }); });",
                 "});",
                 "</script>",
                 "<style>",
@@ -44,6 +45,7 @@ namespace IotHello.Uwp.Controllers
                 ".button { display: block; line-height: 46px; width: 350px; font-size: 20px; font-weight: bold; font-family: Helvetica, sans-serif; color: #fff; text-decoration: none; text-align: center; margin: 10px auto; }",
                 ".red { background-color: red }",
                 ".green { background-color: green }",
+                ".gray { background-color: gray }",
                 "ul { padding: 0; margin-top:0; margin-left: auto; margin-right: auto; margin-bottom:17px; font-size:17px; font-family: Helvetica; font-weight:bold; color:black; width: 350px; background-color: white; border-width: 1px; border-style:solid ; border-color:rgb(217,217,217); -webkit-border-radius: 8px; }",
                 "li { list-style-type: none; border-top-width:1px; border-top-style:solid; border-top-color:rgb(217,217,217); padding:10px; }",
                 "</style>",
@@ -58,6 +60,7 @@ namespace IotHello.Uwp.Controllers
                 "</ul>",
                 "<button class=\"green button\" id=\"start\">Start</button>",
                 "<button class=\"red button\" id=\"stop\">Stop</button>",
+                "<button class=\"gray button\" id=\"disable\">Disable</button>",
                 $"<p>{App.Current.Title} {App.Current.Version}</p>",
                 $"<p>Start:{VM.Controller.StartRelay} Stop:{VM.Controller.StopRelay} Run:{VM.Controller.RunSignal} Panel:{VM.Controller.PanelLightSignal} </p>",
                 "<p><a href=\"/logs\">View Logs</a></p>",
@@ -88,6 +91,15 @@ namespace IotHello.Uwp.Controllers
             VM.StopCommand.Execute(this);
             ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StopOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Stopping...");
+        }
+        [HttpPost]
+        [Route("disable")]
+        public HttpResponse Disable([Body] string postContent)
+        {
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Disable");
+            VM.Controller.ToggleDisable();
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.DisableOK");
+            return new HttpResponse(HttpStatusCode.Ok, $"Toggled. Now: {VM.Controller.Status}");
         }
     }
 }
