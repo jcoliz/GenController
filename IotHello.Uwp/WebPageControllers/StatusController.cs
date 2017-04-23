@@ -61,9 +61,9 @@ namespace IotHello.Uwp.Controllers
                 "<button class=\"green button\" id=\"start\">Start</button>",
                 "<button class=\"red button\" id=\"stop\">Stop</button>",
                 "<button class=\"gray button\" id=\"disable\">Disable</button>",
-                $"<p>{App.Current.Title} {App.Current.Version}</p>",
-                $"<p>Start:{VM.Controller.StartRelay} Stop:{VM.Controller.StopRelay} Run:{VM.Controller.RunSignal} Panel:{VM.Controller.PanelLightSignal} </p>",
-                "<p><a href=\"/logs\">View Logs</a></p>",
+                $"<ul><li>{App.Current.Title} {App.Current.Version}</li>",
+                $"<li>1:{(VM.Controller.StartRelay?'Y':'N')} 0:{(VM.Controller.StopRelay?'Y':'N')} R:{(VM.Controller.RunSignal?'Y':'N')} P:{(VM.Controller.PanelLightSignal?'Y':'N')} </li>",
+                "<li><a href=\"/logs\">View Logs</a></li></ul>",
                 "</body></html>"
             });
             var content = string.Join("\r\n", html);

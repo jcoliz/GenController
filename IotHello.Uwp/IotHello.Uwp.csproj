@@ -171,9 +171,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\automation-hat-ms-iot\Pimoroni.MsIot.AutomationHat\Pimoroni.MsIot.AutomationHat.csproj">
+    <ProjectReference Include="..\..\automation-hat-ms-iot\IotFrosting\IotFrosting.csproj">
       <Project>{0bab3bd0-a6fd-4fb8-9f70-248435139630}</Project>
-      <Name>Pimoroni.MsIot.AutomationHat</Name>
+      <Name>IotFrosting</Name>
     </ProjectReference>
     <ProjectReference Include="..\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
       <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>

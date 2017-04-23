@@ -135,15 +135,14 @@ namespace IotHello.Uwp
             {
                 // Then try to start a hardware clock, and use that if available
                 //
-                // WARNING: This means that until Initialize comes back, we may not have a clock in the system!!
+                // WARNING: This means that until Open comes back, we may not have a clock in the system!!
                 Task.Run(async () => 
                 {
                     try
                     {
                         // Try to create a hardware clock (DS3231), or fall back to no clock
-                        var hc = new Platform.HardwareClock();
-                        await hc.Initialize();
-                        hc.Update();
+                        var hc = await Platform.HardwareClock.Open();
+                        hc.Tick();
 
                         ManiaLabs.Platform.Set<IClock>(hc);
                         HardwareClock = hc;
@@ -274,7 +273,7 @@ namespace IotHello.Uwp
         {
             try
             {
-                HardwareClock?.Update();
+                HardwareClock?.Tick();
                 var t = Portable.Models.Schedule.Current.Tick();
                 if (t != null)
                     await t;

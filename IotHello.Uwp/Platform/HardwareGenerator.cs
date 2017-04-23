@@ -98,7 +98,7 @@ namespace IotHello.Uwp.Platform
         public static async Task<HardwareGenerator> Open()
         {
             var result = new HardwareGenerator();
-            result.Hat = await Pimoroni.MsIot.AutomationHat.Open();
+            result.Hat = await IotFrosting.Pimoroni.AutomationHat.Open();
 
             // These lights are SO bright! Tone them down a bit
             result.Hat.Light.Power.Value = 0.2;
@@ -119,7 +119,7 @@ namespace IotHello.Uwp.Platform
             ((IDisposable)Hat).Dispose();
         }
 
-        private Pimoroni.MsIot.AutomationHat Hat;
+        private IotFrosting.Pimoroni.AutomationHat Hat;
 
     }
 }
