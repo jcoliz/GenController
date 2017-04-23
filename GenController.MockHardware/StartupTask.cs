@@ -5,7 +5,7 @@ using System.Text;
 using System.Net.Http;
 using Windows.ApplicationModel.Background;
 using Windows.System.Threading;
-using Pimoroni.MsIot;
+using IotFrosting.Pimoroni;
 
 // The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
 

@@ -130,9 +130,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\automation-hat-ms-iot\Pimoroni.MsIot.AutomationHat\Pimoroni.MsIot.AutomationHat.csproj">
-      <Project>{0BAB3BD0-A6FD-4FB8-9F70-248435139630}</Project>
-      <Name>Pimoroni.MsIot.AutomationHat</Name>
+    <ProjectReference Include="..\..\automation-hat-ms-iot\IotFrosting\IotFrosting.csproj">
+      <Project>{0bab3bd0-a6fd-4fb8-9f70-248435139630}</Project>
+      <Name>IotFrosting</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
