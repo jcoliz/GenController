@@ -23,26 +23,26 @@ namespace GenController.MockHardware
         DirectLight RunSignalLight;
         DirectLight PowerLight;
 
-        const int run_signal_pin = 24;
-        const int panel_light_pin = 25;
-        const int start_autolight_pin = 23;
-        const int stop_autolight_pin = 18;
-        const int stop_button_pin = 20;
-        const int start_button_pin = 21;
-        const int power_light_pin = 16;
+        const int SIGNAL_START = 16;
+        const int SIGNAL_POWER = 12;
+        const int SIGNAL_STOP = 7;
+        const int IN_STOP = 25;
+        const int IN_START = 24;
+        const int OUT_RUN = 23;
+        const int OUT_PANEL = 18;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             Deferral = taskInstance.GetDeferral();
 
-            var StopAutoLight = new DirectLight(stop_autolight_pin,false) { State = false };
-            var StartAutoLight = new DirectLight(start_autolight_pin,false) { State = false };
+            var StopAutoLight = new DirectLight(SIGNAL_STOP,false) { State = false };
+            var StartAutoLight = new DirectLight(SIGNAL_START,false) { State = false };
 
-            RunSignalLight = new DirectLight(run_signal_pin,false) { State = false };
-            PanelLight = new DirectLight(panel_light_pin,false) { State = false };
-            PowerLight = new DirectLight(power_light_pin,false) { State = true };
+            RunSignalLight = new DirectLight(OUT_RUN,false) { State = false };
+            PanelLight = new DirectLight(OUT_PANEL,false) { State = false };
+            PowerLight = new DirectLight(SIGNAL_POWER,false) { State = true };
 
-            StopButton = new Input(stop_button_pin,StopAutoLight,false);
+            StopButton = new Input(IN_STOP,StopAutoLight,false);
             StopButton.Updated += (s, e) => 
             {
                 // If pressed
@@ -64,7 +64,7 @@ namespace GenController.MockHardware
                     }
                 }
             };
-            StartButton = new Input(start_button_pin,StartAutoLight,false);
+            StartButton = new Input(IN_START,StartAutoLight,false);
             StartButton.Updated += (s, e) =>
             {
                 // If pressed
