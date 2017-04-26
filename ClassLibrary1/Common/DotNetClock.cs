@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManiaLabs.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace Common
@@ -9,16 +10,20 @@ namespace Common
         {
             get
             {
-                return DateTime.Now + Offset;
+                if (!Offset.HasValue)
+                {
+                    Offset = TimeSpan.FromTicks(long.Parse( Setting.GetKeyValueWithDefault("Clock.Offset", "0")));
+                }
+                return DateTime.Now + Offset.Value;
             }
             set
             {
                 Offset = value - DateTime.Now;
+                Setting.SetKey("Clock.Offset", Offset.Value.Ticks.ToString());
             }
         }
 
-        // TODO: Save this to settings
-        private TimeSpan Offset = TimeSpan.Zero;
+        private TimeSpan? Offset;
 
         public Task Delay(TimeSpan t) => Task.Delay(t);
     }

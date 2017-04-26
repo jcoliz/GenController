@@ -23,7 +23,18 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Schedule is free to start and stop generator according to schedule
         /// </summary>
-        public bool Enabled { get; set; } = true;
+        public bool Enabled
+        {
+            get
+            {
+                return Boolean.Parse(Setting.GetKeyValueWithDefault("Enabled", "True"));
+            }
+            set
+            {
+                Setting.SetKey("Enabled", value.ToString());
+            }
+        }
+        //Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
 
         public Schedule()
         {
