@@ -67,11 +67,6 @@ namespace IotHello.Uwp
             Frame.Navigate(typeof(Screens.EditSchedule));
         }
 
-        private void Button_Power_Click(object sender, RoutedEventArgs e)
-        {
-            VM.Controller.ToggleDisable();
-        }
-
         private void PeriodsView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(Screens.EditSchedule),e.ClickedItem);

@@ -31,6 +31,7 @@ namespace IotHello.Portable.ViewModels
                 base.SetError("MV1", ex);
             }
         });
+
         public ICommand StopCommand => new DelegateCommand(async _ =>
         {
             try
@@ -44,6 +45,29 @@ namespace IotHello.Portable.ViewModels
             }
         });
 
+        public ICommand EnableCommand => new DelegateCommand(_ =>
+        {
+            try
+            {
+                Controller.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                base.SetError("MV4", ex);
+            }
+        });
+
+        public ICommand DisableCommand => new DelegateCommand(_ =>
+        {
+            try
+            {
+                Controller.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                base.SetError("MV5", ex);
+            }
+        });
 
         public void Update()
         {

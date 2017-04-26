@@ -59,10 +59,17 @@ namespace IotHello.Uwp.Controllers
             html.AddRange(new List<string>() {
                 "</ul>",
                 "<button class=\"green button\" id=\"start\">Start</button>",
-                "<button class=\"red button\" id=\"stop\">Stop</button>",
-                "<button class=\"gray button\" id=\"disable\">Disable</button>",
+                "<button class=\"red button\" id=\"stop\">Stop</button>"
+            });
+
+            if (VM.Controller.Enabled)
+                html.Add("<button class=\"gray button\" id=\"disable\">Disable</button>");
+            else
+                html.Add("<button class=\"gray button\" id=\"enable\">Enable</button>");
+
+            html.AddRange(new List<string>() {
                 $"<ul><li>{App.Current.Title} {App.Current.Version}</li>",
-                $"<li>1:{(VM.Controller.StartRelay?'Y':'N')} 0:{(VM.Controller.StopRelay?'Y':'N')} R:{(VM.Controller.RunSignal?'Y':'N')} P:{(VM.Controller.PanelLightSignal?'Y':'N')} </li>",
+                $"<li>E: {(VM.Controller.Enabled?'Y':'N')} 1:{(VM.Controller.StartRelay?'Y':'N')} 0:{(VM.Controller.StopRelay?'Y':'N')} R:{(VM.Controller.RunSignal?'Y':'N')} P:{(VM.Controller.PanelLightSignal?'Y':'N')} </li>",
                 "<li><a href=\"/logs\">View Logs</a></li></ul>",
                 "</body></html>"
             });
@@ -97,9 +104,18 @@ namespace IotHello.Uwp.Controllers
         public HttpResponse Disable([Body] string postContent)
         {
             ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Disable");
-            VM.Controller.ToggleDisable();
+            VM.DisableCommand.Execute(this);
             ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.DisableOK");
-            return new HttpResponse(HttpStatusCode.Ok, $"Toggled. Now: {VM.Controller.Status}");
+            return new HttpResponse(HttpStatusCode.Ok, $"Disabled.");
+        }
+        [HttpPost]
+        [Route("enable")]
+        public HttpResponse Enable([Body] string postContent)
+        {
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Enable");
+            VM.EnableCommand.Execute(this);
+            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.EnableOK");
+            return new HttpResponse(HttpStatusCode.Ok, $"Enabled.");
         }
     }
 }

@@ -34,8 +34,8 @@ namespace IotHello.Portable.Models
 
                 if (Generator != null)
                 {
-                    Generator.WarningLight = GenStatus.Initializing == value || GenStatus.Disabled == value;
-                    Generator.CommsLight = GenStatus.Starting == value || GenStatus.Stopping == value || GenStatus.Disabled == value;
+                    Generator.WarningLight = GenStatus.Initializing == value;
+                    Generator.CommsLight = GenStatus.Starting == value || GenStatus.Stopping == value;
                 }
                 if (value == GenStatus.Initializing)
                 {
@@ -52,7 +52,7 @@ namespace IotHello.Portable.Models
                 return;
 
             // Already processing a starting/stopping operation? Or disabled? Skip it
-            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled || Status == GenStatus.Initializing)
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Initializing)
                 return;
 
             // If tehre is no clock yet, we can't do anything
@@ -74,7 +74,7 @@ namespace IotHello.Portable.Models
         public async Task Stop()
         {
             // Already processing a starting/stopping operation? Or Disabled? Skip it
-            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Disabled || Status == GenStatus.Initializing)
+            if (Status == GenStatus.Starting || Status == GenStatus.Stopping || Status == GenStatus.Initializing)
                 return;
 
             // If tehre is no clock yet, we can't do anything
@@ -98,12 +98,23 @@ namespace IotHello.Portable.Models
                 Status = GenStatus.Running;
         }
 
-        public void ToggleDisable()
+        /// <summary>
+        /// Whether the schedule is enabled
+        /// </summary>
+        /// <remarks>
+        /// This is kept here for simplicity because all other system status is here.
+        /// </remarks>
+        public bool Enabled
         {
-            if (Status == GenStatus.Stopped || Status == GenStatus.Initializing)
-                Status = GenStatus.Disabled;
-            else if (Status == GenStatus.Disabled)
-                Status = GenStatus.Initializing;
+            get
+            {
+                return Models.Schedule.Current.Enabled;
+            }
+            set
+            {
+                Models.Schedule.Current.Enabled = value;
+                DoPropertyChanged(nameof(Enabled));
+            }
         }
 
         public static IController Current
@@ -245,5 +256,5 @@ namespace IotHello.Portable.Models
         #endregion
     }
 
-    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping, Disabled, Initializing };
+    public enum GenStatus { Invalid = 0, Stopped, Starting, Confirming, Running, Stopping, Initializing };
 }

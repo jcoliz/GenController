@@ -39,6 +39,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\DotNetClock.cs" />
+    <Compile Include="Common\IClock.cs" />
+    <Compile Include="Common\IMeasurement.cs" />
+    <Compile Include="Common\Platform.cs" />
+    <Compile Include="Common\RangeObservableCollection.cs" />
+    <Compile Include="Common\SimpleMeasurement.cs" />
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />
     <Compile Include="Models\IController.cs" />
@@ -57,9 +64,7 @@
       <Name>ManiaLabs.Portable.Base</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

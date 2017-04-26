@@ -20,6 +20,11 @@ namespace IotHello.Portable.Models
         /// </summary>
         public RangeObservableCollection<Models.GenPeriod> Periods = new RangeObservableCollection<Models.GenPeriod>();
 
+        /// <summary>
+        /// Schedule is free to start and stop generator according to schedule
+        /// </summary>
+        public bool Enabled { get; set; } = true;
+
         public Schedule()
         {
             Periods.CollectionChanged += Periods_CollectionChanged;
@@ -103,7 +108,7 @@ namespace IotHello.Portable.Models
             }
 
             // Don't take action if we are currently TRYING to start or stop
-            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming && status != GenStatus.Initializing && status != GenStatus.Disabled)
+            if (status != GenStatus.Starting && status != GenStatus.Stopping && status != GenStatus.Confirming && status != GenStatus.Initializing && Enabled)
             {
                 // First, figure out what should be happening right now.
                 var found = InternalSchedule.BinarySearch(new ScheduleItem() { Time = now.TimeOfDay });
