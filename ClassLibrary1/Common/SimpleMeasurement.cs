@@ -1,4 +1,5 @@
-﻿using ManiaLabs.Helpers;
+﻿using IotHello.Portable.Common;
+using ManiaLabs.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,14 +7,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Common
+namespace IotHello.Portable.Common
 {
     /// <summary>
     /// This is a simple implementation of the measurement interface which just
     /// logs to the local file system
     /// </summary>
 
-    public class Logger: IMeasurement
+    public class Logger: ManiaLabs.Portable.Base.IMeasurement
     {
         private static string HomeDirectory = string.Empty;
         public Logger(string homedir = null)
@@ -143,7 +144,7 @@ namespace Common
                 {
                     var sw = new StreamWriter(stream);
                     foreach (var line in lines)
-                        await sw.WriteLineAsync(Time.ToString("u") + " " + line);
+                        await sw.WriteLineAsync(Time.ToString("u") + " " + Voltage + line);
                     await sw.FlushAsync();
                 }
 
@@ -163,7 +164,9 @@ namespace Common
         /// If there IS a platform clock use that for time, else just pick up regular
         /// system time.
         /// </summary>
-        private DateTime Time => Platform.TryGet<IClock>()?.Now ?? DateTime.Now;
+        private DateTime Time => ManiaLabs.Platform.TryGet<ManiaLabs.Portable.Base.IClock>()?.Now ?? DateTime.Now;
+
+        private string Voltage => ManiaLabs.Platform.TryGet<IVoltage>()?.Voltage.ToString("0.0") + "V " ?? string.Empty;
     }
 
     /// <summary>

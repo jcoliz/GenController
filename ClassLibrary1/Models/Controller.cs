@@ -1,4 +1,5 @@
-﻿using ManiaLabs.Portable.Base;
+﻿using IotHello.Portable.Common;
+using ManiaLabs.Portable.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ namespace IotHello.Portable.Models
     /// * Stop relay
     /// * IsRunning input
     /// </remarks>
-    public class Controller : IController, INotifyPropertyChanged
+    public class Controller : IController, INotifyPropertyChanged, IVoltage
     {
         public GenStatus Status
         {

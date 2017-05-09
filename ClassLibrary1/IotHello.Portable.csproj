@@ -43,6 +43,7 @@
     <Compile Include="Common\DotNetClock.cs" />
     <Compile Include="Common\IClock.cs" />
     <Compile Include="Common\IMeasurement.cs" />
+    <Compile Include="Common\IVoltage.cs" />
     <Compile Include="Common\Platform.cs" />
     <Compile Include="Common\RangeObservableCollection.cs" />
     <Compile Include="Common\SimpleMeasurement.cs" />

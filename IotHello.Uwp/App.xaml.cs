@@ -158,7 +158,7 @@ namespace IotHello.Uwp
 
                 ManiaLabs.Platform.Set<ManiaLabs.IApp>(this);
                 ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
-                ManiaLabs.Platform.Set<IMeasurement>(new SimpleMeasurement());
+                ManiaLabs.Platform.Set<IMeasurement>(new Portable.Common.Logger(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 ManiaLabs.Platform.Get<IMeasurement>().StartSession();
                 ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
                 ManiaLabs.Platform.Set<IPlatformSettingsManager>(new Platform.WindowsSettingsManager());
@@ -169,10 +169,13 @@ namespace IotHello.Uwp
                     {
                         var gen = await Platform.HardwareGenerator.Open();
                         ManiaLabs.Platform.Set<Portable.Models.IGenerator>(gen);
+                        ManiaLabs.Platform.Set<Portable.Common.IVoltage>(gen);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        ManiaLabs.Platform.Set<Portable.Models.IGenerator>(new Portable.Models.MockGenerator());
+                        var mg = new Portable.Models.MockGenerator();
+                        ManiaLabs.Platform.Set<Portable.Models.IGenerator>(mg);
+                        ManiaLabs.Platform.Set<Portable.Common.IVoltage>(mg);
                     }
                 });
 

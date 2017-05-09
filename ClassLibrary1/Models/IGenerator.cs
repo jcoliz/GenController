@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IotHello.Portable.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace IotHello.Portable.Models
     /// <summary>
     /// Defines the hardware interface to the generator
     /// </summary>
-    public interface IGenerator
+    public interface IGenerator: IVoltage
     {
         /// <summary>
         /// Status of the "Start" output line, true = high
@@ -40,10 +41,5 @@ namespace IotHello.Portable.Models
         /// Status of the "Warn" light on the control board
         /// </summary>
         bool WarningLight { set; }
-
-        /// <summary>
-        /// Currently sensed voltage on the system
-        /// </summary>
-        double Voltage { get; }
     }
 }
