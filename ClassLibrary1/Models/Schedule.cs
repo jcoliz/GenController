@@ -48,7 +48,7 @@ namespace IotHello.Portable.Models
             InternalSchedule.Clear();
             if (Periods.FirstOrDefault() != null)
             {
-                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StartAt, DesiredState = GenStatus.Running }));
+                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StartAt, DesiredState = GenStatus.Running, Voltage = x.Voltage }));
                 InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StopAt, DesiredState = GenStatus.Stopped }));
 
                 if (_Override != null)
@@ -59,8 +59,8 @@ namespace IotHello.Portable.Models
                 // Add tomorrow's first at the end, and yesterday's last at the start
                 var first = InternalSchedule.First();
                 var last = InternalSchedule.Last();
-                InternalSchedule.Add(new ScheduleItem() { Time = first.Time + TimeSpan.FromDays(1), DesiredState = first.DesiredState });
-                InternalSchedule.Insert(0, new ScheduleItem() { Time = last.Time - TimeSpan.FromDays(1), DesiredState = last.DesiredState });
+                InternalSchedule.Add(new ScheduleItem() { Time = first.Time + TimeSpan.FromDays(1), DesiredState = first.DesiredState, Voltage = first.Voltage });
+                InternalSchedule.Insert(0, new ScheduleItem() { Time = last.Time - TimeSpan.FromDays(1), DesiredState = last.DesiredState, Voltage = last.Voltage });
             }
         }
 
@@ -126,7 +126,8 @@ namespace IotHello.Portable.Models
                 if (found < 0)
                     found = (~found) - 1;
 
-                var desiredstate = InternalSchedule[found].DesiredState;
+                var item = InternalSchedule[found];
+                var desiredstate = item.DesiredState;
 
                 // If the desired state is 'invalid', then we are in a schedule override mode, so we are ignoring
                 // the schedule as long as that lasts.
@@ -141,8 +142,12 @@ namespace IotHello.Portable.Models
                     // Take action!!
                     if (desiredstate == GenStatus.Running)
                     {
-                        Log("Schedule.Start");
-                        result = Controller.Current.Start();
+                        // If we want to start, let's check the voltage levels to understand what we need
+                        if (item.Voltage < 1.0 || Controller.Current.Voltage < item.Voltage)
+                        {
+                            Log("Schedule.Start");
+                            result = Controller.Current.Start();
+                        }
                     }
                     else if (desiredstate == GenStatus.Stopped)
                     {
@@ -254,6 +259,7 @@ namespace IotHello.Portable.Models
         {
             public TimeSpan Time;
             public GenStatus DesiredState;
+            public double Voltage;
 
             public int CompareTo(ScheduleItem other) => Time.CompareTo(other.Time);
             public int CompareTo(TimeSpan other) => Time.CompareTo(other);

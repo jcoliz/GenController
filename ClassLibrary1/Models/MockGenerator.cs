@@ -53,7 +53,7 @@ namespace IotHello.Portable.Models
 
         public bool WarningLight { get; set; } = true;
 
-        public double Voltage { get; set; } = 19.0;
+        public double Voltage { get; set; } = 13.9;
 
         private bool _StopOutput;
     }

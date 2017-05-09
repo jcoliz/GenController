@@ -6,6 +6,8 @@ namespace IotHello.Portable.Models
     {
         GenStatus Status { get; }
 
+        double Voltage { get; }
+
         Task Start();
         Task Stop();
         void Confirm();
