@@ -40,5 +40,10 @@ namespace IotHello.Portable.Models
         /// Status of the "Warn" light on the control board
         /// </summary>
         bool WarningLight { set; }
+
+        /// <summary>
+        /// Currently sensed voltage on the system
+        /// </summary>
+        double Voltage { get; }
     }
 }

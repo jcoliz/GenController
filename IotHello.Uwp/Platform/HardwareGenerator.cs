@@ -91,6 +91,11 @@ namespace IotHello.Uwp.Platform
             }
         }
 
+        /// <summary>
+        /// Current voltage sensed in the system
+        /// </summary>
+        public double Voltage => Hat.Analog[0].Voltage;
+
         protected HardwareGenerator()
         {
         }

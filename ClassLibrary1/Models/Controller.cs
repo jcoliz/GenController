@@ -197,10 +197,15 @@ namespace IotHello.Portable.Models
         public bool PanelLightSignal => Generator?.PanelLightInput ?? false;
 
         /// <summary>
+        /// Current voltage on the "voltage sense" line
+        /// </summary>
+        public double Voltage => Math.Floor((Generator?.Voltage ?? 0.0) * 10.0) / 10.0;
+
+        /// <summary>
         /// Call this very frequently. This will debounce the runsignal line. It looks for
         /// 31 consecutive readings opposite the previous reading.
         /// </summary>
-        public void HardwareTick()
+        public void FastTick()
         {
             RunSignalBits <<= 1;
             RunSignalBits |= (RunSignal ? 1u : 0);
@@ -229,6 +234,14 @@ namespace IotHello.Portable.Models
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Call as often as you update the UI (every second is good)
+        /// </summary>
+        public void SlowTick()
+        {
+            DoPropertyChanged(nameof(Voltage));
         }
 
         private UInt32 RunSignalBits = 0;

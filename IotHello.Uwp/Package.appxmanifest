@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="72005c7c-ede7-4c7e-80dc-b4f14a0245d9" Publisher="CN=jlive" Version="1.12.0.0" />
+  <Identity Name="72005c7c-ede7-4c7e-80dc-b4f14a0245d9" Publisher="CN=jlive" Version="1.13.0.0" />
   <mp:PhoneIdentity PhoneProductId="72005c7c-ede7-4c7e-80dc-b4f14a0245d9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Gen Controller</DisplayName>

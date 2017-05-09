@@ -8,7 +8,7 @@
     xmlns:lc="using:IotHello.Uwp.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="800">
 
     <UserControl.Resources>
         <lc:BooleanRedBrushConverterXaml x:Key="BooleanRedBrushConverterXaml"/>
@@ -25,22 +25,26 @@
         </Border>
         <Grid HorizontalAlignment="Right" Margin="30,0" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Ellipse Grid.Column="0" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.Enabled,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="0" Foreground="White" Text="E" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StartRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="1" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StopRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="2" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="3" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.PanelLightSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="3" Foreground="White" Text="P" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="4" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.RunSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
-            <TextBlock Margin="0,-2,0,0" Grid.Column="4" Foreground="White" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <TextBlock Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="10,-2,10,0">
+                    <Run Text="{x:Bind Controller.Voltage,Mode=OneWay}"/>V
+            </TextBlock>
+            <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.Enabled,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Grid.Column="1" Margin="0,-2,0,0" Foreground="White" Text="E" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StartRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Grid.Column="2" Margin="0,-2,0,0" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <Ellipse Grid.Column="3" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StopRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Grid.Column="3" Margin="0,-2,0,0" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <Ellipse Grid.Column="4" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.PanelLightSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Grid.Column="4" Margin="0,-2,0,0" Foreground="White" Text="P" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <Ellipse Grid.Column="5" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.RunSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <TextBlock Grid.Column="5" Margin="0,-2,0,0" Foreground="White" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -266,7 +266,7 @@ namespace IotHello.Uwp
         /// <param name="timer"></param>
         private void HardwareTick(ThreadPoolTimer timer)
         {
-            (Portable.Models.Controller.TryCurrent as Portable.Models.Controller)?.HardwareTick();
+            (Portable.Models.Controller.TryCurrent as Portable.Models.Controller)?.FastTick();
         }
 
         private async void Timer_Tick(object sender, object e)
@@ -278,6 +278,7 @@ namespace IotHello.Uwp
                 if (t != null)
                     await t;
                 this.Tick?.Invoke(this, e);
+                (Portable.Models.Controller.TryCurrent as Portable.Models.Controller)?.SlowTick();
             }
             catch (Exception ex)
             {
