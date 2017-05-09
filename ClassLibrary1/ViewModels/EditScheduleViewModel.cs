@@ -11,7 +11,7 @@ namespace IotHello.Portable.ViewModels
 {
     public class EditScheduleViewModel: ViewModelBase
     {
-        public Models.GenPeriod Period { get; private set; } = new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(13));
+        public Models.GenPeriod Period { get; private set; } = new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(13),14.0);
 
         public Models.GenPeriod Original
         {
@@ -21,7 +21,7 @@ namespace IotHello.Portable.ViewModels
                 {
                     _Original = value;
                     WillAdd = false;
-                    Period = new Models.GenPeriod(_Original.StartAt, _Original.StopAt);
+                    Period = new Models.GenPeriod(_Original.StartAt, _Original.StopAt, _Original.Voltage);
                     base.SetProperty(nameof(Period));
                     base.SetProperty(nameof(WillAdd));
                 }
@@ -107,6 +107,15 @@ namespace IotHello.Portable.ViewModels
                         {
                             Period.StartAt = Period.StopAt;
                         }
+                        break;
+                    case "V":
+                        Period.Voltage += add * 0.2;
+                        if (Period.Voltage > 0.0 && Period.Voltage < 1.0)
+                            Period.Voltage = 12.0;
+                        else if (Period.Voltage < 12.0)
+                            Period.Voltage = 0.0;
+                        else if (Period.Voltage > 14.0)
+                            Period.Voltage = 14.0;
                         break;
                 }
                 base.SetProperty(nameof(Period));

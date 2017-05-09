@@ -46,6 +46,10 @@
                 <ColumnDefinition Width="Auto"/>
                 <!-- Minute to -->
                 <ColumnDefinition Width="Auto"/>
+                <!-- ...at... -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Voltage -->
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -54,45 +58,56 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.Period.StartAt,Mode=OneWay,Converter={StaticResource TimeSpanFormatConverterXaml},ConverterParameter='hh'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=":"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.Period.StartAt,Mode=OneWay,Converter={StaticResource TimeSpanFormatConverterXaml},ConverterParameter='mm'}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="to" Margin="20,0"/>
-            <TextBlock Grid.Row="1" Grid.Column="4" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="4" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.Period.StopAt,Mode=OneWay,Converter={StaticResource TimeSpanFormatConverterXaml},ConverterParameter='hh'}"/>
-            <TextBlock Grid.Row="1" Grid.Column="5" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <TextBlock Grid.Row="1" Grid.Column="5" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text=":"/>
-            <TextBlock Grid.Row="1" Grid.Column="6" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Grid.Row="1" Grid.Column="6" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Text="{x:Bind VM.Period.StopAt,Mode=OneWay,Converter={StaticResource TimeSpanFormatConverterXaml},ConverterParameter='mm'}"/>
 
-            <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="-Hfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <TextBlock Grid.Row="1" Grid.Column="7" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="at" Margin="20,0"/>
+            <TextBlock Grid.Row="1" Grid.Column="8" FontSize="90" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Text="{x:Bind VM.Period.Voltage,Mode=OneWay}"/>
+
+            <Button Grid.Row="0" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="-Hfrom" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White" />
             </Button>
-            <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="-Mfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="-Mfrom" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="-Hto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="-Hto" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="-Mto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="0" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="-Mto" HorizontalAlignment="Center" Width="100" Height="100">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
+            </Button>
+            <Button Grid.Row="0" Grid.Column="8" Command="{x:Bind VM.AddCommand}" CommandParameter="-V" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE0E4;" Foreground="White"/>
             </Button>
 
-            <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="+Hfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="0" Command="{x:Bind VM.AddCommand}" CommandParameter="+Hfrom" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="+Mfrom" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="2" Command="{x:Bind VM.AddCommand}" CommandParameter="+Mfrom" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="+Hto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="4" Command="{x:Bind VM.AddCommand}" CommandParameter="+Hto" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
-            <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="+Mto" HorizontalAlignment="Center" Width="120" Height="100">
+            <Button Grid.Row="2" Grid.Column="6" Command="{x:Bind VM.AddCommand}" CommandParameter="+Mto" HorizontalAlignment="Center" Width="100" Height="100">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="8" Command="{x:Bind VM.AddCommand}" CommandParameter="+V" HorizontalAlignment="Center" Width="100" Height="100">
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="40" Text="&#xE015;" Foreground="White"/>
             </Button>
 

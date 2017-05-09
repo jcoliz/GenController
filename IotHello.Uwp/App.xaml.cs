@@ -192,7 +192,7 @@ namespace IotHello.Uwp
                     var ending = TimeSpan.FromHours(22);
                     while (current < ending)
                     {
-                        Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period));
+                        Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period,0.0));
                         current += period + period;
                     }
                 }
