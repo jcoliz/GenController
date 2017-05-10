@@ -1,4 +1,5 @@
-﻿using ManiaLabs.Helpers;
+﻿using ManiaLabs;
+using ManiaLabs.Helpers;
 using ManiaLabs.Models;
 using ManiaLabs.Portable.Base;
 using System;
@@ -71,6 +72,7 @@ namespace IotHello.Portable.Models
         {
             var storage = Setting.GetCompositeKey("Schedule");
             Periods.AddRange(storage.Select(GenPeriod.Deserialize));
+            Platform.Get<IMeasurement>().LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
         }
 
         /// <summary>
