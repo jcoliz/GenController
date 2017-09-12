@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotHello.Uwp", "IotHello.Uwp\IotHello.Uwp.csproj", "{EDD3B2DF-07B9-42C2-B8C4-11AD27723699}"
 EndProject
@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManiaLabs.Portable.Base", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenController.MockHardware", "GenController.MockHardware\GenController.MockHardware.csproj", "{02F991CA-29BB-4D76-950C-7212A9CFD961}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotFrosting", "..\automation-hat-ms-iot\IotFrosting\IotFrosting.csproj", "{0BAB3BD0-A6FD-4FB8-9F70-248435139630}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotFrosting", "automation-hat-ms-iot\IotFrosting\IotFrosting.csproj", "{0BAB3BD0-A6FD-4FB8-9F70-248435139630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

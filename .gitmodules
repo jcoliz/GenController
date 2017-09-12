@@ -1,9 +1,9 @@
-[submodule "Catnap.Server"]
-	path = Catnap.Server
-	url = git@github.com:jcoliz/Catnap.Server.git
 [submodule "ManiaLabs__"]
 	path = ManiaLabs.Common
 	url = https://jcoliz.visualstudio.com/DefaultCollection/_git/ManiaLabs.Common
 [submodule "automation-hat-ms-iot"]
 	path = automation-hat-ms-iot
 	url = https://github.com/jcoliz/automation-hat-ms-iot.git
+[submodule "Catnap.Server"]
+	path = Catnap.Server
+	url = https://github.com/jcoliz/Catnap.Server.git

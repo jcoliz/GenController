@@ -171,7 +171,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\automation-hat-ms-iot\IotFrosting\IotFrosting.csproj">
+    <ProjectReference Include="..\automation-hat-ms-iot\IotFrosting\IotFrosting.csproj">
       <Project>{0bab3bd0-a6fd-4fb8-9f70-248435139630}</Project>
       <Name>IotFrosting</Name>
     </ProjectReference>
