@@ -1,5 +1,4 @@
-﻿using IotHello.Portable.Common;
-using ManiaLabs.Helpers;
+﻿using ManiaLabs.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,17 +6,16 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Common
+namespace Common
 {
     /// <summary>
-    /// This is a simple implementation of the measurement interface which just
-    /// logs to the local file system
+    /// This is a simple logger which just logs to the local file system. No cloud analytics here.
     /// </summary>
 
-    public class Logger: ManiaLabs.Portable.Base.IMeasurement
+    public class FileSystemLogger: ILogger
     {
         private static string HomeDirectory = string.Empty;
-        public Logger(string homedir = null)
+        public FileSystemLogger(string homedir = null)
         {
             if (!string.IsNullOrEmpty(homedir))
                 HomeDirectory = homedir;

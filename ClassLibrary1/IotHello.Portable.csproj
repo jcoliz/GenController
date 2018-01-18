@@ -42,11 +42,11 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DotNetClock.cs" />
     <Compile Include="Common\IClock.cs" />
-    <Compile Include="Common\IMeasurement.cs" />
+    <Compile Include="Common\ILogger.cs" />
     <Compile Include="Common\IVoltage.cs" />
     <Compile Include="Common\Platform.cs" />
     <Compile Include="Common\RangeObservableCollection.cs" />
-    <Compile Include="Common\SimpleMeasurement.cs" />
+    <Compile Include="Common\FileSystemLogger.cs" />
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />
     <Compile Include="Models\IController.cs" />

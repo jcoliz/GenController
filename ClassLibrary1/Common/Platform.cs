@@ -6,37 +6,40 @@ namespace Common
     /// <summary>
     /// Service Locator
     /// </summary>
-    public static class Platform
+    public static class Service
     {
-        private static Dictionary<Type, object> Objects;
+        /// <summary>
+        /// All the services we know about
+        /// </summary>
+        private static Dictionary<Type, object> RegisteredServices;
 
         public static void Set<T>(T value) where T : class
         {
-            if (Objects == null)
-                Objects = new Dictionary<Type, object>();
+            if (RegisteredServices == null)
+                RegisteredServices = new Dictionary<Type, object>();
 
-            Objects[typeof(T)] = value;
+            RegisteredServices[typeof(T)] = value;
         }
         public static T Get<T>() where T : class
         {
-            if (Objects == null || !Objects.ContainsKey(typeof(T)))
+            if (RegisteredServices == null || !RegisteredServices.ContainsKey(typeof(T)))
             {
                 throw new PlatformNotSupportedException($"Service {typeof(T).Name} not found.");
             }
-            return Objects[typeof(T)] as T;
+            return RegisteredServices[typeof(T)] as T;
         }
         public static T TryGet<T>() where T : class
         {
-            if (Objects == null || !Objects.ContainsKey(typeof(T)))
+            if (RegisteredServices == null || !RegisteredServices.ContainsKey(typeof(T)))
             {
                 return null;
             }
-            return Objects[typeof(T)] as T;
+            return RegisteredServices[typeof(T)] as T;
         }
 
         public static void Clear()
         {
-            Objects.Clear();
+            RegisteredServices.Clear();
         }
     }
 }

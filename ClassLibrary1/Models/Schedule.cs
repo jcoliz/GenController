@@ -256,7 +256,7 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Service Locator for how to get measurement and logging.
         /// </summary>
-        private IMeasurement Measurement => ManiaLabs.Platform.TryGet<IMeasurement>();
+        private ILogger Measurement => ManiaLabs.Platform.TryGet<ILogger>();
 
         class ScheduleItem : IComparable<ScheduleItem>, IComparable<TimeSpan>
         {

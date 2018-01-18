@@ -6,9 +6,6 @@ namespace Common
     /// <summary>
     /// Quick and reusable ICommand
     /// </summary>
-    /// <remarks>
-    /// Move me to manialabs portable base
-    /// </remarks>
     /// <seealso>
     /// http://www.wpftutorial.net/delegatecommand.html
     /// </seealso>

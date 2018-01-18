@@ -1,10 +1,6 @@
-﻿using IotHello.Portable.Common;
-using ManiaLabs.Portable.Base;
+﻿using Common;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -253,8 +249,8 @@ namespace IotHello.Portable.Models
         #endregion
 
         private SynchronizationContext Context = SynchronizationContext.Current;
-        private IMeasurement Measurement => ManiaLabs.Platform.Get<IMeasurement>();
-        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
+        private ILogger Measurement => Service.Get<ILogger>();
+        private IClock Clock => Service.TryGet<IClock>();
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

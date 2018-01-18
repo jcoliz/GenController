@@ -4,6 +4,12 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    /// <summary>
+    /// Provides a standard dotnet 'DateTime.Now' in the IClock interface
+    /// </summary>
+    /// <remarks>
+    /// This is helpful both for testing, and for a system where we use an external clock
+    /// </remarks>
     public class Clock : IClock
     {
         public DateTime Now
