@@ -31,7 +31,7 @@ namespace IotHello.Portable.Models
             {
                 _Status = value;
                 DoPropertyChanged(nameof(Status));
-                ManiaLabs.Platform.Get<IMeasurement>().LogEvent(_Status.ToString());
+                Measurement.LogEvent(_Status.ToString());
 
                 if (Generator != null)
                 {
@@ -252,8 +252,9 @@ namespace IotHello.Portable.Models
         private DateTime? StartedAt;
         #endregion
 
-        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
         private SynchronizationContext Context = SynchronizationContext.Current;
+        private IMeasurement Measurement => ManiaLabs.Platform.Get<IMeasurement>();
+        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

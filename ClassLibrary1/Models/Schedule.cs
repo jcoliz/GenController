@@ -1,12 +1,8 @@
-﻿using ManiaLabs;
-using ManiaLabs.Helpers;
-using ManiaLabs.Models;
-using ManiaLabs.Portable.Base;
+﻿using Setting = ManiaLabs.Models.Setting;
+using Common;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IotHello.Portable.Models
@@ -72,7 +68,7 @@ namespace IotHello.Portable.Models
         {
             var storage = Setting.GetCompositeKey("Schedule");
             Periods.AddRange(storage.Select(GenPeriod.Deserialize));
-            Platform.Get<IMeasurement>().LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
+            Measurement.LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
         }
 
         /// <summary>
@@ -250,14 +246,19 @@ namespace IotHello.Portable.Models
         private DateTime LastTick = DateTime.MinValue;
         private DateTime? StartedConfirmingAt = null;
 
-        private void Log(string what) =>  ManiaLabs.Platform.TryGet<IMeasurement>()?.LogEvent(what);
+        private void Log(string what) =>  Measurement?.LogEvent(what);
 
         /// <summary>
         /// Service Locator for how to get the current time.
         /// </summary>
         private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
 
-        class ScheduleItem: IComparable<ScheduleItem>, IComparable<TimeSpan>
+        /// <summary>
+        /// Service Locator for how to get measurement and logging.
+        /// </summary>
+        private IMeasurement Measurement => ManiaLabs.Platform.TryGet<IMeasurement>();
+
+        class ScheduleItem : IComparable<ScheduleItem>, IComparable<TimeSpan>
         {
             public TimeSpan Time;
             public GenStatus DesiredState;
