@@ -1,5 +1,4 @@
-﻿using Setting = ManiaLabs.Models.Setting;
-using Common;
+﻿using Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +23,11 @@ namespace IotHello.Portable.Models
         {
             get
             {
-                return Boolean.Parse(Setting.GetKeyValueWithDefault("Enabled", "True"));
+                return Boolean.Parse(Settings.GetKeyValueWithDefault("Enabled", "True"));
             }
             set
             {
-                Setting.SetKey("Enabled", value.ToString());
+                Settings.SetKey("Enabled", value.ToString());
             }
         }
         //Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
@@ -66,7 +65,7 @@ namespace IotHello.Portable.Models
         /// </summary>
         public void Load()
         {
-            var storage = Setting.GetCompositeKey("Schedule");
+            var storage = Settings.GetCompositeKey("Schedule");
             Periods.AddRange(storage.Select(GenPeriod.Deserialize));
             Measurement.LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
         }
@@ -195,7 +194,7 @@ namespace IotHello.Portable.Models
             Periods.Clear();
             Periods.AddRange(proposed);
 
-            Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
+            Settings.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
         }
 
         /// <summary>
@@ -226,7 +225,7 @@ namespace IotHello.Portable.Models
         public void Remove(GenPeriod old)
         {
             Periods.Remove(old);
-            Setting.SetCompositeKey("Schedule", Periods.Select(GenPeriod.Serialize));
+            Settings.SetCompositeKey("Schedule", Periods.Select(GenPeriod.Serialize));
         }
 
         /// <summary>
@@ -251,12 +250,14 @@ namespace IotHello.Portable.Models
         /// <summary>
         /// Service Locator for how to get the current time.
         /// </summary>
-        private IClock Clock => ManiaLabs.Platform.TryGet<IClock>();
+        private IClock Clock => Service.TryGet<IClock>();
 
         /// <summary>
         /// Service Locator for how to get measurement and logging.
         /// </summary>
-        private ILogger Measurement => ManiaLabs.Platform.TryGet<ILogger>();
+        private ILogger Measurement => Service.TryGet<ILogger>();
+
+        private ISettings Settings => Service.Get<ISettings>();
 
         class ScheduleItem : IComparable<ScheduleItem>, IComparable<TimeSpan>
         {

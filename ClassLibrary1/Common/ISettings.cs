@@ -1,0 +1,16 @@
+﻿using System.Collections.Generic;
+
+namespace Common
+{
+    /// <summary>
+    /// Defines a platform-dependent service to retrieve settings
+    /// </summary>
+    interface ISettings
+    {
+        void SetKey(string key, string value);
+        string GetKey(string key);
+        string GetKeyValueWithDefault(string key, string defaultvalue);
+        IEnumerable<string> GetCompositeKey(string key);
+        void SetCompositeKey(string key, IEnumerable<string> values);
+    }
+}
