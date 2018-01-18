@@ -58,6 +58,7 @@
     <Compile Include="ScheduleTest.cs" />
     <Compile Include="TestController.cs" />
     <Compile Include="GenPeriodTest.cs" />
+    <Compile Include="TestSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\IotHello.Portable.csproj">

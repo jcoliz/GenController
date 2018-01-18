@@ -22,6 +22,7 @@ namespace IotHello.Portable.Tests
         {
             new Models.Schedule();
             Service.Set<IClock>(Clock = new TestClock());
+            Service.Set<ISettings>(new TestSettings());
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9),0.0));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14),0.0));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19),0.0));
