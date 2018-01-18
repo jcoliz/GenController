@@ -48,6 +48,7 @@
     <Compile Include="Common\Platform.cs" />
     <Compile Include="Common\RangeObservableCollection.cs" />
     <Compile Include="Common\FileSystemLogger.cs" />
+    <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />
     <Compile Include="Models\IController.cs" />
@@ -59,12 +60,6 @@
     <Compile Include="ViewModels\LogsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
-      <Project>{689e267b-b673-46e3-97f9-841fec302a39}</Project>
-      <Name>ManiaLabs.Portable.Base</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

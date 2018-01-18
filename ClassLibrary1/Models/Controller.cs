@@ -147,7 +147,7 @@ namespace IotHello.Portable.Models
         private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromMinutes(2);
         private readonly TimeSpan DelayBetweenStartAndCheck = TimeSpan.FromSeconds(10);
 
-        private IGenerator Generator = ManiaLabs.Platform.TryGet<IGenerator>();
+        private IGenerator Generator = Service.TryGet<IGenerator>();
 
         /// <summary>
         /// Controls the hardware relay pin to close the 'stop' line to the generator

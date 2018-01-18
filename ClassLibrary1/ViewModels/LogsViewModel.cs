@@ -1,11 +1,7 @@
-﻿using ManiaLabs.Helpers;
-using ManiaLabs.Portable.Base;
+﻿using Common;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -36,7 +32,7 @@ namespace IotHello.Portable.ViewModels
             {
                 List<DateTime> result = new List<DateTime>();
 
-                var logs = await SimpleMeasurement.GetLogs();
+                var logs = await FileSystemLogger.GetLogs();
                 foreach (var log in logs)
                 {
                     var text = log.Split('.')[0];
@@ -66,7 +62,7 @@ namespace IotHello.Portable.ViewModels
             {
                 List<string> result = new List<string>();
 
-                using (var stream = await SimpleMeasurement.OpenLogForRead(session))
+                using (var stream = await FileSystemLogger.OpenLogForRead(session))
                 {
                     var reader = new StreamReader(stream);
                     while (!reader.EndOfStream)

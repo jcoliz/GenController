@@ -1,19 +1,13 @@
-﻿using ManiaLabs.Helpers;
-using ManiaLabs.Portable.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Common;
 
 namespace IotHello.Portable.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public DateTime CurrentTime => ManiaLabs.Platform.TryGet<IClock>()?.Now ?? DateTime.MinValue;
+        public DateTime CurrentTime => Service.TryGet<IClock>()?.Now ?? DateTime.MinValue;
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 

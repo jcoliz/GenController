@@ -1,5 +1,4 @@
-﻿using ManiaLabs.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -63,16 +62,12 @@ namespace Common
             var ignore = Log(new[] { $"FYI: {message}" });
         }
 
-        public void SetLocation(IGeoPoint point, float accuracy)
-        {
-            var ignore = Log(new[] { $"Location: {point?.Latitude ?? '-'},{point?.Longitude ?? '-'}" });
-        }
-
         public void StartSession()
         {
             var ignore = Log(new[] { "Started" });
         }
 
+#pragma warning disable 1998
         /// <summary>
         /// Retrieve listing of all the log files
         /// </summary>
@@ -93,6 +88,7 @@ namespace Common
             var path = HomeDirectory + "Logs/" + dt.ToBinary().ToString("x") + ".txt";
             return File.OpenRead(path);
         }
+#pragma warning restore 1998
 
         /// <summary>
         /// Filename of the session log file
@@ -162,9 +158,9 @@ namespace Common
         /// If there IS a platform clock use that for time, else just pick up regular
         /// system time.
         /// </summary>
-        private DateTime Time => ManiaLabs.Platform.TryGet<ManiaLabs.Portable.Base.IClock>()?.Now ?? DateTime.Now;
+        private DateTime Time => Service.TryGet<IClock>()?.Now ?? DateTime.Now;
 
-        private string Voltage => ManiaLabs.Platform.TryGet<IVoltage>()?.Voltage.ToString("0.0") + "V " ?? string.Empty;
+        private string Voltage => Service.TryGet<IVoltage>()?.Voltage.ToString("0.0") + "V " ?? string.Empty;
     }
 
     /// <summary>
@@ -177,5 +173,4 @@ namespace Common
         {
         }
     }
-
 }
