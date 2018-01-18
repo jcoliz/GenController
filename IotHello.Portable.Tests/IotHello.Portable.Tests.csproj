@@ -64,10 +64,6 @@
       <Project>{29e03921-5641-4845-b02f-f1071bcc4408}</Project>
       <Name>IotHello.Portable</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
-      <Project>{689e267b-b673-46e3-97f9-841fec302a39}</Project>
-      <Name>ManiaLabs.Portable.Base</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

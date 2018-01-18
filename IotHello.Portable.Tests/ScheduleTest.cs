@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using IotHello.Portable.Models;
-using ManiaLabs.Portable.Base;
+using Common;
 
 // Not needed to await here in the tests, because the TestController executes generator control commands
 // immediately.
@@ -21,10 +21,10 @@ namespace IotHello.Portable.Tests
         public void SetUp()
         {
             new Models.Schedule();
-            ManiaLabs.Platform.Set<IClock>(Clock = new TestClock());
-            Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
-            Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14)));
-            Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19)));
+            Service.Set<IClock>(Clock = new TestClock());
+            Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9),0.0));
+            Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14),0.0));
+            Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19),0.0));
             Models.Controller.Current = Controller = new TestController() { Status = Models.GenStatus.Invalid };
         }
 

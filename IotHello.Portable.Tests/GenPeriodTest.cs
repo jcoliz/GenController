@@ -12,7 +12,7 @@ namespace IotHello.Portable.Tests
         [TestMethod]
         public void Deserialize()
         {
-            var expected = new GenPeriod(TimeSpan.FromHours(2.5), TimeSpan.FromHours(21.25));
+            var expected = new GenPeriod(TimeSpan.FromHours(2.5), TimeSpan.FromHours(21.25),0.0);
 
             var serialize = expected.SerializeKey;
 
@@ -31,7 +31,7 @@ namespace IotHello.Portable.Tests
             var ending = TimeSpan.FromHours(22);
             while (current < ending)
             {
-                expected.Add(new Portable.Models.GenPeriod(current, current + period));
+                expected.Add(new Portable.Models.GenPeriod(current, current + period,0.0));
                 current += period + period;
             }
 

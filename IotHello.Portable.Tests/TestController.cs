@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using IotHello.Portable.Models;
 
@@ -23,6 +20,8 @@ namespace IotHello.Portable.Tests
         public GenStatus Status { get; set; } = GenStatus.Invalid;
 
         public bool RunSignal { get; set; } = false;
+
+        public double Voltage => throw new NotImplementedException();
 
         public async Task Start()
         {
