@@ -27,7 +27,7 @@ namespace IotHello.Portable.Models
             {
                 _Status = value;
                 DoPropertyChanged(nameof(Status));
-                Measurement.LogEvent(_Status.ToString());
+                Logger.LogEvent(_Status.ToString());
 
                 if (Generator != null)
                 {
@@ -147,8 +147,6 @@ namespace IotHello.Portable.Models
         private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromMinutes(2);
         private readonly TimeSpan DelayBetweenStartAndCheck = TimeSpan.FromSeconds(10);
 
-        private IGenerator Generator = Service.TryGet<IGenerator>();
-
         /// <summary>
         /// Controls the hardware relay pin to close the 'stop' line to the generator
         /// </summary>
@@ -249,8 +247,12 @@ namespace IotHello.Portable.Models
         #endregion
 
         private SynchronizationContext Context = SynchronizationContext.Current;
-        private ILogger Measurement => Service.Get<ILogger>();
+
+        // Service Locator services
+
+        private ILogger Logger => Service.Get<ILogger>();
         private IClock Clock => Service.TryGet<IClock>();
+        private IGenerator Generator = Service.TryGet<IGenerator>();
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
