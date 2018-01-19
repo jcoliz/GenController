@@ -1,11 +1,5 @@
-﻿using ManiaLabs.Portable.Base.ValueConverters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
 
 namespace IotHello.Uwp.Converters
 {
@@ -17,7 +11,7 @@ namespace IotHello.Uwp.Converters
         }
     }
 
-    public class DefaultVisibleXaml: Platform.XamlValueConverter<DefaultToVisibilityConverter>
+    public class DefaultVisibleXaml: XamlValueConverter<DefaultToVisibilityConverter>
     {
     }
 
@@ -29,7 +23,7 @@ namespace IotHello.Uwp.Converters
         }
     }
 
-    public class DefaultHiddenXaml : Platform.XamlValueConverter<DefaultToHiddenConverter>
+    public class DefaultHiddenXaml : XamlValueConverter<DefaultToHiddenConverter>
     {
     }
 

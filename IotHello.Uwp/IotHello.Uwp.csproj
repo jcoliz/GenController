@@ -101,11 +101,12 @@
     <Compile Include="Converters\BooleanBrushConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DefaultConverter.cs" />
+    <Compile Include="Converters\IBaseValueConverter.cs" />
     <Compile Include="Platform\HardwareClock.cs" />
     <Compile Include="Platform\HardwareGenerator.cs" />
     <Compile Include="Platform\MessageDialog.cs" />
-    <Compile Include="Platform\WindowsSettingsManager.cs" />
-    <Compile Include="Platform\XamlValueConverter.cs" />
+    <Compile Include="Platform\WindowsSettings.cs" />
+    <Compile Include="Converters\XamlValueConverter.cs" />
     <Compile Include="Screens\EditSchedule.xaml.cs">
       <DependentUpon>EditSchedule.xaml</DependentUpon>
     </Compile>
@@ -121,7 +122,6 @@
     <Compile Include="Screens\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Platform\Rtc3231.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,14 +182,6 @@
     <ProjectReference Include="..\ClassLibrary1\IotHello.Portable.csproj">
       <Project>{29e03921-5641-4845-b02f-f1071bcc4408}</Project>
       <Name>IotHello.Portable</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ManiaLabs.Common\ManiaLabs.NET\ManiaLabs.NET.csproj">
-      <Project>{622af662-21e6-4a0f-825d-882b056470b0}</Project>
-      <Name>ManiaLabs.NET</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ManiaLabs.Common\ManiaLabs.Portable.Base\ManiaLabs.Portable.Base.csproj">
-      <Project>{689e267b-b673-46e3-97f9-841fec302a39}</Project>
-      <Name>ManiaLabs.Portable.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

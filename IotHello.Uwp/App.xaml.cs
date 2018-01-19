@@ -1,30 +1,22 @@
-﻿using ManiaLabs.Models;
-using ManiaLabs.Portable.Base;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using Common;
 
 namespace IotHello.Uwp
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application, ManiaLabs.IApp
+    sealed partial class App : Application
     {
         /// <summary>
         /// Timer to run scheduled program logic and UI updates
@@ -75,31 +67,7 @@ namespace IotHello.Uwp
                 return result;
             }
         }
-        public IMeasurement Measurement => ManiaLabs.Platform.Get<IMeasurement>();
-
-        public string DeviceUniqueID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string PurchasesInfo
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Launches
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public ILogger Logger => Service.TryGet<ILogger>();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -115,7 +83,7 @@ namespace IotHello.Uwp
 
         private void App_Resuming(object sender, object e)
         {
-            ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Resuming");
+            Logger?.LogInfo("Resuming");
         }
 
         /// <summary>
@@ -144,46 +112,38 @@ namespace IotHello.Uwp
                         var hc = await Platform.HardwareClock.Open();
                         hc.Tick();
 
-                        ManiaLabs.Platform.Set<IClock>(hc);
+                        Service.Set<IClock>(hc);
                         HardwareClock = hc;
-                        ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Hardware clock started.");
+                        Logger?.LogInfo("Hardware clock started.");
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // Nevermind, no hardware clock available
-                        ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Hardware clock failed, using built-in clock.");
-                        ManiaLabs.Platform.Set<IClock>(new ManiaLabs.NET.Clock());
+                        Logger?.LogInfo("Hardware clock failed, using built-in clock.");
+                        Service.Set<IClock>(new Common.Clock());
                     }
                 });
 
-                ManiaLabs.Platform.Set<ManiaLabs.IApp>(this);
-                ManiaLabs.Platform.Set<IPlatformFilesystem>(new ManiaLabs.DotNetPlatform.DotNetFileSystem(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
-                ManiaLabs.Platform.Set<IMeasurement>(new Portable.Common.Logger(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
-                ManiaLabs.Platform.Get<IMeasurement>().StartSession();
-                ManiaLabs.Platform.Get<IMeasurement>().LogInfo($"{Title} {Version}");
-                ManiaLabs.Platform.Set<IPlatformSettingsManager>(new Platform.WindowsSettingsManager());
+                Service.Set<ILogger>(new Common.FileSystemLogger(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
+                Logger.StartSession();
+                Logger.LogInfo($"{Title} {Version}");
+                Service.Set<ISettings>(new Platform.WindowsSettings());
 
                 Task.Run(async () => 
                 {
                     try
                     {
                         var gen = await Platform.HardwareGenerator.Open();
-                        ManiaLabs.Platform.Set<Portable.Models.IGenerator>(gen);
-                        ManiaLabs.Platform.Set<Portable.Common.IVoltage>(gen);
+                        Service.Set<Portable.Models.IGenerator>(gen);
+                        Service.Set<IVoltage>(gen);
                     }
                     catch (Exception)
                     {
                         var mg = new Portable.Models.MockGenerator();
-                        ManiaLabs.Platform.Set<Portable.Models.IGenerator>(mg);
-                        ManiaLabs.Platform.Set<Portable.Common.IVoltage>(mg);
+                        Service.Set<Portable.Models.IGenerator>(mg);
+                        Service.Set<IVoltage>(mg);
                     }
                 });
-
-                /* This is the REAL schedule
-                Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9)));
-                Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14)));
-                Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19)));
-                */
 
                 Portable.Models.Schedule.Current.Load();
 
@@ -219,14 +179,14 @@ namespace IotHello.Uwp
                             }
                             catch (Exception ex)
                             {
-                                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP3", ex);
+                                Logger?.Error("AP3", ex);
                             }
                         });
 
             }
             catch (Exception ex)
             {
-                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP2", ex);
+                Logger?.Error("AP2", ex);
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -285,7 +245,7 @@ namespace IotHello.Uwp
             }
             catch (Exception ex)
             {
-                ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP1", ex);
+                Service.TryGet<ILogger>()?.Error("AP1", ex);
             }
         }
 
@@ -296,7 +256,7 @@ namespace IotHello.Uwp
         /// <param name="e">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            ManiaLabs.Platform.TryGet<IMeasurement>()?.Error("AP4", e.Exception);
+            Logger?.Error("AP4", e.Exception);
         }
 
         /// <summary>
@@ -310,29 +270,14 @@ namespace IotHello.Uwp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-            ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Suspending");
+            Logger?.LogInfo("Suspending");
             deferral.Complete();
         }
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            ManiaLabs.Platform.TryGet<IMeasurement>()?.LogInfo("Activated");
+            Logger?.LogInfo("Activated");
             base.OnActivated(args);
-        }
-
-        public void GoBack()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetResourceString(string key)
-        {
-            return key;
-        }
-
-        public Task<Stream> OpenStreamForReadFromApplicationAsync(string Pathname)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using IotHello.Portable.ViewModels;
+﻿using Common;
+using IotHello.Portable.ViewModels;
 using IotHello.Uwp.Platform;
 using System;
 using System.Linq;
@@ -25,15 +26,15 @@ namespace IotHello.Uwp.Screens
             catch (Exception ex)
             {
                 string code = "LX0";
-                App.Current.Measurement.Error(code, ex);
-                VM_ExceptionRaised(this, new ManiaLabs.Portable.Base.ExceptionArgs(ex, code));
+                Logger?.Error(code, ex);
+                VM_ExceptionRaised(this, new ViewModelBase.ExceptionArgs(ex, code));
             }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            App.Current.Measurement.LogEvent("Screen.Logs");
+            Logger?.LogEvent("Screen.Logs");
             var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => 
             {
                 await VM.Load();
@@ -49,12 +50,12 @@ namespace IotHello.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private void VM_ExceptionRaised(object sender, ManiaLabs.Portable.Base.ExceptionArgs e)
+        private void VM_ExceptionRaised(object sender, Common.ViewModelBase.ExceptionArgs e)
         {
             string message = e.ex.Message;
             if (!string.IsNullOrEmpty(e.code))
                 message += $" (Code {e.code})";
-            var ignore = new MessageDialog(message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
+            var ignore = new MessageDialog(message, "SORRY").ShowAsync();
         }
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -77,5 +78,7 @@ namespace IotHello.Uwp.Screens
                 lv.ScrollIntoView(e.AddedItems.First());
             }
         }
+
+        private ILogger Logger => Service.TryGet<ILogger>();
     }
 }

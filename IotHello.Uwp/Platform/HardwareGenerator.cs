@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace IotHello.Uwp.Platform
 {
     /// <summary>
-    /// Controls the actual generator hooked up to real hardware
+    /// Controls the actual generator hooked up to real hardware, using a Pimoroni Automation Hat
     /// </summary>
     public class HardwareGenerator : Portable.Models.IGenerator, IDisposable
     {

@@ -1,4 +1,5 @@
-﻿using IotHello.Uwp.Platform;
+﻿using Common;
+using IotHello.Uwp.Platform;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,8 +20,8 @@ namespace IotHello.Uwp.Screens
             catch (Exception ex)
             {
                 string code = "EX0";
-                App.Current.Measurement.Error(code, ex);
-                VM_ExceptionRaised(this, new ManiaLabs.Portable.Base.ExceptionArgs(ex, code));
+                Logger?.Error(code, ex);
+                VM_ExceptionRaised(this, new ViewModelBase.ExceptionArgs(ex, code));
             }
         }
 
@@ -28,7 +29,7 @@ namespace IotHello.Uwp.Screens
         {
             base.OnNavigatedTo(e);
             VM.ExceptionRaised += VM_ExceptionRaised;
-            App.Current.Measurement.LogEvent("Screen.Settings");
+            Logger?.LogEvent("Screen.Settings");
             App.Current.Tick += App_Tick;
         }
 
@@ -39,12 +40,12 @@ namespace IotHello.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private void VM_ExceptionRaised(object sender, ManiaLabs.Portable.Base.ExceptionArgs e)
+        private void VM_ExceptionRaised(object sender, Common.ViewModelBase.ExceptionArgs e)
         {
             string message = e.ex.Message;
             if (!string.IsNullOrEmpty(e.code))
                 message += $" (Code {e.code})";
-            var ignore = new MessageDialog(message, App.Current.GetResourceString("Sorry/Text").ToUpper()).ShowAsync();
+            var ignore = new MessageDialog(message, "SORRY").ShowAsync();
         }
 
         private void App_Tick(object sender, object e)
@@ -59,8 +60,10 @@ namespace IotHello.Uwp.Screens
         private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
             VM.Commit();
-            App.Current.Measurement.LogEvent("Time.Set", $"Time={VM.DT}");
+            Logger?.LogEvent("Time.Set", $"Time={VM.DT}");
             Frame.GoBack();
         }
+
+        private ILogger Logger => Service.TryGet<ILogger>();
     }
 }

@@ -1,12 +1,7 @@
-﻿using ManiaLabs.Portable.Base.ValueConverters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace IotHello.Uwp.Platform
+namespace IotHello.Uwp.Converters
 {
     /// <summary>
     /// Generic class to convert Portable.Base valueconverters into Xaml-specific valueconverters

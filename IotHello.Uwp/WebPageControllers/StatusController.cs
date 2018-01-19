@@ -1,11 +1,8 @@
 ﻿using Catnap.Server;
-using ManiaLabs.Portable.Base;
-using System;
+using Common;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Windows.Web.Http;
 
 namespace IotHello.Uwp.Controllers
@@ -21,7 +18,7 @@ namespace IotHello.Uwp.Controllers
         [Route]
         public HttpResponse Get()
         {
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Status");
+            Service.Get<ILogger>().LogEvent("Web.Status");
 
             var html = new List<string>()
             {
@@ -75,7 +72,7 @@ namespace IotHello.Uwp.Controllers
             });
             var content = string.Join("\r\n", html);
 
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StatusOK",$"Status={VM.Controller.Status}");
+            Service.Get<ILogger>().LogEvent("Web.StatusOK",$"Status={VM.Controller.Status}");
 
             return new HttpResponse(HttpStatusCode.Ok, content);
         }
@@ -84,9 +81,9 @@ namespace IotHello.Uwp.Controllers
         [Route("start")]
         public HttpResponse Start([Body] string postContent)
         {
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Start");
+            Service.Get<ILogger>().LogEvent("Web.Start");
             VM.StartCommand.Execute(this);
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StartOK");
+            Service.Get<ILogger>().LogEvent("Web.StartOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Starting...");
         }
 
@@ -94,27 +91,27 @@ namespace IotHello.Uwp.Controllers
         [Route("stop")]
         public HttpResponse Stop([Body] string postContent)
         {
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Stop");
+            Service.Get<ILogger>().LogEvent("Web.Stop");
             VM.StopCommand.Execute(this);
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.StopOK");
+            Service.Get<ILogger>().LogEvent("Web.StopOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Stopping...");
         }
         [HttpPost]
         [Route("disable")]
         public HttpResponse Disable([Body] string postContent)
         {
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Disable");
+            Service.Get<ILogger>().LogEvent("Web.Disable");
             VM.DisableCommand.Execute(this);
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.DisableOK");
+            Service.Get<ILogger>().LogEvent("Web.DisableOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Disabled.");
         }
         [HttpPost]
         [Route("enable")]
         public HttpResponse Enable([Body] string postContent)
         {
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.Enable");
+            Service.Get<ILogger>().LogEvent("Web.Enable");
             VM.EnableCommand.Execute(this);
-            ManiaLabs.Platform.Get<IMeasurement>().LogEvent("Web.EnableOK");
+            Service.Get<ILogger>().LogEvent("Web.EnableOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Enabled.");
         }
     }

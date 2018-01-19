@@ -1,4 +1,4 @@
-﻿using ManiaLabs.Models;
+﻿using Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,25 +6,15 @@ using Windows.Storage;
 
 namespace IotHello.Uwp.Platform
 {
-    public class WindowsSettingsManager : IPlatformSettingsManager
+    /// <summary>
+    /// Windows platform-specific way to get settings
+    /// </summary>
+    public class WindowsSettings : ISettings
     {
         public IEnumerable<string> GetCompositeKey(string name)
         {
             List<string> result = new List<string>();
 
-            /*
-            Windows.Storage.ApplicationDataCompositeValue composite = 
-               (Windows.Storage.ApplicationDataCompositeValue)localSettings.Values["exampleCompositeSetting"];
-
-            if (composite == null)
-            {
-               // No data
-            }
-            else
-            {
-               // Access data in composite["intVal"] and composite["strVal"]
-            }
-            */
             var ApplicationSettings = ApplicationData.Current.LocalSettings.Values;
             if (ApplicationSettings.ContainsKey(name))
             {
@@ -42,30 +32,27 @@ namespace IotHello.Uwp.Platform
             return result;
         }
 
-        public string GetKeyValue(string name)
+        public string GetKey(string key)
         {
             var ApplicationSettings = ApplicationData.Current.LocalSettings.Values;
 
             string result = null;
 
-            if (ApplicationSettings.Keys.Contains(name))
+            if (ApplicationSettings.Keys.Contains(key))
             {
-                result = ApplicationSettings[name] as string;
+                result = ApplicationSettings[key] as string;
             }
 
             return result;
         }
 
+        public string GetKeyValueWithDefault(string key, string defaultvalue)
+        {
+            return GetKey(key) ?? defaultvalue;
+        }
+
         public void SetCompositeKey(string name, IEnumerable<string> values)
         {
-            /*
-            Windows.Storage.ApplicationDataCompositeValue composite = 
-                new Windows.Storage.ApplicationDataCompositeValue();
-            composite["intVal"] = 1;
-            composite["strVal"] = "string";
-
-            localSettings.Values["exampleCompositeSetting"] = composite;
-            */
             ApplicationDataCompositeValue composite =
                 new ApplicationDataCompositeValue();
 

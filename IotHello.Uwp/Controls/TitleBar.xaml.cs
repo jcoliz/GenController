@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace IotHello.Uwp.Controls
 {
+    /// <summary>
+    /// A common title bar control so all the screens look the same
+    /// </summary>
     public sealed partial class TitleBar : UserControl
     {
         public Portable.Models.Controller Controller => Portable.Models.Controller.Current as Portable.Models.Controller;
@@ -36,13 +40,14 @@ namespace IotHello.Uwp.Controls
         {
             get
             {
-                var app = ManiaLabs.Platform.Get<ManiaLabs.IApp>();
+                throw new NotImplementedException("Need a way to get the app title!");
+                //var app = Service.Get<ManiaLabs.IApp>();
                 var pagetitle = string.Empty;
                 if (!string.IsNullOrEmpty(Title))
                 {
                     pagetitle = $": {Title}";
                 }
-                return $"{app.Title} {app.Version}{pagetitle}";
+                //return $"{app.Title} {app.Version}{pagetitle}";
             }
         }
 

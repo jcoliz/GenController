@@ -1,5 +1,5 @@
 ﻿using Catnap.Server;
-using ManiaLabs.Portable.Base;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +17,7 @@ namespace IotHello.Uwp.Controllers
         [Route]
         public async Task<HttpResponse> Get()
         {
-            await ManiaLabs.Platform.Get<IMeasurement>().LogEventAsync("Web.Logs");
+            await Service.Get<ILogger>().LogEventAsync("Web.Logs");
 
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
@@ -37,7 +37,7 @@ namespace IotHello.Uwp.Controllers
             htmlBuilder.AppendLine("<body>");
             htmlBuilder.AppendLine("<h1>Logs</h1>");
             htmlBuilder.AppendLine("<ul>");
-            var logs = await SimpleMeasurement.GetLogs();
+            var logs = await FileSystemLogger.GetLogs();
             var sorted = logs.ToList();
             sorted.Sort((x, y) => y.CompareTo(x));
 
@@ -64,7 +64,7 @@ namespace IotHello.Uwp.Controllers
             long binary = Convert.ToInt64(param1, 16);
             DateTime dt = DateTime.FromBinary(binary);
 
-            await ManiaLabs.Platform.Get<IMeasurement>().LogEventAsync("Web.GetLog", $"Log={dt}");
+            await Service.Get<ILogger>().LogEventAsync("Web.GetLog", $"Log={dt}");
 
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
@@ -73,7 +73,7 @@ namespace IotHello.Uwp.Controllers
             htmlBuilder.AppendLine("<body>");
             htmlBuilder.AppendLine($"<h1>{dt}</h1>");
 
-            using (var stream = await SimpleMeasurement.OpenLogForRead(dt))
+            using (var stream = await FileSystemLogger.OpenLogForRead(dt))
             {
                 var reader = new StreamReader(stream);
                 while (!reader.EndOfStream)

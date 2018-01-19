@@ -1,11 +1,5 @@
-﻿using ManiaLabs.Portable.Base.ValueConverters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Windows.UI;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
 namespace IotHello.Uwp.Converters
@@ -20,7 +14,7 @@ namespace IotHello.Uwp.Converters
         }
     }
 
-    public class BooleanRedBrushConverterXaml : Platform.XamlValueConverter<BooleanRedBrushConverter>
+    public class BooleanRedBrushConverterXaml : XamlValueConverter<BooleanRedBrushConverter>
     {
     }
 }

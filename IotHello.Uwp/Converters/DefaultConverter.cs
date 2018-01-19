@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IotHello.Uwp.Converters
 {
-    public abstract class DefaultConverter : ManiaLabs.Portable.Base.ValueConverters.IBaseValueConverter
+    public abstract class DefaultConverter : IBaseValueConverter
     {
         protected T Convert<T>(T yes, T no, object value, Type targetType, object parameter)
         {

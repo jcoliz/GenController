@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using IotFrosting;
+using Common;
 
 namespace IotHello.Uwp.Platform
 {
-    class HardwareClock : ManiaLabs.Portable.Base.IClock
+    /// <summary>
+    /// Wraps the DS3231 controller in an IClock interface so the rest of the system can use it
+    /// </summary>
+    class HardwareClock : IClock
     {
         private DS3231 ds;
 
