@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Converters;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Common.Converters;
 
 namespace IotHello.Uwp.Converters
 {
@@ -26,5 +27,4 @@ namespace IotHello.Uwp.Converters
     public class DefaultHiddenXaml : XamlValueConverter<DefaultToHiddenConverter>
     {
     }
-
 }

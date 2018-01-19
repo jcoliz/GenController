@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using IotFrosting.Pimoroni;
+using System;
 using System.Threading.Tasks;
 
 namespace IotHello.Uwp.Platform
@@ -103,7 +101,7 @@ namespace IotHello.Uwp.Platform
         public static async Task<HardwareGenerator> Open()
         {
             var result = new HardwareGenerator();
-            result.Hat = await IotFrosting.Pimoroni.AutomationHat.Open();
+            result.Hat = await AutomationHat.Open();
 
             // These lights are SO bright! Tone them down a bit
             result.Hat.Light.Power.Value = 0.2;
@@ -124,7 +122,7 @@ namespace IotHello.Uwp.Platform
             ((IDisposable)Hat).Dispose();
         }
 
-        private IotFrosting.Pimoroni.AutomationHat Hat;
+        private AutomationHat Hat;
 
     }
 }

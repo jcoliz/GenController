@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IotHello.Uwp.Converters
+namespace Common.Converters
 {
     public abstract class DefaultConverter : IBaseValueConverter
     {

@@ -100,8 +100,6 @@
     </Compile>
     <Compile Include="Converters\BooleanBrushConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\DefaultConverter.cs" />
-    <Compile Include="Converters\IBaseValueConverter.cs" />
     <Compile Include="Platform\HardwareClock.cs" />
     <Compile Include="Platform\HardwareGenerator.cs" />
     <Compile Include="Platform\MessageDialog.cs" />
@@ -134,7 +132,6 @@
     <Content Include="Assets\ic_appicon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Platform\Platform TODO.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

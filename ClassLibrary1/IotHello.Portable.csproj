@@ -39,9 +39,12 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DateFormatConverter.cs" />
+    <Compile Include="Common\DefaultConverter.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DotNetClock.cs" />
     <Compile Include="Common\IApplicationInfo.cs" />
+    <Compile Include="Common\IBaseValueConverter.cs" />
     <Compile Include="Common\IClock.cs" />
     <Compile Include="Common\ILogger.cs" />
     <Compile Include="Common\ISettings.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="Common\ServiceLocator.cs" />
     <Compile Include="Common\RangeObservableCollection.cs" />
     <Compile Include="Common\FileSystemLogger.cs" />
+    <Compile Include="Common\TimeSpanFormatConverter.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Models\Controller.cs" />
     <Compile Include="Models\GenPeriod.cs" />

@@ -1,10 +1,11 @@
 ﻿using System;
+using Common.Converters;
 using Windows.UI.Xaml.Data;
 
 namespace IotHello.Uwp.Converters
 {
     /// <summary>
-    /// Generic class to convert Portable.Base valueconverters into Xaml-specific valueconverters
+    /// Generic class to convert Portable valueconverters into Xaml-specific valueconverters
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class XamlValueConverter<T> : IValueConverter where T : IBaseValueConverter, new()

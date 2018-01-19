@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IotHello.Uwp.Converters
+namespace Common.Converters
 {
     /// <summary>
     /// This interface is implemented by value converters which are intended to be used
