@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -19,17 +18,30 @@ namespace IotHello.Uwp
     sealed partial class App : Application, IApplicationInfo
     {
         /// <summary>
+        /// Will be raised every second. Attach anything to this you want updated
+        /// regularly.
+        /// </summary>
+        public event EventHandler<object> Tick;
+
+        /// <summary>
+        /// Reference to the singleton app instance
+        /// </summary>
+        public static new App Current { get; private set; }
+
+        /// <summary>
         /// Timer to run scheduled program logic and UI updates
         /// </summary>
         private DispatcherTimer Timer;
-
-        public event EventHandler<object> Tick;
 
         /// <summary>
         /// High-resolutoin timer only for hardware timing
         /// </summary>
         private ThreadPoolTimer HardwareTimer;
 
+        /// <summary>
+        /// The hardware clock we are using to keep time. Null if we are using
+        /// a software clock
+        /// </summary>
         private Platform.HardwareClock HardwareClock;
 
         /// <summary>
@@ -38,8 +50,6 @@ namespace IotHello.Uwp
         private static IAsyncAction ServerTask;
 
         private Catnap.Server.HttpServer httpServer;
-
-        public static new App Current { get; private set; }
 
         public string Title
         {
@@ -120,26 +130,33 @@ namespace IotHello.Uwp
                     {
                         // Nevermind, no hardware clock available
                         Logger?.LogInfo("Hardware clock failed, using built-in clock.");
-                        Service.Set<IClock>(new Common.Clock());
+
+                        // We'll use a software clock instead
+                        Service.Set<IClock>(new Clock());
                     }
                 });
 
+                // Set up services to be located by other components
                 Service.Set<ILogger>(new Common.FileSystemLogger(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
-                Logger.StartSession();
-                Logger.LogInfo($"{Title} {Version}");
                 Service.Set<ISettings>(new Platform.WindowsSettings());
                 Service.Set<IApplicationInfo>(this);
+
+                Logger.StartSession();
+                Logger.LogInfo($"{Title} {Version}");
 
                 Task.Run(async () => 
                 {
                     try
                     {
+                        // Try to open a connection to the hardware generator line
                         var gen = await Platform.HardwareGenerator.Open();
                         Service.Set<Portable.Models.IGenerator>(gen);
                         Service.Set<IVoltage>(gen);
                     }
                     catch (Exception)
                     {
+                        // If there is no hardware generator controller, we'll mock it up in
+                        // sofware. This is helpful for UI and logic testing.
                         var mg = new Portable.Models.MockGenerator();
                         Service.Set<Portable.Models.IGenerator>(mg);
                         Service.Set<IVoltage>(mg);
@@ -246,7 +263,7 @@ namespace IotHello.Uwp
             }
             catch (Exception ex)
             {
-                Service.TryGet<ILogger>()?.Error("AP1", ex);
+                Logger?.Error("AP1", ex);
             }
         }
 
