@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using IotHello.Portable.Models;
 
-namespace IotHello.Portable.Tests
+namespace IotHello.Portable.Tests.Mocks
 {
     /// <summary>
     /// Mimic the controller interface for use in testing
     /// </summary>
-    public class TestController : IController
+    public class MockController : IController
     {
         public string FullStatus
         {

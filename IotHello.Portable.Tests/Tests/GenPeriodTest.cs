@@ -4,7 +4,7 @@ using IotHello.Portable.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IotHello.Portable.Tests
+namespace IotHello.Portable.Tests.Tests
 {
     [TestClass]
     public class GenPeriodTest

@@ -2,9 +2,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Tests
+namespace IotHello.Portable.Tests.Mocks
 {
-    public class TestClock: IClock
+    public class MockClock: IClock
     {
         public DateTime Now { get; set; }
 

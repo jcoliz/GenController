@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using IotHello.Portable.Models;
+using IotHello.Portable.Tests.Mocks;
 using Common;
 
 // Not needed to await here in the tests, because the TestController executes generator control commands
@@ -9,24 +9,24 @@ using Common;
 #pragma warning disable 1998
 #pragma warning disable 4014
 
-namespace IotHello.Portable.Tests
+namespace IotHello.Portable.Tests.Tests
 {
     [TestClass]
     public class ScheduleTest
     {
-        private TestClock Clock { get; set; }
-        private TestController Controller;
+        private MockClock Clock { get; set; }
+        private MockController Controller;
 
         [TestInitialize]
         public void SetUp()
         {
             new Models.Schedule();
-            Service.Set<IClock>(Clock = new TestClock());
-            Service.Set<ISettings>(new TestSettings());
+            Service.Set<IClock>(Clock = new MockClock());
+            Service.Set<ISettings>(new MockSettings());
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9),0.0));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14),0.0));
             Models.Schedule.Current.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19),0.0));
-            Models.Controller.Current = Controller = new TestController() { Status = Models.GenStatus.Invalid };
+            Models.Controller.Current = Controller = new MockController() { Status = Models.GenStatus.Invalid };
         }
 
         [TestMethod]

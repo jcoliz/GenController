@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 
-namespace IotHello.Portable.Tests
+namespace IotHello.Portable.Tests.Mocks
 {
-    public class TestSettings : ISettings
+    public class MockSettings : ISettings
     {
         Dictionary<string, object> Storage = new Dictionary<string, object>();
 
