@@ -23,6 +23,7 @@ namespace GenController.Portable.Tests.Mocks
 
         public double Voltage => throw new NotImplementedException();
 
+#pragma warning disable 1998
         public async Task Start()
         {
             Status = GenStatus.Confirming;
@@ -32,6 +33,7 @@ namespace GenController.Portable.Tests.Mocks
         {
             Status = GenStatus.Stopped;
         }
+#pragma warning restore 1998
 
         public void Confirm()
         {

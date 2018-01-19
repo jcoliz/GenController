@@ -8,9 +8,11 @@ namespace GenController.Portable.Tests.Mocks
     {
         public DateTime Now { get; set; }
 
+#pragma warning disable 1998
         public async Task Delay(TimeSpan t)
         {
             Now += t;
         }
+#pragma warning restore 1998
     }
 }
