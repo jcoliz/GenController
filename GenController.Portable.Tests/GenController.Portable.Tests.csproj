@@ -61,7 +61,7 @@
     <Compile Include="Mocks\MockSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\IotHello.Portable.csproj">
+    <ProjectReference Include="..\GenController.Portable\GenController.Portable.csproj">
       <Project>{29e03921-5641-4845-b02f-f1071bcc4408}</Project>
       <Name>IotHello.Portable</Name>
     </ProjectReference>

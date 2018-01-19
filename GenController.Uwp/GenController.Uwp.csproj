@@ -168,7 +168,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\automation-hat-ms-iot\IotFrosting\IotFrosting.csproj">
+    <ProjectReference Include="..\IotFrosting\IotFrosting\IotFrosting.csproj">
       <Project>{0bab3bd0-a6fd-4fb8-9f70-248435139630}</Project>
       <Name>IotFrosting</Name>
     </ProjectReference>
@@ -176,7 +176,7 @@
       <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
       <Name>Catnap.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClassLibrary1\IotHello.Portable.csproj">
+    <ProjectReference Include="..\GenController.Portable\GenController.Portable.csproj">
       <Project>{29e03921-5641-4845-b02f-f1071bcc4408}</Project>
       <Name>IotHello.Portable</Name>
     </ProjectReference>
