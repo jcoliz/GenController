@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Common;
 
-namespace IotHello.Portable.ViewModels
+namespace GenController.Portable.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {

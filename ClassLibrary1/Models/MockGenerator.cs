@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Models
+namespace GenController.Portable.Models
 {
     /// <summary>
     /// Use this if you don't have generator hardware hooked up

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using Windows.Web.Http;
 
-namespace IotHello.Uwp.Controllers
+namespace GenController.Uwp.Controllers
 {
     [RoutePrefix("status")]
     class StatusController : Controller

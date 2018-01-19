@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace IotHello.Portable.ViewModels
+namespace GenController.Portable.ViewModels
 {
     /// <summary>
     /// This makes the logs from SimpleMeasurement instrumentation visible

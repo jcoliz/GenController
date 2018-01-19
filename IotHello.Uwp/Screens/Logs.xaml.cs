@@ -1,6 +1,6 @@
 ﻿using Common;
-using IotHello.Portable.ViewModels;
-using IotHello.Uwp.Platform;
+using GenController.Portable.ViewModels;
+using GenController.Uwp.Platform;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace IotHello.Uwp.Screens
+namespace GenController.Uwp.Screens
 {
     /// <summary>
     /// Log viewer screen

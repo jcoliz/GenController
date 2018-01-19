@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Models
+namespace GenController.Portable.Models
 {
     /// <summary>
     /// Describes a period of time during the day when the generator should be on

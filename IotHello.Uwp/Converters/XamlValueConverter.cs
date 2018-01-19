@@ -2,7 +2,7 @@
 using Common.Converters;
 using Windows.UI.Xaml.Data;
 
-namespace IotHello.Uwp.Converters
+namespace GenController.Uwp.Converters
 {
     /// <summary>
     /// Generic class to convert Portable valueconverters into Xaml-specific valueconverters

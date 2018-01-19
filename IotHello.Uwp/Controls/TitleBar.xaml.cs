@@ -3,7 +3,7 @@ using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace IotHello.Uwp.Controls
+namespace GenController.Uwp.Controls
 {
     /// <summary>
     /// A common title bar control so all the screens look the same

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Models
+namespace GenController.Portable.Models
 {
     /// <summary>
     /// The overall schedule of the generator, containing all the schedule blocks

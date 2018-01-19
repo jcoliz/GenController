@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.Storage;
 
-namespace IotHello.Uwp.Platform
+namespace GenController.Uwp.Platform
 {
     /// <summary>
     /// Windows platform-specific way to get settings

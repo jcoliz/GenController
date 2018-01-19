@@ -1,13 +1,13 @@
 ﻿<Page
-    x:Class="IotHello.Uwp.MainPage"
+    x:Class="GenController.Uwp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:IotHello.Uwp"
+    xmlns:local="using:GenController.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pm="using:IotHello.Portable.Models"
-    xmlns:lc="using:IotHello.Uwp.Converters"
-    xmlns:lctrl="using:IotHello.Uwp.Controls"
+    xmlns:pm="using:GenController.Portable.Models"
+    xmlns:lc="using:GenController.Uwp.Converters"
+    xmlns:lctrl="using:GenController.Uwp.Controls"
     xmlns:s="using:System"
     mc:Ignorable="d">
 

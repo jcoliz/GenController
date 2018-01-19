@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 
-namespace IotHello.Portable.Tests.Mocks
+namespace GenController.Portable.Tests.Mocks
 {
     public class MockSettings : ISettings
     {

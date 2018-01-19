@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IotHello.Portable.Models;
+using GenController.Portable.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IotHello.Portable.Tests.Tests
+namespace GenController.Portable.Tests.Tests
 {
     [TestClass]
     public class GenPeriodTest

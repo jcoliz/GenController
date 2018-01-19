@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace IotHello.Uwp.Platform
+namespace GenController.Uwp.Platform
 {
     /// <summary>
     /// Controls the actual generator hooked up to real hardware, using a Pimoroni Automation Hat

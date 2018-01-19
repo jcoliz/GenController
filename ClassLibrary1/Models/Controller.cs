@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Models
+namespace GenController.Portable.Models
 {
     /// <summary>
     /// Controls the hardware interface to the generator

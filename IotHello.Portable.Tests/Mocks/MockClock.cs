@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace IotHello.Portable.Tests.Mocks
+namespace GenController.Portable.Tests.Mocks
 {
     public class MockClock: IClock
     {

@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Common;
 
-namespace IotHello.Uwp
+namespace GenController.Uwp
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

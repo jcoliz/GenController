@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
-namespace IotHello.Uwp.Platform
+namespace GenController.Uwp.Platform
 {
     /// <summary>
     /// IoT doesn't have Windows.UI.Popups, so we need this

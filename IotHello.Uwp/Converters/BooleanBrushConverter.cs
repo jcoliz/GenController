@@ -3,7 +3,7 @@ using System;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
-namespace IotHello.Uwp.Converters
+namespace GenController.Uwp.Converters
 {
     public class BooleanRedBrushConverter : DefaultConverter
     {

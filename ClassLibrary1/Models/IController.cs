@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace IotHello.Portable.Models
+namespace GenController.Portable.Models
 {
     public interface IController
     {

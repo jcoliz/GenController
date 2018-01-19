@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace IotHello.Uwp.Screens
+namespace GenController.Uwp.Screens
 {
     public sealed partial class EditSchedule : Page
     {

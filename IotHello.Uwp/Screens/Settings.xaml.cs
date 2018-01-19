@@ -1,11 +1,11 @@
 ﻿using Common;
-using IotHello.Uwp.Platform;
+using GenController.Uwp.Platform;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace IotHello.Uwp.Screens
+namespace GenController.Uwp.Screens
 {
     public sealed partial class Settings : Page
     {

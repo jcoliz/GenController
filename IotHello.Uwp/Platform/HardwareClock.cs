@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using IotFrosting;
 using Common;
 
-namespace IotHello.Uwp.Platform
+namespace GenController.Uwp.Platform
 {
     /// <summary>
     /// Wraps the DS3231 controller in an IClock interface so the rest of the system can use it

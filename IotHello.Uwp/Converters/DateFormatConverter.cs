@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.Converters;
 
-namespace IotHello.Uwp.Converters
+namespace GenController.Uwp.Converters
 {
     public class DateFormatConverterXaml : XamlValueConverter<DateFormatConverter>
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IotHello.Portable.Models;
+using GenController.Portable.Models;
 
-namespace IotHello.Portable.Tests.Mocks
+namespace GenController.Portable.Tests.Mocks
 {
     /// <summary>
     /// Mimic the controller interface for use in testing

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 
-namespace IotHello.Uwp.Controllers
+namespace GenController.Uwp.Controllers
 {
     [RoutePrefix("logs")]
     class LogsController : Controller

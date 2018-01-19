@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Input;
 
-namespace IotHello.Portable.ViewModels
+namespace GenController.Portable.ViewModels
 {
     public class EditScheduleViewModel: ViewModelBase
     {

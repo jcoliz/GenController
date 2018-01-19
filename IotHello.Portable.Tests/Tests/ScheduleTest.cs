@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using IotHello.Portable.Tests.Mocks;
+using GenController.Portable.Tests.Mocks;
 using Common;
 
 // Not needed to await here in the tests, because the TestController executes generator control commands
@@ -9,7 +9,7 @@ using Common;
 #pragma warning disable 1998
 #pragma warning disable 4014
 
-namespace IotHello.Portable.Tests.Tests
+namespace GenController.Portable.Tests.Tests
 {
     [TestClass]
     public class ScheduleTest
