@@ -36,7 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="Common\README.md" />
+    <None Include="Models\README.md" />
     <None Include="project.json" />
+    <None Include="README.md" />
+    <None Include="ViewModels\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DateFormatConverter.cs" />
