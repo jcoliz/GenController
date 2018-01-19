@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="IotHello.Uwp.App">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GenController.Uwp.App">
       <uap:VisualElements DisplayName="Gen Controller" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Control your generator" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Gen Controller">
         </uap:DefaultTile>

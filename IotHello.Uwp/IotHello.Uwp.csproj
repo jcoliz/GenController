@@ -7,8 +7,8 @@
     <ProjectGuid>{EDD3B2DF-07B9-42C2-B8C4-11AD27723699}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IotHello.Uwp</RootNamespace>
-    <AssemblyName>IotHello.Uwp</AssemblyName>
+    <RootNamespace>GenController.Uwp</RootNamespace>
+    <AssemblyName>GenController.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>

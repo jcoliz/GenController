@@ -8,8 +8,8 @@
     <ProjectGuid>{29E03921-5641-4845-B02F-F1071BCC4408}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IotHello.Portable</RootNamespace>
-    <AssemblyName>IotHello.Portable</AssemblyName>
+    <RootNamespace>GenController.Portable</RootNamespace>
+    <AssemblyName>GenController.Portable</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
