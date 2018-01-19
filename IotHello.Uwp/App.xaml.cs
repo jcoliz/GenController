@@ -16,7 +16,7 @@ namespace IotHello.Uwp
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    sealed partial class App : Application, IApplicationInfo
     {
         /// <summary>
         /// Timer to run scheduled program logic and UI updates
@@ -128,6 +128,7 @@ namespace IotHello.Uwp
                 Logger.StartSession();
                 Logger.LogInfo($"{Title} {Version}");
                 Service.Set<ISettings>(new Platform.WindowsSettings());
+                Service.Set<IApplicationInfo>(this);
 
                 Task.Run(async () => 
                 {

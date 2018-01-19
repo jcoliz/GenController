@@ -40,14 +40,13 @@ namespace IotHello.Uwp.Controls
         {
             get
             {
-                throw new NotImplementedException("Need a way to get the app title!");
-                //var app = Service.Get<ManiaLabs.IApp>();
+                var app = Service.Get<IApplicationInfo>();
                 var pagetitle = string.Empty;
                 if (!string.IsNullOrEmpty(Title))
                 {
                     pagetitle = $": {Title}";
                 }
-                //return $"{app.Title} {app.Version}{pagetitle}";
+                return $"{app.Title} {app.Version}{pagetitle}";
             }
         }
 
