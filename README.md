@@ -4,14 +4,14 @@ This project is a fullly-programmable custom Auto-Generator Start (AGS) for Onan
 
 # Hardware Requirements 
 
-* Raspberry Pi
-* DS3231 Real-time clock module
-* Pimoroni Automation Hat
+* [Raspberry Pi](https://www.adafruit.com/category/105)
+* [DS3231 Real-time clock module](https://www.adafruit.com/product/3013)
+* [Pimoroni Automation Hat](https://www.adafruit.com/product/3289)
 * Onan generator cables
 
 # Software Requirements
 
-* Windows 10 IoT Core
+* [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot)
 
 # Components
 
@@ -25,5 +25,5 @@ The project is comprised of these pieces:
 
 The project consumes these dependencies:
 
-* IoTFrosting: For control of the Pimoroni Automation Hat and the DS3231 real-time clock.
-* Catnap.Server: To present a web backend
+* [IoTFrosting](https://github.com/jcoliz/Iot-Frosting): For control of the Pimoroni Automation Hat and the DS3231 real-time clock.
+* [Catnap.Server](https://github.com/jcoliz/Catnap.Server): To present a web backend
