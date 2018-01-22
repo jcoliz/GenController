@@ -13,7 +13,7 @@ namespace GenController.Portable.Models
     /// This is built with a latching RF receiver with two lines. A "start" button
     /// line and a "stop" button line. We act when there are changes in those lines.
     /// </remarks>
-    public class RemoteControl
+    public class RemoteControlLogic
     {
     }
 }
