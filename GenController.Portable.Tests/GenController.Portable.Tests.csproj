@@ -59,6 +59,7 @@
     <Compile Include="Mocks\MockController.cs" />
     <Compile Include="Tests\GenPeriodTest.cs" />
     <Compile Include="Mocks\MockSettings.cs" />
+    <Compile Include="Tests\RemoteControlTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenController.Portable\GenController.Portable.csproj">
