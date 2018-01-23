@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,17 @@ namespace GenController.Portable.Models
     /// </remarks>
     public class RemoteControlLogic
     {
+        public RemoteControlLogic()
+        {
+            Remote.LineChanged += Remote_LineChanged;
+        }
+
+        private void Remote_LineChanged(object sender, int line)
+        {
+            if (line == 1 && Remote.IsPressed(1))
+                Controller.Current.Start();
+        }
+
+        private IRemote Remote => Service.Get<IRemote>();
     }
 }

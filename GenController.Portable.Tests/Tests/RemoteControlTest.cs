@@ -10,9 +10,9 @@ namespace IotHello.Portable.Tests.Tests
     [TestClass]
     public class RemoteControlTest
     {
+        private RemoteControlLogic RC;
         private MockController Controller;
         private MockRemoteControlHWI RemoteControlHWI;
-        private RemoteControlLogic RC;
 
         [TestInitialize]
         public void SetUp()
