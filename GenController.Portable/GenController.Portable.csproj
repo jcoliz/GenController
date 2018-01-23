@@ -64,7 +64,6 @@
     <Compile Include="Models\IGenerator.cs" />
     <Compile Include="Models\IRemote.cs" />
     <Compile Include="Models\MockGenerator.cs" />
-    <Compile Include="Models\HardwareRemote.cs" />
     <Compile Include="Models\RemoteControlLogic.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

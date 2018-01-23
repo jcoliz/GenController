@@ -17,15 +17,31 @@ namespace GenController.Portable.Models
     public class RemoteControlLogic
     {
         /// <summary>
-        /// Constructor
+        /// Attach to the underlying hardware
         /// </summary>
         /// <remarks>
-        /// Make sure the IRemote service is set first, and the controller is constructed.
+        /// Make sure the IRemote service is set first, if there is ever going to be one.
         /// </remarks>
-        public RemoteControlLogic()
+        public void AttachToHardware()
         {
-            Remote.LineChanged += Remote_LineChanged;
+            // It's OK if there is no hardware remote
+            if (null != Remote)
+                Remote.LineChanged += Remote_LineChanged;
         }
+
+        /// <summary>
+        /// The current singleton
+        /// </summary>
+        public static RemoteControlLogic Current
+        {
+            get
+            {
+                if (null == _Current)
+                    _Current = new RemoteControlLogic();
+                return _Current;
+            }
+        }
+        static RemoteControlLogic _Current = null;
 
         private void Remote_LineChanged(object sender, int line)
         {
@@ -35,6 +51,6 @@ namespace GenController.Portable.Models
                 Controller.Current.Stop();
         }
 
-        private IRemote Remote => Service.Get<IRemote>();
+        private IRemote Remote => Service.TryGet<IRemote>();
     }
 }

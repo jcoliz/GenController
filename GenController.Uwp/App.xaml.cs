@@ -136,6 +136,20 @@ namespace GenController.Uwp
                     }
                 });
 
+                // Try to open the hardware remote 
+                try
+                {
+                    var remote = new Platform.HardwareRemote();
+                    Service.Set<Portable.Models.IRemote>(remote);
+                    Portable.Models.RemoteControlLogic.Current.AttachToHardware();
+
+                }
+                catch
+                {
+                    // OK if it fails. We just won't get any inputs from the remote
+                }
+
+
                 // Set up services to be located by other components
                 Service.Set<ILogger>(new Common.FileSystemLogger(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 Service.Set<ISettings>(new Platform.WindowsSettings());
