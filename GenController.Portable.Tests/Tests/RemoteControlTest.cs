@@ -39,5 +39,14 @@ namespace IotHello.Portable.Tests.Tests
 
             Assert.AreEqual(GenStatus.Confirming, Controller.Status);
         }
+        [TestMethod]
+        public async Task StopFromRunning()
+        {
+            await Controller.Start();
+            Controller.Confirm();
+            RemoteControlHWI.SetPressed(2, true);
+
+            Assert.AreEqual(GenStatus.Stopped, Controller.Status);
+        }
     }
 }

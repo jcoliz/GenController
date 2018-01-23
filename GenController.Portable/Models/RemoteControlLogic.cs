@@ -16,6 +16,12 @@ namespace GenController.Portable.Models
     /// </remarks>
     public class RemoteControlLogic
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <remarks>
+        /// Make sure the IRemote service is set first, and the controller is constructed.
+        /// </remarks>
         public RemoteControlLogic()
         {
             Remote.LineChanged += Remote_LineChanged;
@@ -25,6 +31,8 @@ namespace GenController.Portable.Models
         {
             if (line == 1 && Remote.IsPressed(1))
                 Controller.Current.Start();
+            else if (line == 2 && Remote.IsPressed(2))
+                Controller.Current.Stop();
         }
 
         private IRemote Remote => Service.Get<IRemote>();
