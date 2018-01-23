@@ -21,7 +21,7 @@ namespace IotHello.Portable.Tests.Tests
             Controller = new MockController();
             GenController.Portable.Models.Controller.Current = Controller;
             RemoteControlHWI = new MockRemoteControlHWI();
-            GenController.Portable.Models.RemoteControlHWI.Current = RemoteControlHWI;
+            Service.Set<IRemote>(RemoteControlHWI);
             RC = new RemoteControlLogic();
         }
 

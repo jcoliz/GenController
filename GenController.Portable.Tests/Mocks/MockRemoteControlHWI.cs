@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GenController.Portable.Tests.Mocks
 {
-    public class MockRemoteControlHWI : IRemoteControlHWI
+    public class MockRemoteControlHWI : IRemote
     {
         public bool IsPressed(int line)
         {
