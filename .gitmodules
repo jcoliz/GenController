@@ -1,6 +1,3 @@
-[submodule "ManiaLabs__"]
-	path = ManiaLabs.Common
-	url = https://jcoliz.visualstudio.com/DefaultCollection/_git/ManiaLabs.Common
 [submodule "automation-hat-ms-iot"]
 	path = IotFrosting
 	url = https://github.com/jcoliz/automation-hat-ms-iot.git
