@@ -1,4 +1,4 @@
-![GenController in action](Resources/GenController.jpg)
+![GenController in action](Resources/GenController-500x.jpg)
 
 # Gen Controller
 
