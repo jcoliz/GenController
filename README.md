@@ -25,6 +25,8 @@ This seems like a great problem to solve with technology. We need a system that 
 
 * [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot)
 
+Perhaps my favorite thing about Windows IoT Core is how little effort is required to have a native version. One of my first rules of embedded development is to have a native version of the system, enabling much faster turns of the coding loop. Here, it's as simple as changing the compiler target to x86, and making sure any hardware-specific code is hidden behind a service locator. This means I can ensure all the logic is working right, quickly debugging if needed, without having to wait for a (slow) deployment to target hardware. Likewise, I can test the business logic in .NET unit tests on the host PC--again much faster than deploying tests and running on the target.
+
 # Software Components
 
 The project is comprised of these pieces:
