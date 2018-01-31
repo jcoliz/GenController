@@ -1,19 +1,31 @@
+![GenController in action](Resources/GenController.jpg)
+
 # Gen Controller
 
-This project is a fullly-programmable custom Auto-Generator Start (AGS) for Onan Generators.
+This project is a fully-programmable custom Auto-Generator Start (AGS) for Onan Generators.
 
-# Hardware Requirements 
+# The Idea
+
+In the summer of 2017, my family travelled around the West Coast in our 32-foot motorhome. One of the great advantages of motorhome travel is that you bring with you all the comforts of home wherever you go, no matter how rustic the surroundings. One of these travelling comforts, the one most germane to this discussion, is electricity. Typically, we will stay in a park or campground with power hookups where you simply plug the motorhome into the giant plug, and use all the electricity you like. 
+
+Sometimes, you'll want to stay somewhere without a convenient power hookup. For these times, the coach comes with a built-in generator capable of providing all the needed power. The downside to this is that the generator makes some noise, leading to restrictions on its use in many organized campgrounds. 
+
+The extreme example is Yosemite NP. The park has no hookups, and restricts generator hours as follows: 7am-9am, 12pm-2pm, and 5pm-7pm. Ideally, we would like to run our generator at all those times, storing all the power we can in our batteries for use at other times of day. However, we are not going to always be around our site at exactly those times. This leaves us with the problem of either restricting our time out enjoying the park, or accepting less electricity use.
+
+This seems like a great problem to solve with technology. We need a system that will automatically turn the generator on and off at precisely the prescribed times of day, whether or not we are around. This way, we can enjoy the park to the fullest and maximize our power generation. Technology FTW!
+
+# Hardware 
 
 * [Raspberry Pi](https://www.adafruit.com/category/105)
 * [DS3231 Real-time clock module](https://www.adafruit.com/product/3013)
 * [Pimoroni Automation Hat](https://www.adafruit.com/product/3289)
-* Onan generator cables
+* [Onan remote control harness](https://www.rvupgradestore.com/Onan-Remote-Control-Panels-Wiring-Harness-p/55-8685.htm)
 
-# Software Requirements
+# Software Environment
 
 * [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot)
 
-# Components
+# Software Components
 
 The project is comprised of these pieces:
 
