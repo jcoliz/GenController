@@ -23,6 +23,7 @@ namespace IotHello.Portable.Tests.Tests
             RemoteControlHWI = new MockRemoteControlHWI();
             Service.Set<IRemote>(RemoteControlHWI);
             RC = new RemoteControlLogic();
+            RC.AttachToHardware();
         }
 
         [TestMethod]

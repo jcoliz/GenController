@@ -13,6 +13,13 @@ namespace GenController.Portable.Models
     /// <remarks>
     /// This is built with a latching RF receiver with two lines. A "start" button
     /// line and a "stop" button line. We act when there are changes in those lines.
+    /// 
+    /// The hardware interface to the remote is found in an IRemote. 
+    /// This should already be set in the service locator becore calling
+    /// AttachToHardware()
+    /// 
+    /// However, if there is no IRemote (perhaps because the app is running
+    /// natively with no actual GPIO), this class will do nothing.
     /// </remarks>
     public class RemoteControlLogic
     {

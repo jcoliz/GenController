@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 namespace GenController.Portable.Models
 {
     /// <summary>
-    /// Controls the hardware interface to the generator
+    /// Provides a logical interface to the generator
     /// </summary>
     /// <remarks>
-    /// Hardware schematic:
-    /// * Start relay
-    /// * Stop relay
-    /// * IsRunning input
+    /// The hardware interface to the generator is found in an IGenerator. 
+    /// This should already be set in the service locator.
+    /// However, if there is no IGenerator (perhaps because the app is running
+    /// natively with no actual GPIO), this class will simply maintain
+    /// what the status would be.
     /// </remarks>
     public class Controller : IController, INotifyPropertyChanged, IVoltage
     {
@@ -248,11 +249,13 @@ namespace GenController.Portable.Models
 
         private SynchronizationContext Context = SynchronizationContext.Current;
 
-        // Service Locator services
+        #region Service Locator services
 
         private ILogger Logger => Service.Get<ILogger>();
         private IClock Clock => Service.TryGet<IClock>();
         private IGenerator Generator = Service.TryGet<IGenerator>();
+
+        #endregion
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

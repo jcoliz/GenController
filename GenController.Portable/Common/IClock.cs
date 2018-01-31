@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Common
 {
     /// <summary>
-    /// Provides a source of the current time
+    /// Defines a platform-dependent service to access the time
     /// </summary>
     public interface IClock
     {

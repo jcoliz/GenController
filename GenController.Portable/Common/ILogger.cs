@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Common
 {
     /// <summary>
-    /// Interface for app logging and analytics. Actual implementation is platform-dependent
+    /// Defines a platform-dependent service to log events and errors.
     /// </summary>
     public interface ILogger
     {

@@ -14,7 +14,7 @@ namespace GenController.Portable.Models
         /// <summary>
         /// The actual schedule blocks
         /// </summary>
-        public RangeObservableCollection<Models.GenPeriod> Periods = new RangeObservableCollection<Models.GenPeriod>();
+        public RangeObservableCollection<GenPeriod> Periods = new RangeObservableCollection<GenPeriod>();
 
         /// <summary>
         /// Schedule is free to start and stop generator according to schedule
@@ -30,34 +30,10 @@ namespace GenController.Portable.Models
                 Settings.SetKey("Enabled", value.ToString());
             }
         }
-        //Setting.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
 
         public Schedule()
         {
             Periods.CollectionChanged += Periods_CollectionChanged;
-        }
-
-        private void Periods_CollectionChanged(object sender = null, System.Collections.Specialized.NotifyCollectionChangedEventArgs e = null)
-        {
-            // Reorganize the schedule into a format that's easy for the scheduler to quickly determine what should be
-            // happening right now
-            InternalSchedule.Clear();
-            if (Periods.FirstOrDefault() != null)
-            {
-                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StartAt, DesiredState = GenStatus.Running, Voltage = x.Voltage }));
-                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StopAt, DesiredState = GenStatus.Stopped }));
-
-                if (_Override != null)
-                    InternalSchedule.Add(_Override);
-
-                InternalSchedule.Sort();
-
-                // Add tomorrow's first at the end, and yesterday's last at the start
-                var first = InternalSchedule.First();
-                var last = InternalSchedule.Last();
-                InternalSchedule.Add(new ScheduleItem() { Time = first.Time + TimeSpan.FromDays(1), DesiredState = first.DesiredState, Voltage = first.Voltage });
-                InternalSchedule.Insert(0, new ScheduleItem() { Time = last.Time - TimeSpan.FromDays(1), DesiredState = last.DesiredState, Voltage = last.Voltage });
-            }
         }
 
         /// <summary>
@@ -67,7 +43,7 @@ namespace GenController.Portable.Models
         {
             var storage = Settings.GetCompositeKey("Schedule");
             Periods.AddRange(storage.Select(GenPeriod.Deserialize));
-            Measurement.LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
+            Logger?.LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
         }
 
         /// <summary>
@@ -75,7 +51,9 @@ namespace GenController.Portable.Models
         /// state.
         /// </summary>
         /// <remarks>
-        /// Whether something changed
+        /// This method is the heart of the entire application logic. The whole purpose
+        /// to the app is to start and stop the generator based on a set schedule.
+        /// Here is where we do that.
         /// </remarks>
         public Task Tick()
         {
@@ -216,8 +194,6 @@ namespace GenController.Portable.Models
             Periods_CollectionChanged();
         }
 
-        private ScheduleItem _Override;
-
         /// <summary>
         /// Remove this block from the schedule
         /// </summary>
@@ -242,22 +218,27 @@ namespace GenController.Portable.Models
         }
         static Schedule _Current = null;
 
+        #region Internals
+
         private DateTime LastTick = DateTime.MinValue;
         private DateTime? StartedConfirmingAt = null;
+        private ScheduleItem _Override;
 
-        private void Log(string what) =>  Measurement?.LogEvent(what);
+        private void Log(string what) =>  Logger?.LogEvent(what);
 
-        /// <summary>
-        /// Service Locator for how to get the current time.
-        /// </summary>
+        #endregion
+
+        #region Service Locator services
+
         private IClock Clock => Service.TryGet<IClock>();
 
-        /// <summary>
-        /// Service Locator for how to get measurement and logging.
-        /// </summary>
-        private ILogger Measurement => Service.TryGet<ILogger>();
+        private ILogger Logger => Service.TryGet<ILogger>();
 
         private ISettings Settings => Service.Get<ISettings>();
+
+        #endregion
+
+        #region The actual schedule
 
         class ScheduleItem : IComparable<ScheduleItem>, IComparable<TimeSpan>
         {
@@ -274,5 +255,35 @@ namespace GenController.Portable.Models
         /// easy to test.
         /// </summary>
         private List<ScheduleItem> InternalSchedule = new List<ScheduleItem>();
+
+        /// <summary>
+        /// When the schedule changes, make sure to update our internal representation of the schedule
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Periods_CollectionChanged(object sender = null, System.Collections.Specialized.NotifyCollectionChangedEventArgs e = null)
+        {
+            // Reorganize the schedule into a format that's easy for the scheduler to quickly determine what should be
+            // happening right now
+            InternalSchedule.Clear();
+            if (Periods.FirstOrDefault() != null)
+            {
+                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StartAt, DesiredState = GenStatus.Running, Voltage = x.Voltage }));
+                InternalSchedule.AddRange(Periods.Select(x => new ScheduleItem() { Time = x.StopAt, DesiredState = GenStatus.Stopped }));
+
+                if (_Override != null)
+                    InternalSchedule.Add(_Override);
+
+                InternalSchedule.Sort();
+
+                // Add tomorrow's first at the end, and yesterday's last at the start
+                var first = InternalSchedule.First();
+                var last = InternalSchedule.Last();
+                InternalSchedule.Add(new ScheduleItem() { Time = first.Time + TimeSpan.FromDays(1), DesiredState = first.DesiredState, Voltage = first.Voltage });
+                InternalSchedule.Insert(0, new ScheduleItem() { Time = last.Time - TimeSpan.FromDays(1), DesiredState = last.DesiredState, Voltage = last.Voltage });
+            }
+        }
+
+        #endregion
     }
 }
