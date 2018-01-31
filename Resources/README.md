@@ -1,0 +1,1 @@
+This folder contains resources used in the main repo README.
