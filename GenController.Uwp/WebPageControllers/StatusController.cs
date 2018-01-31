@@ -66,7 +66,7 @@ namespace GenController.Uwp.Controllers
 
             html.AddRange(new List<string>() {
                 $"<ul><li>{App.Current.Title} {App.Current.Version}</li>",
-                $"<li>E: {(VM.Controller.Enabled?'Y':'N')} 1:{(VM.Controller.StartRelay?'Y':'N')} 0:{(VM.Controller.StopRelay?'Y':'N')} R:{(VM.Controller.RunSignal?'Y':'N')} P:{(VM.Controller.PanelLightSignal?'Y':'N')} </li>",
+                $"<li>E: {(VM.Controller.Enabled?'Y':'N')} 1:{(VM.Controller.StartLine?'Y':'N')} 0:{(VM.Controller.StopLine?'Y':'N')} R:{(VM.Controller.RunSignal?'Y':'N')} P:{(VM.Controller.PanelLightSignal?'Y':'N')} </li>",
                 "<li><a href=\"/logs\">View Logs</a></li></ul>",
                 "</body></html>"
             });

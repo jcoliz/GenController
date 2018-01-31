@@ -59,13 +59,13 @@ namespace GenController.Portable.Models
 
             Status = GenStatus.Starting;
 
-            StopRelay = true;
-            await Clock.Delay(StopPinHigh);
-            StopRelay = false;
+            StopLine = true;
+            await Clock.Delay(StopPinHighDuration);
+            StopLine = false;
             await Clock.Delay(DelayBetweenStartAndStop);
-            StartRelay = true;
-            await Clock.Delay(StartPinHigh);
-            StartRelay = false;
+            StartLine = true;
+            await Clock.Delay(StartPinHighDuration);
+            StartLine = false;
 
             Status = GenStatus.Confirming;
         }
@@ -81,9 +81,9 @@ namespace GenController.Portable.Models
 
             Status = GenStatus.Stopping;
 
-            StopRelay = true;
-            await Clock.Delay(StopPinHigh);
-            StopRelay = false;
+            StopLine = true;
+            await Clock.Delay(StopPinHighDuration);
+            StopLine = false;
 
             Status = GenStatus.Stopped;
         }
@@ -142,16 +142,16 @@ namespace GenController.Portable.Models
         // See wiring and timing diagram here:
         // http://www.magnum-dimensions.com/sites/default/files/MagAGS/ME-AGS-Onan-Models-HGJAD-HGJAE-HGJAF-Rev-12-02-08.pdf
 
-        private readonly TimeSpan StopPinHigh = TimeSpan.FromSeconds(10);
-        private readonly TimeSpan StartPinHigh = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan StopPinHighDuration = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan StartPinHighDuration = TimeSpan.FromSeconds(10);
         private readonly TimeSpan DelayBetweenStartAndStop = TimeSpan.FromSeconds(4);
         private readonly TimeSpan DelayBetweenStartAttempts = TimeSpan.FromMinutes(2);
         private readonly TimeSpan DelayBetweenStartAndCheck = TimeSpan.FromSeconds(10);
 
         /// <summary>
-        /// Controls the hardware relay pin to close the 'stop' line to the generator
+        /// Controls the hardware output pin to close the 'stop' line to the generator
         /// </summary>
-        public bool StopRelay
+        public bool StopLine
         {
             get { return Generator?.StopOutput ?? false; }
             private set
@@ -159,15 +159,15 @@ namespace GenController.Portable.Models
                 if (null != Generator && value != Generator.StopOutput)
                 {
                     Generator.StopOutput = value;
-                    DoPropertyChanged(nameof(StopRelay));
+                    DoPropertyChanged(nameof(StopLine));
                 }
             }
         }
 
         /// <summary>
-        /// Controls the hardware relay pin to close the 'start' line to the generator
+        /// Controls the hardware output pin to close the 'start' line to the generator
         /// </summary>
-        public bool StartRelay
+        public bool StartLine
         {
             get { return Generator?.StartOutput ?? false; }
             private set
@@ -175,7 +175,7 @@ namespace GenController.Portable.Models
                 if (null != Generator && value != Generator.StartOutput)
                 {
                     Generator.StartOutput = value;
-                    DoPropertyChanged(nameof(StartRelay));
+                    DoPropertyChanged(nameof(StartLine));
                 }
             }
         }
@@ -195,12 +195,21 @@ namespace GenController.Portable.Models
         /// <summary>
         /// Current voltage on the "voltage sense" line
         /// </summary>
+        /// <remarks>
+        /// Rounded to the lowest tenth of a volt, for display purposes
+        /// </remarks>
         public double Voltage => Math.Floor((Generator?.Voltage ?? 0.0) * 10.0) / 10.0;
 
         /// <summary>
         /// Call this very frequently. This will debounce the runsignal line. It looks for
         /// 31 consecutive readings opposite the previous reading.
         /// </summary>
+        /// <remarks>
+        /// This is a very conservative approach. While the underlying GPIO pin has debounce
+        /// as well, we want a really CERTAIN indication that the run signal is changed.
+        /// This smooths out variance which can exist in the hostile environment where the
+        /// generator operates.
+        /// </remarks>
         public void FastTick()
         {
             RunSignalBits <<= 1;
