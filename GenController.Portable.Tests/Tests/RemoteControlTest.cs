@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GenController.Portable.Tests.Mocks;
 using GenController.Portable.Models;
-using Common;
+using Commonality;
 using System.Threading.Tasks;
 
 namespace IotHello.Portable.Tests.Tests

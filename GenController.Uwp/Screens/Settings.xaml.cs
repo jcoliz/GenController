@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Commonality;
 using GenController.Uwp.Platform;
 using System;
 using Windows.UI.Xaml;
@@ -40,7 +40,7 @@ namespace GenController.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private void VM_ExceptionRaised(object sender, Common.ViewModelBase.ExceptionArgs e)
+        private void VM_ExceptionRaised(object sender, ViewModelBase.ExceptionArgs e)
         {
             string message = e.ex.Message;
             if (!string.IsNullOrEmpty(e.code))

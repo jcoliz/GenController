@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Common
+namespace Commonality
 {
     /// <summary>
     /// Defines a platform-dependent service to retrieve settings

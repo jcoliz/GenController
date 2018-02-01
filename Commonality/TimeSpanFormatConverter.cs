@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Converters
+namespace Commonality.Converters
 {
     public class TimeSpanFormatConverter : IBaseValueConverter
     {

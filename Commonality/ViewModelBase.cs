@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 
-namespace Common
+namespace Commonality
 {
     /// <summary>
     /// Provides some basic common functionality that all ViewModels want

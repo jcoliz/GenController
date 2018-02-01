@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Commonality
 {
     /// <summary>
     /// Defines a platform-dependent service to access the time

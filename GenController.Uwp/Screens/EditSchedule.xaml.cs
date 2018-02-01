@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Commonality;
 using System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -24,7 +24,7 @@ namespace GenController.Uwp.Screens
             {
                 string code = "EX0";
                 Logger?.Error(code, ex);
-                VM_ExceptionRaised(this, new Common.ViewModelBase.ExceptionArgs(ex, code));
+                VM_ExceptionRaised(this, new ViewModelBase.ExceptionArgs(ex, code));
             }
         }
 
@@ -45,7 +45,7 @@ namespace GenController.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private void VM_ExceptionRaised(object sender, Common.ViewModelBase.ExceptionArgs e)
+        private void VM_ExceptionRaised(object sender, ViewModelBase.ExceptionArgs e)
         {
             string message = e.ex.Message;
             if (!string.IsNullOrEmpty(e.code))

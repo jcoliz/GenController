@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Commonality
 {
     /// <summary>
     /// This is a simple logger which just logs to the local file system. No cloud analytics here.

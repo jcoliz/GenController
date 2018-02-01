@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Converters
+namespace Commonality.Converters
 {
     /// <summary>
     /// This interface is implemented by value converters which are intended to be used

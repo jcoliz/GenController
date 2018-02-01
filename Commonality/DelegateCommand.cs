@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Common
+namespace Commonality
 {
     /// <summary>
     /// Quick and reusable ICommand

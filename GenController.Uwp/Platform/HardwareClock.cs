@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using IotFrosting;
-using Common;
+using Commonality;
 
 namespace GenController.Uwp.Platform
 {

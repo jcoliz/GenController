@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace Common
+namespace Commonality
 {
     public class RangeObservableCollection<T> : ObservableCollection<T>
     {

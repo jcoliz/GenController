@@ -37,9 +37,9 @@
             </TextBlock>
             <Ellipse Grid.Column="1" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.Enabled,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
             <TextBlock Grid.Column="1" Margin="0,-2,0,0" Foreground="White" Text="E" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StartRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <Ellipse Grid.Column="2" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StartLine,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
             <TextBlock Grid.Column="2" Margin="0,-2,0,0" Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <Ellipse Grid.Column="3" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StopRelay,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
+            <Ellipse Grid.Column="3" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.StopLine,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
             <TextBlock Grid.Column="3" Margin="0,-2,0,0" Foreground="White" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
             <Ellipse Grid.Column="4" Width="30" Height="30" Stroke="White" Fill="{x:Bind Controller.PanelLightSignal,Converter={StaticResource BooleanRedBrushConverterXaml},Mode=OneWay}" Margin="5,0"/>
             <TextBlock Grid.Column="4" Margin="0,-2,0,0" Foreground="White" Text="P" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>

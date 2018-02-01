@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Common;
+using Commonality;
 
 namespace GenController.Portable.ViewModels
 {

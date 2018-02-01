@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Commonality;
 using GenController.Portable.ViewModels;
 using GenController.Uwp.Platform;
 using System;
@@ -50,7 +50,7 @@ namespace GenController.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private void VM_ExceptionRaised(object sender, Common.ViewModelBase.ExceptionArgs e)
+        private void VM_ExceptionRaised(object sender, ViewModelBase.ExceptionArgs e)
         {
             string message = e.ex.Message;
             if (!string.IsNullOrEmpty(e.code))

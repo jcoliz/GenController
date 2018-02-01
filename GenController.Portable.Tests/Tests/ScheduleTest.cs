@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using GenController.Portable.Tests.Mocks;
-using Common;
+using Commonality;
 
 // Not needed to await here in the tests, because the TestController executes generator control commands
 // immediately.

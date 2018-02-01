@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Commonality
 {
     /// <summary>
     /// Provides a standard dotnet 'DateTime.Now' in the IClock interface

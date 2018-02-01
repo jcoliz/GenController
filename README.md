@@ -32,8 +32,9 @@ Perhaps my favorite thing about Windows IoT Core is how little effort is require
 The project is comprised of these pieces:
 
 * [GenController.Uwp](./GenController.Uwp) Universal Windows App, contains the UI screens and Windows-specific components.
-* [GenController.Portable](./GenController.Portable) .NET Standard library, contains the platform-independent application logic, viewmodels, and domain-independent helper classes.
-* [GenController.Portable.Tests](./GenController.Portable.Tests) Unit tests for the application logic
+* [GenController.Portable](./GenController.Portable) .NET Standard library, contains the platform-independent application logic, viewmodels.
+* [GenController.Portable.Tests](./GenController.Portable.Tests) Unit tests for the application logic.
+* [Commonality](./Commonality) .NET Standard library, contains domain-independent helper classes.
 
 # Dependencies
 
