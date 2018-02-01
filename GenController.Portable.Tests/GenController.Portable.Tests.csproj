@@ -63,6 +63,10 @@
     <Compile Include="Tests\RemoteControlTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Commonality\Commonality.csproj">
+      <Project>{f1aba490-97c2-4d12-9c40-40db350c65e0}</Project>
+      <Name>Commonality</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenController.Portable\GenController.Portable.csproj">
       <Project>{29e03921-5641-4845-b02f-f1071bcc4408}</Project>
       <Name>IotHello.Portable</Name>

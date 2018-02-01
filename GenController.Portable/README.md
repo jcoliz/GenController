@@ -1,6 +1,6 @@
 ﻿# GenController.Portable
 
-This project contains all the application logic and helper classes in a portable class library.
+This project contains all the application logic in a portable class library.
 Where possible, I've put as much as I can into this portable project.
 
 This has two benefits:
