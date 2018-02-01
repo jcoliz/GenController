@@ -27,12 +27,7 @@ namespace GenController.Portable.Tests.Mocks
             else
                 return null;
         }
-
-        public string GetKeyValueWithDefault(string key, string defaultvalue)
-        {
-            return GetKey(key) ?? defaultvalue;
-        }
-
+        
         public void SetCompositeKey(string key, IEnumerable<string> values)
         {
             Storage[key] = values;

@@ -17,7 +17,7 @@ namespace Commonality
             {
                 if (!Offset.HasValue)
                 {
-                    Offset = TimeSpan.FromTicks(long.Parse( Settings.GetKeyValueWithDefault("Clock.Offset", "0")));
+                    Offset = TimeSpan.FromTicks(long.Parse( Settings.GetKey("Clock.Offset") ?? "0"));
                 }
                 return DateTime.Now + Offset.Value;
             }

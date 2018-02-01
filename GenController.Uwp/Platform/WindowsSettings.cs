@@ -46,11 +46,6 @@ namespace GenController.Uwp.Platform
             return result;
         }
 
-        public string GetKeyValueWithDefault(string key, string defaultvalue)
-        {
-            return GetKey(key) ?? defaultvalue;
-        }
-
         public void SetCompositeKey(string name, IEnumerable<string> values)
         {
             ApplicationDataCompositeValue composite =

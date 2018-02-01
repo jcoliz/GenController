@@ -7,10 +7,12 @@ namespace Commonality
     /// </summary>
     public interface ISettings
     {
+        string GetKey(string key); // Or null if not found
+
         void SetKey(string key, string value);
-        string GetKey(string key);
-        string GetKeyValueWithDefault(string key, string defaultvalue);
-        IEnumerable<string> GetCompositeKey(string key);
+
+        IEnumerable<string> GetCompositeKey(string key); // Or empty if not found
+
         void SetCompositeKey(string key, IEnumerable<string> values);
     }
 }

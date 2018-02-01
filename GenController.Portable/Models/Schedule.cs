@@ -23,7 +23,7 @@ namespace GenController.Portable.Models
         {
             get
             {
-                return Boolean.Parse(Settings.GetKeyValueWithDefault("Enabled", "True"));
+                return Boolean.Parse(Settings.GetKey("Enabled") ?? "True");
             }
             set
             {
