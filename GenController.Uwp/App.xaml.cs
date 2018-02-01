@@ -151,7 +151,7 @@ namespace GenController.Uwp
 
 
                 // Set up services to be located by other components
-                Service.Set<ILogger>(new Common.FileSystemLogger(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
+                Service.Set<ILogger>(new Portable.Models.FileSystemLoggerWithVoltage(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 Service.Set<ISettings>(new Platform.WindowsSettings());
                 Service.Set<IApplicationInfo>(this);
 
@@ -165,7 +165,7 @@ namespace GenController.Uwp
                         // Try to open a connection to the hardware generator line
                         var gen = await Platform.HardwareGenerator.Open();
                         Service.Set<Portable.Models.IGenerator>(gen);
-                        Service.Set<IVoltage>(gen);
+                        Service.Set<Portable.Models.IVoltage>(gen);
                     }
                     catch (Exception)
                     {
@@ -173,7 +173,7 @@ namespace GenController.Uwp
                         // sofware. This is helpful for UI and logic testing.
                         var mg = new Portable.Models.MockGenerator();
                         Service.Set<Portable.Models.IGenerator>(mg);
-                        Service.Set<IVoltage>(mg);
+                        Service.Set<Portable.Models.IVoltage>(mg);
                     }
                 });
 

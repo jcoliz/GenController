@@ -138,7 +138,7 @@ namespace Common
                 {
                     var sw = new StreamWriter(stream);
                     foreach (var line in lines)
-                        await sw.WriteLineAsync(Time.ToString("u") + " " + Voltage + line);
+                        await sw.WriteLineAsync(FormattedLine(line));
                     await sw.FlushAsync();
                 }
 
@@ -155,12 +155,21 @@ namespace Common
         }
 
         /// <summary>
+        /// Format the given line into what it should look like when it actually goes into
+        /// the log.
+        /// </summary>
+        /// <remarks>
+        /// This can be overridden by derived class to do something special with the formatting
+        /// </remarks>
+        /// <param name="originalline">Unformatted raw line</param>
+        /// <returns>Formatted line ready to log</returns>
+        protected virtual string FormattedLine(string originalline) => Time.ToString("u") + " " + originalline;
+
+        /// <summary>
         /// If there IS a platform clock use that for time, else just pick up regular
         /// system time.
         /// </summary>
-        private DateTime Time => Service.TryGet<IClock>()?.Now ?? DateTime.Now;
-
-        private string Voltage => Service.TryGet<IVoltage>()?.Voltage.ToString("0.0") + "V " ?? string.Empty;
+        protected DateTime Time => Service.TryGet<IClock>()?.Now ?? DateTime.Now;
     }
 
     /// <summary>

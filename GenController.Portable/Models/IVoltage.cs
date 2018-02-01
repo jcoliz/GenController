@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace GenController.Portable.Models
 {
     /// <summary>
     /// Defines a platform-dependent service to retrieve the current system voltage
