@@ -5,7 +5,14 @@
     /// </summary>
     public interface IApplicationInfo
     {
+        /// <summary>
+        /// Title of the app
+        /// </summary>
         string Title { get; }
+
+        /// <summary>
+        /// Version # of the app
+        /// </summary>
         string Version { get; }
     }
 }

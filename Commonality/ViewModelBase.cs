@@ -9,6 +9,10 @@ namespace Commonality
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Encapsulates an exception and a unique code. This can be used
+        /// to log the exception and tie back to where it was raised.
+        /// </summary>
         public class ExceptionArgs
         {
             public string code;

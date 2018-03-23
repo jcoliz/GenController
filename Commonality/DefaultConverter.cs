@@ -2,8 +2,34 @@
 
 namespace Commonality.Converters
 {
+    /// <summary>
+    /// General purpose "bool to {something}" converter 
+    /// </summary>
+    /// <remarks>
+    /// Instead of just converting from bool, it converts from ANYTHING, by comparing it with the
+    /// default value for that type.
+    /// </remarks>
+    /// <example>
+    /// public class DefaultToVisibilityConverter : DefaultConverter
+    /// {
+    ///     public override object Convert(object value, Type targetType, object parameter)
+    ///     {
+    ///         return base.Convert<Visibility>(Visibility.Collapsed, Visibility.Visible, value, targetType, parameter);
+    ///     }
+    /// }
+    /// </example>
     public abstract class DefaultConverter : IBaseValueConverter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="yes"></param>
+        /// <param name="no"></param>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
         protected T Convert<T>(T yes, T no, object value, Type targetType, object parameter)
         {
             if (typeof(T) != targetType)
