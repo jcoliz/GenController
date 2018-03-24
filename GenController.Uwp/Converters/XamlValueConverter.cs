@@ -13,14 +13,10 @@ namespace GenController.Uwp.Converters
         T converter = new T();
 
         object IValueConverter.Convert(object value, Type targetType, object parameter, string culture)
-        {
-            return converter.Convert(value, targetType, parameter);
-        }
+            => converter.Convert(value, targetType, parameter);
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, string culture)
-        {
-            return converter.ConvertBack(value, targetType, parameter);
-        }
+            => converter.ConvertBack(value, targetType, parameter);
     }
 
 }

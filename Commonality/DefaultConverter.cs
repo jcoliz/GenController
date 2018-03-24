@@ -13,9 +13,7 @@ namespace Commonality.Converters
     /// public class DefaultToVisibilityConverter : DefaultConverter
     /// {
     ///     public override object Convert(object value, Type targetType, object parameter)
-    ///     {
-    ///         return base.Convert<Visibility>(Visibility.Collapsed, Visibility.Visible, value, targetType, parameter);
-    ///     }
+    ///         => base.Convert<Visibility>(Visibility.Collapsed, Visibility.Visible, value, targetType, parameter);
     /// }
     /// </example>
     public abstract class DefaultConverter : IBaseValueConverter

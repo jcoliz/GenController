@@ -3,8 +3,7 @@
 namespace Commonality.Converters
 {
     /// <summary>
-    /// Value converter to apply a custom timespan format to
-    /// convert a timespan to a string
+    /// Value converter to apply a custom timespan format to convert a timespan to a string
     /// </summary>
     public class TimeSpanFormatConverter : IBaseValueConverter
     {

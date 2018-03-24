@@ -5,7 +5,7 @@ using System.Threading;
 namespace Commonality
 {
     /// <summary>
-    /// Provides some basic common functionality that all ViewModels want
+    /// Provides some basic common functionality that all ViewModels want, including INotifyPropertyChanged handling, and message/error propagation to the UI
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
@@ -57,7 +57,7 @@ namespace Commonality
                 else
                     ExceptionRaised?.Invoke(this, new ExceptionArgs(ex, code));
 
-                Service.Get<ILogger>().Error(code, ex);
+                Service.TryGet<ILogger>()?.Error(code, ex);
             }
             catch (Exception)
             {
