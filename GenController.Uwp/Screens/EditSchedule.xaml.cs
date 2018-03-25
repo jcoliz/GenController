@@ -22,9 +22,9 @@ namespace GenController.Uwp.Screens
             }
             catch (Exception ex)
             {
-                string code = "EX0";
-                Logger?.Error(code, ex);
-                VM_ExceptionRaised(this, new ViewModelBase.ExceptionArgs(ex, code));
+                ex.Source = "EX0";
+                Logger?.LogError(ex);
+                VM_ExceptionRaised(this, ex);
             }
         }
 
@@ -45,11 +45,11 @@ namespace GenController.Uwp.Screens
             base.OnNavigatedFrom(e);
         }
 
-        private void VM_ExceptionRaised(object sender, ViewModelBase.ExceptionArgs e)
+        private void VM_ExceptionRaised(object sender, Exception ex)
         {
-            string message = e.ex.Message;
-            if (!string.IsNullOrEmpty(e.code))
-                message += $" (Code {e.code})";
+            string message = ex.Message;
+            if (!string.IsNullOrEmpty(ex.Source))
+                message += $" (Code {ex.Source})";
             var ignore = new MessageDialog(message, "SORRY").ShowAsync();
         }
 
