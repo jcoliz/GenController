@@ -32,11 +32,11 @@ namespace GenController.Uwp.Screens
         {
             base.OnNavigatedTo(e);
             VM.ExceptionRaised += VM_ExceptionRaised;
-            Logger?.LogEvent("Screen.EditSchedule", $"Add={VM.WillAdd}");
             if (e.Parameter != null && e.Parameter is Portable.Models.GenPeriod)
             {
                 VM.Original = e.Parameter as Portable.Models.GenPeriod;
             }
+            Logger?.LogEvent("Screen.EditSchedule", $"Add={VM.WillAdd}");
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
