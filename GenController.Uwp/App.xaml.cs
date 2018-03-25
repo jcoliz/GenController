@@ -111,30 +111,33 @@ namespace GenController.Uwp
 #endif
             try
             {
-                // Then try to start a hardware clock, and use that if available
-                //
-                // WARNING: This means that until Open comes back, we may not have a clock in the system!!
-                var ignore = Task.Run(async () => 
+                try
                 {
-                    try
-                    {
-                        // Try to create a hardware clock (DS3231), or fall back to no clock
-                        var hc = await Platform.HardwareClock.Open();
-                        hc.Tick();
+                    // Try to create a hardware clock (DS3231), or fall back to no clock
+                    var hc = await Platform.HardwareClock.Open();
+                    hc.Tick();
 
-                        Service.Set<IClock>(hc);
-                        HardwareClock = hc;
-                        Logger?.LogInfo("Hardware clock started.");
-                    }
-                    catch
-                    {
-                        // Nevermind, no hardware clock available
-                        Logger?.LogInfo("Hardware clock failed, using built-in clock.");
+                    Service.Set<IClock>(hc);
+                    HardwareClock = hc;
+                    await Logger?.LogInfoAsync("Hardware clock started.");
+                }
+                catch
+                {
+                    // Nevermind, no hardware clock available
+                    // There is no logger yet!
+                    //await Logger?.LogInfoAsync("Hardware clock failed, using built-in clock.");
 
-                        // We'll use a software clock instead
-                        Service.Set<IClock>(new Clock());
-                    }
-                });
+                    // We'll use a software clock instead
+                    Service.Set<IClock>(new Clock());
+                }
+
+                // Set up services to be located by other components
+                Service.Set<ILogger>(new Portable.Models.FileSystemLoggerWithVoltage(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
+                Service.Set<ISettings>(new Platform.WindowsSettings());
+                Service.Set<IApplicationInfo>(this);
+
+                await Logger.StartSession();
+                await Logger.LogInfoAsync($"{Title} {Version}");
 
                 // Try to open the hardware remote 
                 try
@@ -146,35 +149,24 @@ namespace GenController.Uwp
                 catch
                 {
                     // OK if it fails. We just won't get any inputs from the remote
+                    await Logger?.LogInfoAsync("No hardware remote.");
                 }
 
-
-                // Set up services to be located by other components
-                Service.Set<ILogger>(new Portable.Models.FileSystemLoggerWithVoltage(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
-                Service.Set<ISettings>(new Platform.WindowsSettings());
-                Service.Set<IApplicationInfo>(this);
-
-                await Logger.StartSession();
-                await Logger.LogInfoAsync($"{Title} {Version}");
-
-                var ignore2 = Task.Run(async () => 
+                try
                 {
-                    try
-                    {
-                        // Try to open a connection to the hardware generator line
-                        var gen = await Platform.HardwareGenerator.Open();
-                        Service.Set<Portable.Models.IGenerator>(gen);
-                        Service.Set<Portable.Models.IVoltage>(gen);
-                    }
-                    catch (Exception)
-                    {
-                        // If there is no hardware generator controller, we'll mock it up in
-                        // sofware. This is helpful for UI and logic testing.
-                        var mg = new Portable.Models.MockGenerator();
-                        Service.Set<Portable.Models.IGenerator>(mg);
-                        Service.Set<Portable.Models.IVoltage>(mg);
-                    }
-                });
+                    // Try to open a connection to the hardware generator line
+                    var gen = await Platform.HardwareGenerator.Open();
+                    Service.Set<Portable.Models.IGenerator>(gen);
+                    Service.Set<Portable.Models.IVoltage>(gen);
+                }
+                catch (Exception)
+                {
+                    // If there is no hardware generator controller, we'll mock it up in
+                    // sofware. This is helpful for UI and logic testing.
+                    var mg = new Portable.Models.MockGenerator();
+                    Service.Set<Portable.Models.IGenerator>(mg);
+                    Service.Set<Portable.Models.IVoltage>(mg);
+                }
 
                 Portable.Models.Schedule.Current.Load();
 
@@ -210,14 +202,16 @@ namespace GenController.Uwp
                             }
                             catch (Exception ex)
                             {
-                                Logger?.Error("AP3", ex);
+                                ex.Source = "AP3";
+                                await Logger?.LogErrorAsync(ex);
                             }
                         });
 
             }
             catch (Exception ex)
             {
-                Logger?.Error("AP2", ex);
+                ex.Source = "AP2";
+                await Logger?.LogErrorAsync(ex);
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -276,7 +270,8 @@ namespace GenController.Uwp
             }
             catch (Exception ex)
             {
-                Logger?.Error("AP1", ex);
+                ex.Source = "AP1";
+                Logger?.LogError(ex);
             }
         }
 
@@ -287,7 +282,8 @@ namespace GenController.Uwp
         /// <param name="e">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            Logger?.Error("AP4", e.Exception);
+            e.Exception.Source = "AP4";
+            Logger?.LogError(e.Exception);
         }
 
         /// <summary>
