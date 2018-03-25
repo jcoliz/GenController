@@ -119,7 +119,9 @@ namespace GenController.Uwp
 
                     Service.Set<IClock>(hc);
                     HardwareClock = hc;
-                    await Logger?.LogInfoAsync("Hardware clock started.");
+
+                    // No logger yet!!
+                    //await Logger?.LogInfoAsync("Hardware clock started.");
                 }
                 catch
                 {
@@ -149,7 +151,7 @@ namespace GenController.Uwp
                 catch
                 {
                     // OK if it fails. We just won't get any inputs from the remote
-                    await Logger?.LogInfoAsync("No hardware remote.");
+                    await Logger.LogInfoAsync("No hardware remote.");
                 }
 
                 try
@@ -203,7 +205,8 @@ namespace GenController.Uwp
                             catch (Exception ex)
                             {
                                 ex.Source = "AP3";
-                                await Logger?.LogErrorAsync(ex);
+                                if (Logger != null)
+                                    await Logger.LogErrorAsync(ex);
                             }
                         });
 
@@ -211,7 +214,8 @@ namespace GenController.Uwp
             catch (Exception ex)
             {
                 ex.Source = "AP2";
-                await Logger?.LogErrorAsync(ex);
+                if (Logger != null)
+                    await Logger.LogErrorAsync(ex);
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
