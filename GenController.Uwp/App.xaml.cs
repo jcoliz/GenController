@@ -101,7 +101,7 @@ namespace GenController.Uwp
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -114,7 +114,7 @@ namespace GenController.Uwp
                 // Then try to start a hardware clock, and use that if available
                 //
                 // WARNING: This means that until Open comes back, we may not have a clock in the system!!
-                Task.Run(async () => 
+                var ignore = Task.Run(async () => 
                 {
                     try
                     {
@@ -142,7 +142,6 @@ namespace GenController.Uwp
                     var remote = new Platform.HardwareRemote();
                     Service.Set<Portable.Models.IRemote>(remote);
                     Portable.Models.RemoteControlLogic.Current.AttachToHardware();
-
                 }
                 catch
                 {
@@ -155,10 +154,10 @@ namespace GenController.Uwp
                 Service.Set<ISettings>(new Platform.WindowsSettings());
                 Service.Set<IApplicationInfo>(this);
 
-                Logger.StartSession();
-                Logger.LogInfo($"{Title} {Version}");
+                await Logger.StartSession();
+                await Logger.LogInfoAsync($"{Title} {Version}");
 
-                Task.Run(async () => 
+                var ignore2 = Task.Run(async () => 
                 {
                     try
                     {
