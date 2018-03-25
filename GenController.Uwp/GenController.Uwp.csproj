@@ -169,10 +169,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commonality\Commonality.csproj">
-      <Project>{f1aba490-97c2-4d12-9c40-40db350c65e0}</Project>
-      <Name>Commonality</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IotFrosting\IotFrosting\IotFrosting.csproj">
       <Project>{0bab3bd0-a6fd-4fb8-9f70-248435139630}</Project>
       <Name>IotFrosting</Name>

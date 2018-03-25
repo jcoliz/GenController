@@ -59,8 +59,8 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commonality\Commonality.csproj">
-      <Project>{f1aba490-97c2-4d12-9c40-40db350c65e0}</Project>
+    <ProjectReference Include="..\Commonality\Commonality\Commonality.csproj">
+      <Project>{e272f2de-e043-4793-934d-4cb9e9f42a05}</Project>
       <Name>Commonality</Name>
     </ProjectReference>
   </ItemGroup>

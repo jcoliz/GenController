@@ -2,9 +2,10 @@
   "supports": {},
   "dependencies": {
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-    "NETStandard.Library": "2.0.1"
+    "NETStandard.Library": "1.6.0",
+    "System.IO.Abstractions": "2.1.0.178"
   },
   "frameworks": {
-    "netstandard1.3": {}
+    "netstandard1.4": {}
   }
 }
