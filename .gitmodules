@@ -4,3 +4,6 @@
 [submodule "Catnap.Server"]
 	path = Catnap.Server
 	url = https://github.com/jcoliz/Catnap.Server.git
+[submodule "Commonality"]
+	path = Commonality
+	url = https://github.com/jcoliz/Commonality.git
