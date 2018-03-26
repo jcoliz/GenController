@@ -37,7 +37,7 @@ namespace GenController.Uwp.Screens
             Logger?.LogEvent("Screen.Logs");
             var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => 
             {
-                await VM.Load();
+                VM.Load();
                 await Task.Delay(200);
                 await VM.SelectSession(VM.Sessions.First());
             });

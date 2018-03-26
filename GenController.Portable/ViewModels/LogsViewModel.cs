@@ -27,7 +27,7 @@ namespace GenController.Portable.ViewModels
         /// Load the sessions up from disk
         /// </summary>
         /// <returns></returns>
-        public async Task Load()
+        public void Load()
         {
             try
             {
