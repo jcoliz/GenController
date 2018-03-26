@@ -37,16 +37,13 @@ namespace GenController.Uwp.Controllers
             htmlBuilder.AppendLine("<body>");
             htmlBuilder.AppendLine("<h1>Logs</h1>");
             htmlBuilder.AppendLine("<ul>");
-            var logs = await FileSystemLogger.GetLogs();
+            var logs = FileSystemLogger.GetLogs();
             var sorted = logs.ToList();
             sorted.Sort((x, y) => y.CompareTo(x));
 
             foreach (var log in sorted)
             {
-                var text = log.Split('.')[0];
-                long binary = Convert.ToInt64(text, 16);
-                DateTime dt = DateTime.FromBinary(binary);
-                htmlBuilder.AppendLine($"<li><a href=\"logs/log/{text}\">{dt}</a>");
+                htmlBuilder.AppendLine($"<li><a href=\"logs/log/{log.ToBinary().ToString()}\">{log}</a>");
             }
 
             htmlBuilder.AppendLine("</ul>");
@@ -73,15 +70,9 @@ namespace GenController.Uwp.Controllers
             htmlBuilder.AppendLine("<body>");
             htmlBuilder.AppendLine($"<h1>{dt}</h1>");
 
-            using (var stream = await FileSystemLogger.OpenLogForRead(dt))
-            {
-                var reader = new StreamReader(stream);
-                while (!reader.EndOfStream)
-                {
-                    var line = await reader.ReadLineAsync();
-                    htmlBuilder.AppendLine($"<p>{line}</p>");
-                }
-            }
+            var lines = await FileSystemLogger.ReadContents(dt);
+            foreach(var line in lines)
+                htmlBuilder.AppendLine($"<p>{line}</p>");
 
             htmlBuilder.AppendLine("</body>");
             htmlBuilder.AppendLine("</html>");
