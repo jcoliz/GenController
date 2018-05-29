@@ -20,6 +20,7 @@ namespace GenController.Portable.Models
     ///     * ILogger
     ///     * IClock
     ///     * IGenerator
+    ///     * ISchedule
     /// 
     /// </remarks>
     public class Controller : IController, INotifyPropertyChanged, IVoltage
@@ -112,11 +113,11 @@ namespace GenController.Portable.Models
         {
             get
             {
-                return Models.Schedule.Current.Enabled;
+                return Schedule.Enabled;
             }
             set
             {
-                Models.Schedule.Current.Enabled = value;
+                Schedule.Enabled = value;
                 DoPropertyChanged(nameof(Enabled));
             }
         }
@@ -269,6 +270,7 @@ namespace GenController.Portable.Models
         private ILogger Logger => Service.TryGet<ILogger>();
         private IClock Clock => Service.TryGet<IClock>();
         private IGenerator Generator => Service.TryGet<IGenerator>();
+        private ISchedule Schedule => Service.Get<ISchedule>();
 
         #endregion
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using Commonality;
+using GenController.Portable.Models;
 
 namespace GenController.Portable.ViewModels
 {
@@ -11,6 +12,7 @@ namespace GenController.Portable.ViewModels
     /// <remarks>
     /// Service Dependencies:
     ///     * IClock
+    ///     * ISchedule
     /// </remarks>
     public class MainViewModel : ViewModelBase
     {
@@ -18,13 +20,13 @@ namespace GenController.Portable.ViewModels
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
-        public IList<Models.GenPeriod> Periods => Models.Schedule.Current.Periods;
+        public ICollection<Models.GenPeriod> Periods => Schedule.Periods;
 
         public ICommand StartCommand => new DelegateCommand(async _ => 
         {
             try
             {
-                Models.Schedule.Current.Override();
+                Schedule.Override();
                 await Models.Controller.Current.Start();
             }
             catch (Exception ex)
@@ -37,7 +39,7 @@ namespace GenController.Portable.ViewModels
         {
             try
             {
-                Models.Schedule.Current.Override();
+                Schedule.Override();
                 await Models.Controller.Current.Stop();
             }
             catch (Exception ex)
@@ -83,5 +85,6 @@ namespace GenController.Portable.ViewModels
         }
 
         private IClock Clock => Service.TryGet<IClock>();
+        private ISchedule Schedule => Service.Get<ISchedule>();
     }
 }

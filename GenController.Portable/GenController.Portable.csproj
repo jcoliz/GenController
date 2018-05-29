@@ -48,6 +48,7 @@
     <Compile Include="Models\IController.cs" />
     <Compile Include="Models\IGenerator.cs" />
     <Compile Include="Models\IRemote.cs" />
+    <Compile Include="Models\ISchedule.cs" />
     <Compile Include="Models\IVoltage.cs" />
     <Compile Include="Models\MockGenerator.cs" />
     <Compile Include="Models\RemoteControlLogic.cs" />

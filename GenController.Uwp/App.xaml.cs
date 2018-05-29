@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Commonality;
+using GenController.Portable.Models;
 
 namespace GenController.Uwp
 {
@@ -48,6 +49,11 @@ namespace GenController.Uwp
         /// Task running our HTTPD server
         /// </summary>
         private static IAsyncAction ServerTask;
+
+        /// <summary>
+        /// The current schedule we are follwoing
+        /// </summary>
+        private static Schedule ScheduleCurrent;
 
         private Catnap.Server.HttpServer httpServer;
 
@@ -170,9 +176,13 @@ namespace GenController.Uwp
                     Service.Set<Portable.Models.IVoltage>(mg);
                 }
 
-                Portable.Models.Schedule.Current.Load();
 
-                if (Portable.Models.Schedule.Current.Periods.FirstOrDefault() == null)
+
+                ScheduleCurrent = new Schedule();
+                Commonality.Service.Set<ISchedule>(ScheduleCurrent);
+                ScheduleCurrent.Load();
+
+                if (ScheduleCurrent.Periods.FirstOrDefault() == null)
                 {
                     /* This is the crazy testing schedule. Once every minute!! */
                     var current = TimeSpan.FromHours(5);
@@ -180,7 +190,7 @@ namespace GenController.Uwp
                     var ending = TimeSpan.FromHours(22);
                     while (current < ending)
                     {
-                        Portable.Models.Schedule.Current.Periods.Add(new Portable.Models.GenPeriod(current, current + period,0.0));
+                        ScheduleCurrent.Periods.Add(new GenPeriod(current, current + period,0.0));
                         current += period + period;
                     }
                 }
@@ -266,7 +276,7 @@ namespace GenController.Uwp
             try
             {
                 HardwareClock?.Tick();
-                var t = Portable.Models.Schedule.Current.Tick();
+                var t = ScheduleCurrent.Tick();
                 if (t != null)
                     await t;
                 this.Tick?.Invoke(this, e);

@@ -1,4 +1,5 @@
 ﻿using Commonality;
+using GenController.Portable.Models;
 using System;
 using System.Windows.Input;
 
@@ -139,16 +140,18 @@ namespace GenController.Portable.ViewModels
             try
             {
                 if (WillDelete)
-                    Models.Schedule.Current.Remove(_Original);
+                    Schedule.Remove(_Original);
                 else if (WillAdd)
-                    Models.Schedule.Current.Add(Period);
+                    Schedule.Add(Period);
                 else
-                    Models.Schedule.Current.Replace(_Original, Period);
+                    Schedule.Replace(_Original, Period);
             }
             catch (Exception ex)
             {
                 base.SetError("EV3", ex);
             }
         }
+        private ISchedule Schedule => Service.Get<ISchedule>();
+
     }
 }

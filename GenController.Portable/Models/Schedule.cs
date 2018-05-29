@@ -15,12 +15,14 @@ namespace GenController.Portable.Models
     ///     * IClock
     ///     * ISettings
     /// </remarks>
-    public class Schedule
+    public class Schedule : ISchedule
     {
         /// <summary>
         /// The actual schedule blocks
         /// </summary>
-        public RangeObservableCollection<GenPeriod> Periods = new RangeObservableCollection<GenPeriod>();
+        private RangeObservableCollection<GenPeriod> _Periods { get; } = new RangeObservableCollection<GenPeriod>();
+
+        public ICollection<GenPeriod> Periods => _Periods;
 
         /// <summary>
         /// Schedule is free to start and stop generator according to schedule
@@ -39,7 +41,7 @@ namespace GenController.Portable.Models
 
         public Schedule()
         {
-            Periods.CollectionChanged += Periods_CollectionChanged;
+            _Periods.CollectionChanged += Periods_CollectionChanged;
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace GenController.Portable.Models
         public void Load()
         {
             var storage = Settings.GetCompositeKey("Schedule");
-            Periods.AddRange(storage.Select(GenPeriod.Deserialize));
+            _Periods.AddRange(storage.Select(GenPeriod.Deserialize));
             Logger?.LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
         }
 
@@ -175,8 +177,8 @@ namespace GenController.Portable.Models
                 laststop = p.StopAt;
             }
 
-            Periods.Clear();
-            Periods.AddRange(proposed);
+            _Periods.Clear();
+            _Periods.AddRange(proposed);
 
             Settings.SetCompositeKey("Schedule",Periods.Select(GenPeriod.Serialize));
         }
@@ -209,20 +211,6 @@ namespace GenController.Portable.Models
             Periods.Remove(old);
             Settings.SetCompositeKey("Schedule", Periods.Select(GenPeriod.Serialize));
         }
-
-        /// <summary>
-        /// The current singleton
-        /// </summary>
-        public static Schedule Current
-        {
-            get
-            {
-                if (null == _Current)
-                    _Current = new Schedule();
-                return _Current;
-            }
-        }
-        static Schedule _Current = null;
 
         #region Internals
 
