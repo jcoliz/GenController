@@ -7,6 +7,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GenController.Uwp.Screens
 {
+    /// <summary>
+    /// Screen view for settings page
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
     public sealed partial class Settings : Page
     {
         public Portable.ViewModels.SettingsViewModel VM { get; } = new Portable.ViewModels.SettingsViewModel();

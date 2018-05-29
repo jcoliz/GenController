@@ -4,6 +4,13 @@ using System.Windows.Input;
 
 namespace GenController.Portable.ViewModels
 {
+    /// <summary>
+    /// View model for use with the settings screen
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * IClock
+    /// </remarks>
     public class SettingsViewModel: ViewModelBase
     {
         /// <summary>

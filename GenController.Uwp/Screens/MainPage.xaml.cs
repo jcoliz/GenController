@@ -7,6 +7,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GenController.Uwp
 {
+    /// <summary>
+    /// Main screen
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
     public sealed partial class MainPage : Page
     {
         public Portable.ViewModels.MainViewModel VM = new Portable.ViewModels.MainViewModel();

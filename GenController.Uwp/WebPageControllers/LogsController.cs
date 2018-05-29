@@ -10,6 +10,13 @@ using Windows.Web.Http;
 
 namespace GenController.Uwp.Controllers
 {
+    /// <summary>
+    /// Web controller for "logs" page
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
     [RoutePrefix("logs")]
     class LogsController : Controller
     {

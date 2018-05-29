@@ -13,6 +13,10 @@ namespace GenController.Uwp.Screens
     /// <summary>
     /// Log viewer screen
     /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
     public sealed partial class Logs : Page
     {
         public LogsViewModel VM { get; } = new LogsViewModel();

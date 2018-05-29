@@ -7,6 +7,14 @@ using Windows.Web.Http;
 
 namespace GenController.Uwp.Controllers
 {
+    /// <summary>
+    /// Web controller for "status" page
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
+
     [RoutePrefix("status")]
     class StatusController : Controller
     {

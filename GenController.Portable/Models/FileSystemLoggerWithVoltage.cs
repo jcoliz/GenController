@@ -17,8 +17,10 @@ namespace GenController.Portable.Models
         {
         }
 
-        protected override string FormattedLine(string originalline) => Time.ToString("u") + " " + Voltage + originalline;
+        protected override string FormattedLine(string originalline) => Time.ToString("u") + " " + VoltageStr + originalline;
 
-        private string Voltage => Service.TryGet<IVoltage>()?.Voltage.ToString("0.0") + "V " ?? string.Empty;
+        private string VoltageStr => Voltage?.Voltage.ToString("0.0") + "V " ?? string.Empty;
+
+        private IVoltage Voltage => Service.TryGet<IVoltage>();
     }
 }

@@ -15,6 +15,9 @@ namespace GenController.Portable.Models
     /// 
     /// However, if there is no IRemote (perhaps because the app is running
     /// natively with no actual GPIO), this class will do nothing.
+    ///
+    /// Service Dependencies:
+    ///     * IRemote
     /// </remarks>
     public class RemoteControlLogic
     {

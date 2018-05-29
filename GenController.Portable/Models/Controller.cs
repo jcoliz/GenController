@@ -15,6 +15,12 @@ namespace GenController.Portable.Models
     /// However, if there is no IGenerator (perhaps because the app is running
     /// natively with no actual GPIO), this class will simply maintain
     /// what the status would be.
+    /// 
+    /// Service Dependencies:
+    ///     * ILogger
+    ///     * IClock
+    ///     * IGenerator
+    /// 
     /// </remarks>
     public class Controller : IController, INotifyPropertyChanged, IVoltage
     {

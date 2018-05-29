@@ -5,9 +5,16 @@ using Commonality;
 
 namespace GenController.Portable.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for the main screen
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * IClock
+    /// </remarks>
     public class MainViewModel : ViewModelBase
     {
-        public DateTime CurrentTime => Service.TryGet<IClock>()?.Now ?? DateTime.MinValue;
+        public DateTime CurrentTime => Clock?.Now ?? DateTime.MinValue;
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
@@ -74,5 +81,7 @@ namespace GenController.Portable.ViewModels
                 base.SetError("MV3", ex);
             }
         }
+
+        private IClock Clock => Service.TryGet<IClock>();
     }
 }

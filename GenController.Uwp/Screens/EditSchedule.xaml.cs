@@ -7,6 +7,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GenController.Uwp.Screens
 {
+    /// <summary>
+    /// Screen for Edit Schedule page
+    /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
     public sealed partial class EditSchedule : Page
     {
 

@@ -9,6 +9,12 @@ namespace GenController.Portable.Models
     /// <summary>
     /// The overall schedule of the generator, containing all the schedule blocks
     /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    ///     * IClock
+    ///     * ISettings
+    /// </remarks>
     public class Schedule
     {
         /// <summary>
