@@ -27,13 +27,12 @@ namespace GenController.Uwp.Controls
         {
             get
             {
-                var app = Service.Get<IApplicationInfo>();
                 var pagetitle = string.Empty;
                 if (!string.IsNullOrEmpty(Title))
                 {
                     pagetitle = $": {Title}";
                 }
-                return $"{app.Title} {app.Version}{pagetitle}";
+                return $"{ApplicationInfo.Title} {ApplicationInfo.Version}{pagetitle}";
             }
         }
 
@@ -41,5 +40,10 @@ namespace GenController.Uwp.Controls
         {
             this.InitializeComponent();
         }
+
+        #region Service Locator services
+        private IApplicationInfo ApplicationInfo => Service.Get<IApplicationInfo>();
+        #endregion
+
     }
 }

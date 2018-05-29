@@ -28,7 +28,7 @@ namespace GenController.Portable.Models
             {
                 _Status = value;
                 DoPropertyChanged(nameof(Status));
-                Logger.LogEvent(_Status.ToString());
+                Logger?.LogEvent(_Status.ToString());
 
                 if (Generator != null)
                 {
@@ -260,9 +260,9 @@ namespace GenController.Portable.Models
 
         #region Service Locator services
 
-        private ILogger Logger => Service.Get<ILogger>();
+        private ILogger Logger => Service.TryGet<ILogger>();
         private IClock Clock => Service.TryGet<IClock>();
-        private IGenerator Generator = Service.TryGet<IGenerator>();
+        private IGenerator Generator => Service.TryGet<IGenerator>();
 
         #endregion
 

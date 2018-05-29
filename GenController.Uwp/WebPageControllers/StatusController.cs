@@ -18,7 +18,7 @@ namespace GenController.Uwp.Controllers
         [Route]
         public HttpResponse Get()
         {
-            Service.Get<ILogger>().LogEvent("Web.Status");
+            Logger?.LogEvent("Web.Status");
 
             var html = new List<string>()
             {
@@ -72,7 +72,7 @@ namespace GenController.Uwp.Controllers
             });
             var content = string.Join("\r\n", html);
 
-            Service.Get<ILogger>().LogEvent("Web.StatusOK",$"Status={VM.Controller.Status}");
+            Logger?.LogEvent("Web.StatusOK",$"Status={VM.Controller.Status}");
 
             return new HttpResponse(HttpStatusCode.Ok, content);
         }
@@ -81,9 +81,9 @@ namespace GenController.Uwp.Controllers
         [Route("start")]
         public HttpResponse Start([Body] string postContent)
         {
-            Service.Get<ILogger>().LogEvent("Web.Start");
+            Logger?.LogEvent("Web.Start");
             VM.StartCommand.Execute(this);
-            Service.Get<ILogger>().LogEvent("Web.StartOK");
+            Logger?.LogEvent("Web.StartOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Starting...");
         }
 
@@ -91,28 +91,32 @@ namespace GenController.Uwp.Controllers
         [Route("stop")]
         public HttpResponse Stop([Body] string postContent)
         {
-            Service.Get<ILogger>().LogEvent("Web.Stop");
+            Logger?.LogEvent("Web.Stop");
             VM.StopCommand.Execute(this);
-            Service.Get<ILogger>().LogEvent("Web.StopOK");
+            Logger?.LogEvent("Web.StopOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Stopping...");
         }
         [HttpPost]
         [Route("disable")]
         public HttpResponse Disable([Body] string postContent)
         {
-            Service.Get<ILogger>().LogEvent("Web.Disable");
+            Logger?.LogEvent("Web.Disable");
             VM.DisableCommand.Execute(this);
-            Service.Get<ILogger>().LogEvent("Web.DisableOK");
+            Logger?.LogEvent("Web.DisableOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Disabled.");
         }
         [HttpPost]
         [Route("enable")]
         public HttpResponse Enable([Body] string postContent)
         {
-            Service.Get<ILogger>().LogEvent("Web.Enable");
+            Logger?.LogEvent("Web.Enable");
             VM.EnableCommand.Execute(this);
-            Service.Get<ILogger>().LogEvent("Web.EnableOK");
+            Logger?.LogEvent("Web.EnableOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Enabled.");
         }
+
+        #region Service Locator services
+        private ILogger Logger => Service.TryGet<ILogger>();
+        #endregion
     }
 }

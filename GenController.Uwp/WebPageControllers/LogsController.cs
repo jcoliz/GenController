@@ -17,7 +17,7 @@ namespace GenController.Uwp.Controllers
         [Route]
         public async Task<HttpResponse> Get()
         {
-            await Service.Get<ILogger>().LogEventAsync("Web.Logs");
+            await Logger?.LogEventAsync("Web.Logs");
 
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
@@ -61,7 +61,7 @@ namespace GenController.Uwp.Controllers
             long binary = Convert.ToInt64(param1, 16);
             DateTime dt = DateTime.FromBinary(binary);
 
-            await Service.Get<ILogger>().LogEventAsync("Web.GetLog", $"Log={dt}");
+            await Logger?.LogEventAsync("Web.GetLog", $"Log={dt}");
 
             var htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<html>");
@@ -80,5 +80,9 @@ namespace GenController.Uwp.Controllers
 
             return new HttpResponse(HttpStatusCode.Ok, htmlBuilder.ToString());
         }
+
+        #region Service Locator services
+        private ILogger Logger => Service.TryGet<ILogger>();
+        #endregion
     }
 }
