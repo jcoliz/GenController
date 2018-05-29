@@ -6,7 +6,7 @@ namespace GenController.Uwp.Converters
 {
     public class DefaultToVisibilityConverter : DefaultConverter<Visibility>
     {
-        public DefaultToVisibilityConverter(): base(Visibility.Visible, Visibility.Collapsed)
+        public DefaultToVisibilityConverter(): base(Visibility.Collapsed, Visibility.Visible)
         {}
 
     }
@@ -17,7 +17,7 @@ namespace GenController.Uwp.Converters
 
     public class DefaultToHiddenConverter : DefaultConverter<Visibility>
     {
-        public DefaultToHiddenConverter(): base(Visibility.Collapsed, Visibility.Visible)
+        public DefaultToHiddenConverter(): base(Visibility.Visible, Visibility.Collapsed)
         { }
     }
 

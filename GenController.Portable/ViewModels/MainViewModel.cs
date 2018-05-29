@@ -20,7 +20,7 @@ namespace GenController.Portable.ViewModels
 
         public Models.Controller Controller => Models.Controller.Current as Models.Controller;
 
-        public ICollection<Models.GenPeriod> Periods => Schedule.Periods;
+        public IObservableCollection<Models.GenPeriod> Periods => Schedule.Periods;
 
         public ICommand StartCommand => new DelegateCommand(async _ => 
         {

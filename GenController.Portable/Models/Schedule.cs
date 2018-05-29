@@ -22,7 +22,7 @@ namespace GenController.Portable.Models
         /// </summary>
         private RangeObservableCollection<GenPeriod> _Periods { get; } = new RangeObservableCollection<GenPeriod>();
 
-        public ICollection<GenPeriod> Periods => _Periods;
+        public IObservableCollection<GenPeriod> Periods => _Periods;
 
         /// <summary>
         /// Schedule is free to start and stop generator according to schedule
