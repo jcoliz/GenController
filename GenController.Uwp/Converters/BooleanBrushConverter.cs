@@ -5,13 +5,10 @@ using Windows.UI.Xaml.Media;
 
 namespace GenController.Uwp.Converters
 {
-    public class BooleanRedBrushConverter : DefaultConverter
+    public class BooleanRedBrushConverter : DefaultConverter<Brush>
     {
-        SolidColorBrush Red = new SolidColorBrush(Colors.Red);
-        SolidColorBrush Black = new SolidColorBrush(Colors.Black);
-        public override object Convert(object value, Type targetType, object parameter)
+        public BooleanRedBrushConverter(): base(new SolidColorBrush(Colors.Black),new SolidColorBrush(Colors.Red))
         {
-            return base.Convert<Brush>(Black, Red, value, targetType, parameter);
         }
     }
 

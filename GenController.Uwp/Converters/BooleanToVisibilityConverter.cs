@@ -4,24 +4,21 @@ using Commonality.Converters;
 
 namespace GenController.Uwp.Converters
 {
-    public class DefaultToVisibilityConverter : DefaultConverter
+    public class DefaultToVisibilityConverter : DefaultConverter<Visibility>
     {
-        public override object Convert(object value, Type targetType, object parameter)
-        {
-            return base.Convert<Visibility>(Visibility.Collapsed, Visibility.Visible, value, targetType, parameter);
-        }
+        public DefaultToVisibilityConverter(): base(Visibility.Visible, Visibility.Collapsed)
+        {}
+
     }
 
     public class DefaultVisibleXaml: XamlValueConverter<DefaultToVisibilityConverter>
     {
     }
 
-    public class DefaultToHiddenConverter : DefaultConverter
+    public class DefaultToHiddenConverter : DefaultConverter<Visibility>
     {
-        public override object Convert(object value, Type targetType, object parameter)
-        {
-            return base.Convert<Visibility>(Visibility.Visible, Visibility.Collapsed, value, targetType, parameter);
-        }
+        public DefaultToHiddenConverter(): base(Visibility.Collapsed, Visibility.Visible)
+        { }
     }
 
     public class DefaultHiddenXaml : XamlValueConverter<DefaultToHiddenConverter>
