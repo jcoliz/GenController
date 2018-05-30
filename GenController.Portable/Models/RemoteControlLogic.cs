@@ -22,6 +22,11 @@ namespace GenController.Portable.Models
     /// </remarks>
     public class RemoteControlLogic
     {
+        public RemoteControlLogic(IRemote remote, IController controller)
+        {
+            Remote = remote;
+            Controller = controller;
+        }
         /// <summary>
         /// Attach to the underlying hardware
         /// </summary>
@@ -35,20 +40,6 @@ namespace GenController.Portable.Models
                 Remote.LineChanged += Remote_LineChanged;
         }
 
-        /// <summary>
-        /// The current singleton
-        /// </summary>
-        public static RemoteControlLogic Current
-        {
-            get
-            {
-                if (null == _Current)
-                    _Current = new RemoteControlLogic();
-                return _Current;
-            }
-        }
-        static RemoteControlLogic _Current = null;
-
         private void Remote_LineChanged(object sender, int line)
         {
             if (line == 1 && Remote.IsPressed(1))
@@ -57,8 +48,8 @@ namespace GenController.Portable.Models
                 Controller.Stop();
         }
 
-        private IRemote Remote => Service.TryGet<IRemote>();
+        private IRemote Remote;
 
-        private IController Controller => Service.Get<IController>();
+        private IController Controller;
     }
 }

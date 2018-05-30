@@ -60,6 +60,8 @@ namespace GenController.Uwp
         /// </summary>
         public static Controller ControllerCurrent;
 
+        private static RemoteControlLogic RemoteControlCurrent;
+
         private Catnap.Server.HttpServer httpServer;
 
         public string Title
@@ -155,19 +157,6 @@ namespace GenController.Uwp
                 await Logger.StartSessionAsync();
                 await Logger.LogInfoAsync($"{Title} {Version}");
 
-                // Try to open the hardware remote 
-                try
-                {
-                    var remote = new Platform.HardwareRemote();
-                    Service.Set<Portable.Models.IRemote>(remote);
-                    Portable.Models.RemoteControlLogic.Current.AttachToHardware();
-                }
-                catch
-                {
-                    // OK if it fails. We just won't get any inputs from the remote
-                    await Logger.LogInfoAsync("No hardware remote.");
-                }
-
                 try
                 {
                     // Try to open a connection to the hardware generator line
@@ -184,15 +173,12 @@ namespace GenController.Uwp
                     Service.Set<Portable.Models.IVoltage>(mg);
                 }
 
-
-
                 ScheduleCurrent = new Schedule();
                 Commonality.Service.Set<ISchedule>(ScheduleCurrent);
                 ScheduleCurrent.Load();
 
                 if (ScheduleCurrent.Periods.FirstOrDefault() == null)
                 {
-                    /* This is the crazy testing schedule. Once every minute!! */
                     var current = TimeSpan.FromHours(5);
                     var period = TimeSpan.FromHours(2);
                     var ending = TimeSpan.FromHours(22);
@@ -205,6 +191,20 @@ namespace GenController.Uwp
 
                 ControllerCurrent = new Controller();
                 Service.Set<IController>(ControllerCurrent);
+
+                // Try to open the hardware remote 
+                try
+                {
+                    var remote = new Platform.HardwareRemote();
+                    Service.Set<Portable.Models.IRemote>(remote);
+                    RemoteControlCurrent = new RemoteControlLogic(remote, ControllerCurrent);
+                    RemoteControlCurrent.AttachToHardware();
+                }
+                catch
+                {
+                    // OK if it fails. We just won't get any inputs from the remote
+                    await Logger.LogInfoAsync("No hardware remote.");
+                }
 
                 Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
                 Timer.Tick += Timer_Tick;

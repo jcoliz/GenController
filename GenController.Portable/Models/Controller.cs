@@ -108,6 +108,8 @@ namespace GenController.Portable.Models
         /// </summary>
         /// <remarks>
         /// This is kept here for simplicity because all other system status is here.
+        /// TODO: Unfortunately, this makes for a cyclic dependency between schedule and controller.
+        /// Will need to refactor the users of this.
         /// </remarks>
         public bool Enabled
         {
