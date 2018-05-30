@@ -10,6 +10,7 @@ namespace GenController.Portable.ViewModels
     /// <remarks>
     /// Service Dependencies:
     ///     * IClock
+    ///     * ILogger
     /// </remarks>
     public class SettingsViewModel: ViewModelBase
     {

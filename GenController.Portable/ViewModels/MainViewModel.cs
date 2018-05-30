@@ -13,6 +13,8 @@ namespace GenController.Portable.ViewModels
     /// Service Dependencies:
     ///     * IClock
     ///     * ISchedule
+    ///     * IController
+    ///     * ILogger
     /// </remarks>
     public class MainViewModel : ViewModelBase
     {

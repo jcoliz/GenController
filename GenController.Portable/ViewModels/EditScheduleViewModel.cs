@@ -5,6 +5,11 @@ using System.Windows.Input;
 
 namespace GenController.Portable.ViewModels
 {
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ISchedule
+    ///     * ILogger
+    /// </remarks>
     public class EditScheduleViewModel: ViewModelBase
     {
         public EditScheduleViewModel(): base(Service.TryGet<ILogger>())

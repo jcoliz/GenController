@@ -11,6 +11,10 @@ namespace GenController.Portable.ViewModels
     /// <summary>
     /// This makes the logs from SimpleMeasurement instrumentation visible
     /// </summary>
+    /// <remarks>
+    /// Service Dependencies:
+    ///     * ILogger
+    /// </remarks>
     public class LogsViewModel: ViewModelBase
     {
         public LogsViewModel(): base(Service.TryGet<ILogger>())
