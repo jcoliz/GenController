@@ -18,7 +18,7 @@ namespace GenController.Portable.ViewModels
     {
         public DateTime CurrentTime => Clock?.Now ?? DateTime.MinValue;
 
-        public Models.Controller Controller => Models.Controller.Current as Models.Controller;
+        public IController Controller => Service.Get<IController>();
 
         public IObservableCollection<Models.GenPeriod> Periods => Schedule.Periods;
 
@@ -27,7 +27,7 @@ namespace GenController.Portable.ViewModels
             try
             {
                 Schedule.Override();
-                await Models.Controller.Current.Start();
+                await Controller.Start();
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace GenController.Portable.ViewModels
             try
             {
                 Schedule.Override();
-                await Models.Controller.Current.Stop();
+                await Controller.Stop();
             }
             catch (Exception ex)
             {

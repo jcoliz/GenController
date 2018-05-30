@@ -55,6 +55,11 @@ namespace GenController.Uwp
         /// </summary>
         private static Schedule ScheduleCurrent;
 
+        /// <summary>
+        /// The current logic controller
+        /// </summary>
+        public static Controller ControllerCurrent;
+
         private Catnap.Server.HttpServer httpServer;
 
         public string Title
@@ -195,6 +200,9 @@ namespace GenController.Uwp
                     }
                 }
 
+                ControllerCurrent = new Controller();
+                Service.Set<IController>(ControllerCurrent);
+
                 Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
                 Timer.Tick += Timer_Tick;
                 Timer.Start();
@@ -219,7 +227,7 @@ namespace GenController.Uwp
                                     await Logger.LogErrorAsync(ex);
                             }
                         });
-
+               
             }
             catch (Exception ex)
             {
@@ -268,7 +276,7 @@ namespace GenController.Uwp
         /// <param name="timer"></param>
         private void HardwareTick(ThreadPoolTimer timer)
         {
-            (Portable.Models.Controller.TryCurrent as Portable.Models.Controller)?.FastTick();
+            ControllerCurrent.FastTick();
         }
 
         private async void Timer_Tick(object sender, object e)
@@ -280,7 +288,7 @@ namespace GenController.Uwp
                 if (t != null)
                     await t;
                 this.Tick?.Invoke(this, e);
-                (Portable.Models.Controller.TryCurrent as Portable.Models.Controller)?.SlowTick();
+                ControllerCurrent.SlowTick();
             }
             catch (Exception ex)
             {

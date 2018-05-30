@@ -14,6 +14,7 @@ namespace GenController.Portable.Models
     ///     * ILogger
     ///     * IClock
     ///     * ISettings
+    ///     * IController
     /// </remarks>
     public class Schedule : ISchedule
     {
@@ -72,13 +73,13 @@ namespace GenController.Portable.Models
             Task result = null;
             var now = Clock.Now;
             var elapsed = now - LastTick;
-            var status = Controller.Current.Status;
+            var status = Controller.Status;
 
             // Managed failed starts
             if (status == GenStatus.Confirming)
             {
                 // Confirm whether the generator is running now
-                Controller.Current.Confirm();
+                Controller.Confirm();
 
                 // If this is the first we've heard about it, start the timer
                 if (StartedConfirmingAt == null)
@@ -91,7 +92,7 @@ namespace GenController.Portable.Models
                         // Try again!!
                         Log("Schedule.RetryStart");
                         StartedConfirmingAt = null;
-                        result = Controller.Current.Start();
+                        result = Controller.Start();
                     }
                 }
             }
@@ -126,16 +127,16 @@ namespace GenController.Portable.Models
                     if (desiredstate == GenStatus.Running)
                     {
                         // If we want to start, let's check the voltage levels to understand what we need
-                        if (item.Voltage < 1.0 || Controller.Current.Voltage < item.Voltage)
+                        if (item.Voltage < 1.0 || Controller.Voltage < item.Voltage)
                         {
                             Log("Schedule.Start");
-                            result = Controller.Current.Start();
+                            result = Controller.Start();
                         }
                     }
                     else if (desiredstate == GenStatus.Stopped)
                     {
                         Log("Schedule.Stop");
-                        result = Controller.Current.Stop();
+                        result = Controller.Stop();
                     }
                 }
             }
@@ -229,6 +230,8 @@ namespace GenController.Portable.Models
         private ILogger Logger => Service.TryGet<ILogger>();
 
         private ISettings Settings => Service.Get<ISettings>();
+
+        private IController Controller => Service.Get<IController>();
 
         #endregion
 

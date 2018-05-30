@@ -28,7 +28,8 @@ namespace GenController.Portable.Tests.Tests
             ScheduleCurrent.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(7), TimeSpan.FromHours(9),0.0));
             ScheduleCurrent.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(14),0.0));
             ScheduleCurrent.Periods.Add(new Models.GenPeriod(TimeSpan.FromHours(17), TimeSpan.FromHours(19),0.0));
-            Models.Controller.Current = Controller = new MockController() { Status = Models.GenStatus.Invalid };
+            Controller = new MockController() { Status = Models.GenStatus.Invalid };
+            Service.Set<IController>(Controller);
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 07, 00, 02);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Running, Controller.Status);
         }
 
         [TestMethod]
@@ -56,7 +57,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 09, 00, 02);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Stopped, Controller.Status);
         }
         [TestMethod]
         public async Task LastStartingEdge()
@@ -69,7 +70,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 17, 00, 02);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Running, Controller.Status);
         }
 
         [TestMethod]
@@ -83,7 +84,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 19, 00, 01);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Stopped, Controller.Status);
         }
 
         [TestMethod]
@@ -94,7 +95,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 2, 00, 00, 01);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Stopped, Controller.Status);
         }
 
         [TestMethod]
@@ -106,7 +107,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 2, 08, 00, 01);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Running, Controller.Status);
         }
 
         [TestMethod]
@@ -121,7 +122,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 07, 01, 03);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Confirming, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Confirming, Controller.Status);
         }
 
         [TestMethod]
@@ -139,7 +140,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 07, 02, 04);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Running, Controller.Status);
         }
 
         [TestMethod]
@@ -165,7 +166,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 10, 01, 02);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Running, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Running, Controller.Status);
         }
 
         [TestMethod]
@@ -196,7 +197,7 @@ namespace GenController.Portable.Tests.Tests
             Clock.Now = new DateTime(2017, 3, 1, 14, 01, 02);
             ScheduleCurrent.Tick();
 
-            Assert.AreEqual(Models.GenStatus.Stopped, Models.Controller.Current.Status);
+            Assert.AreEqual(Models.GenStatus.Stopped, Controller.Status);
         }
 
     }

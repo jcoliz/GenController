@@ -18,6 +18,7 @@ namespace GenController.Portable.Models
     ///
     /// Service Dependencies:
     ///     * IRemote
+    ///     * IController
     /// </remarks>
     public class RemoteControlLogic
     {
@@ -51,11 +52,13 @@ namespace GenController.Portable.Models
         private void Remote_LineChanged(object sender, int line)
         {
             if (line == 1 && Remote.IsPressed(1))
-                Controller.Current.Start();
+                Controller.Start();
             else if (line == 2 && Remote.IsPressed(2))
-                Controller.Current.Stop();
+                Controller.Stop();
         }
 
         private IRemote Remote => Service.TryGet<IRemote>();
+
+        private IController Controller => Service.Get<IController>();
     }
 }

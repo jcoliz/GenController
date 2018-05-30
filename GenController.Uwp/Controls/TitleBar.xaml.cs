@@ -1,4 +1,5 @@
 ﻿using Commonality;
+using GenController.Portable.Models;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -8,9 +9,13 @@ namespace GenController.Uwp.Controls
     /// <summary>
     /// A common title bar control so all the screens look the same
     /// </summary>
+    /// <remarks>
+    /// Uses these services:
+    ///     * IController
+    /// </remarks>
     public sealed partial class TitleBar : UserControl
     {
-        public Portable.Models.Controller Controller => Portable.Models.Controller.Current as Portable.Models.Controller;
+        public Controller Controller => App.ControllerCurrent;
 
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(String), typeof(TitleBar), new PropertyMetadata(string.Empty));

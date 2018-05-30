@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using GenController.Portable.Models;
 
@@ -22,6 +23,12 @@ namespace GenController.Portable.Tests.Mocks
         public bool RunSignal { get; set; } = false;
 
         public double Voltage => throw new NotImplementedException();
+
+        public bool Enabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+#pragma warning disable 67
+        public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore
 
 #pragma warning disable 1998
         public async Task Start()

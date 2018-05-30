@@ -122,28 +122,6 @@ namespace GenController.Portable.Models
             }
         }
 
-        public static IController Current
-        {
-            get
-            {
-                if (null == _Current)
-                    _Current = new Controller();
-                return _Current;
-            }
-            
-            set
-            {
-                // Setting the controller is allowed for platform injection during tests
-                _Current = value;
-            }
-        }
-        static IController _Current = null;
-
-        /// <summary>
-        /// Get the current controller if exists, but don't make a new one yet.
-        /// </summary>
-        public static IController TryCurrent => _Current;
-
         #region Hardware Interface
 
         // See wiring and timing diagram here:
