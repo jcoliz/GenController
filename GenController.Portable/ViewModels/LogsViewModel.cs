@@ -13,6 +13,10 @@ namespace GenController.Portable.ViewModels
     /// </summary>
     public class LogsViewModel: ViewModelBase
     {
+        public LogsViewModel(): base(Service.TryGet<ILogger>())
+        {
+        }
+
         /// <summary>
         /// List of session logs available
         /// </summary>

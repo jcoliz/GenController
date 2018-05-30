@@ -16,6 +16,10 @@ namespace GenController.Portable.ViewModels
     /// </remarks>
     public class MainViewModel : ViewModelBase
     {
+        public MainViewModel(): base(Service.TryGet<ILogger>())
+        {
+        }
+
         public DateTime CurrentTime => Clock?.Now ?? DateTime.MinValue;
 
         public IController Controller => Service.Get<IController>();

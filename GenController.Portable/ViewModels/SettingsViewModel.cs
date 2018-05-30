@@ -13,6 +13,10 @@ namespace GenController.Portable.ViewModels
     /// </remarks>
     public class SettingsViewModel: ViewModelBase
     {
+        public SettingsViewModel(): base(Service.TryGet<ILogger>())
+        {
+        }
+
         /// <summary>
         /// DateTime currently being edited
         /// </summary>

@@ -7,6 +7,10 @@ namespace GenController.Portable.ViewModels
 {
     public class EditScheduleViewModel: ViewModelBase
     {
+        public EditScheduleViewModel(): base(Service.TryGet<ILogger>())
+        {
+        }
+
         public Models.GenPeriod Period { get; private set; } = new Models.GenPeriod(TimeSpan.FromHours(12), TimeSpan.FromHours(13),14.0);
 
         public Models.GenPeriod Original
