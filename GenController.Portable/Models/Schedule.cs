@@ -52,7 +52,7 @@ namespace GenController.Portable.Models
         {
             var storage = Settings.GetCompositeKey("Schedule");
             _Periods.AddRange(storage.Select(GenPeriod.Deserialize));
-            Logger?.LogEvent("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
+            Logger?.LogEventAsync("Schedule.Loaded", $"Schedule={string.Join(",",storage)}");
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace GenController.Portable.Models
         private DateTime? StartedConfirmingAt = null;
         private ScheduleItem _Override;
 
-        private void Log(string what) =>  Logger?.LogEvent(what);
+        private void Log(string what) =>  Logger?.LogEventAsync(what);
 
         #endregion
 

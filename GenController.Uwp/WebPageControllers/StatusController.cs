@@ -26,7 +26,7 @@ namespace GenController.Uwp.Controllers
         [Route]
         public HttpResponse Get()
         {
-            Logger?.LogEvent("Web.Status");
+            Logger?.LogEventAsync("Web.Status");
 
             var html = new List<string>()
             {
@@ -80,7 +80,7 @@ namespace GenController.Uwp.Controllers
             });
             var content = string.Join("\r\n", html);
 
-            Logger?.LogEvent("Web.StatusOK",$"Status={VM.Controller.Status}");
+            Logger?.LogEventAsync("Web.StatusOK",$"Status={VM.Controller.Status}");
 
             return new HttpResponse(HttpStatusCode.Ok, content);
         }
@@ -89,9 +89,9 @@ namespace GenController.Uwp.Controllers
         [Route("start")]
         public HttpResponse Start([Body] string postContent)
         {
-            Logger?.LogEvent("Web.Start");
+            Logger?.LogEventAsync("Web.Start");
             VM.StartCommand.Execute(this);
-            Logger?.LogEvent("Web.StartOK");
+            Logger?.LogEventAsync("Web.StartOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Starting...");
         }
 
@@ -99,27 +99,27 @@ namespace GenController.Uwp.Controllers
         [Route("stop")]
         public HttpResponse Stop([Body] string postContent)
         {
-            Logger?.LogEvent("Web.Stop");
+            Logger?.LogEventAsync("Web.Stop");
             VM.StopCommand.Execute(this);
-            Logger?.LogEvent("Web.StopOK");
+            Logger?.LogEventAsync("Web.StopOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Stopping...");
         }
         [HttpPost]
         [Route("disable")]
         public HttpResponse Disable([Body] string postContent)
         {
-            Logger?.LogEvent("Web.Disable");
+            Logger?.LogEventAsync("Web.Disable");
             VM.DisableCommand.Execute(this);
-            Logger?.LogEvent("Web.DisableOK");
+            Logger?.LogEventAsync("Web.DisableOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Disabled.");
         }
         [HttpPost]
         [Route("enable")]
         public HttpResponse Enable([Body] string postContent)
         {
-            Logger?.LogEvent("Web.Enable");
+            Logger?.LogEventAsync("Web.Enable");
             VM.EnableCommand.Execute(this);
-            Logger?.LogEvent("Web.EnableOK");
+            Logger?.LogEventAsync("Web.EnableOK");
             return new HttpResponse(HttpStatusCode.Ok, $"Enabled.");
         }
 

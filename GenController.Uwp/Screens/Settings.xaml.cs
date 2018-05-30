@@ -27,7 +27,7 @@ namespace GenController.Uwp.Screens
             catch (Exception ex)
             {
                 ex.Source = "SX0";
-                Logger?.LogError(ex);
+                Logger?.LogErrorAsync(ex);
                 VM_ExceptionRaised(this, ex);
             }
         }
@@ -36,7 +36,7 @@ namespace GenController.Uwp.Screens
         {
             base.OnNavigatedTo(e);
             VM.ExceptionRaised += VM_ExceptionRaised;
-            Logger?.LogEvent("Screen.Settings");
+            Logger?.LogEventAsync("Screen.Settings");
             App.Current.Tick += App_Tick;
         }
 
@@ -67,7 +67,7 @@ namespace GenController.Uwp.Screens
         private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
             VM.Commit();
-            Logger?.LogEvent("Time.Set", $"Time={VM.DT}");
+            Logger?.LogEventAsync("Time.Set", $"Time={VM.DT}");
             Frame.GoBack();
         }
 

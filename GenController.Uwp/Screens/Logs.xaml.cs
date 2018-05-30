@@ -30,7 +30,7 @@ namespace GenController.Uwp.Screens
             catch (Exception ex)
             {
                 ex.Source = "LX0";
-                Logger?.LogError(ex);
+                Logger?.LogErrorAsync(ex);
                 VM_ExceptionRaised(this, ex);
             }
         }
@@ -38,7 +38,7 @@ namespace GenController.Uwp.Screens
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            Logger?.LogEvent("Screen.Logs");
+            Logger?.LogEventAsync("Screen.Logs");
             var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => 
             {
                 VM.Load();

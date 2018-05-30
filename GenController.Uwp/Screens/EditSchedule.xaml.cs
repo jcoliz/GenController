@@ -30,7 +30,7 @@ namespace GenController.Uwp.Screens
             catch (Exception ex)
             {
                 ex.Source = "EX0";
-                Logger?.LogError(ex);
+                Logger?.LogErrorAsync(ex);
                 VM_ExceptionRaised(this, ex);
             }
         }
@@ -43,7 +43,7 @@ namespace GenController.Uwp.Screens
             {
                 VM.Original = e.Parameter as Portable.Models.GenPeriod;
             }
-            Logger?.LogEvent("Screen.EditSchedule", $"Add={VM.WillAdd}");
+            Logger?.LogEventAsync("Screen.EditSchedule", $"Add={VM.WillAdd}");
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -69,12 +69,12 @@ namespace GenController.Uwp.Screens
             try
             {
                 VM.Commit();
-                Logger?.LogEvent("Schedule.Commit", $"Start={VM.Period.SerializeKey}",$"Delete={VM.WillDelete}");
+                Logger?.LogEventAsync("Schedule.Commit", $"Start={VM.Period.SerializeKey}",$"Delete={VM.WillDelete}");
                 Frame.GoBack();
             }
             catch (Exception ex)
             {
-                Logger?.LogEvent("Schedule.CommitFailed",$"Reason={ex.Message}");
+                Logger?.LogEventAsync("Schedule.CommitFailed",$"Reason={ex.Message}");
                 var ignore = new MessageDialog(ex.Message, "SORRY").ShowAsync();
             }
         }

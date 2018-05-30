@@ -27,7 +27,7 @@ namespace GenController.Uwp
             catch (Exception ex)
             {
                 ex.Source = "MX0";
-                Logger?.LogError(ex);
+                Logger?.LogErrorAsync(ex);
                 VM_ExceptionRaised(this, ex);
             }
         }

@@ -104,7 +104,7 @@ namespace GenController.Uwp
 
         private void App_Resuming(object sender, object e)
         {
-            Logger?.LogInfo("Resuming");
+            Logger?.LogInfoAsync("Resuming");
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace GenController.Uwp
                 Service.Set<ILogger>(new Portable.Models.FileSystemLoggerWithVoltage(clock,Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
                 Service.Set<IApplicationInfo>(this);
 
-                await Logger.StartSession();
+                await Logger.StartSessionAsync();
                 await Logger.LogInfoAsync($"{Title} {Version}");
 
                 // Try to open the hardware remote 
@@ -296,7 +296,7 @@ namespace GenController.Uwp
             catch (Exception ex)
             {
                 ex.Source = "AP1";
-                Logger?.LogError(ex);
+                Logger?.LogErrorAsync(ex);
             }
         }
 
@@ -308,7 +308,7 @@ namespace GenController.Uwp
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             e.Exception.Source = "AP4";
-            Logger?.LogError(e.Exception);
+            Logger?.LogErrorAsync(e.Exception);
         }
 
         /// <summary>
@@ -322,13 +322,13 @@ namespace GenController.Uwp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-            Logger?.LogInfo("Suspending");
+            Logger?.LogInfoAsync("Suspending");
             deferral.Complete();
         }
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            Logger?.LogInfo("Activated");
+            Logger?.LogInfoAsync("Activated");
             base.OnActivated(args);
         }
     }

@@ -35,7 +35,7 @@ namespace GenController.Portable.Models
             {
                 _Status = value;
                 DoPropertyChanged(nameof(Status));
-                Logger?.LogEvent(_Status.ToString());
+                Logger?.LogEventAsync(_Status.ToString());
 
                 if (Generator != null)
                 {
