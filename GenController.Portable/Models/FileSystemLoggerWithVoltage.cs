@@ -13,7 +13,7 @@ namespace GenController.Portable.Models
     /// </summary>
     public class FileSystemLoggerWithVoltage: FileSystemLogger
     {
-        public FileSystemLoggerWithVoltage(string homedir = null): base(homedir)
+        public FileSystemLoggerWithVoltage(IClock clock, string homedir = null): base(clock, homedir)
         {
         }
 
