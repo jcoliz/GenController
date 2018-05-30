@@ -122,6 +122,9 @@ namespace GenController.Uwp
 #endif
             try
             {
+                var settings = new Platform.WindowsSettings();
+                Service.Set<ISettings>(settings);
+
                 try
                 {
                     // Try to create a hardware clock (DS3231), or fall back to no clock
@@ -141,12 +144,11 @@ namespace GenController.Uwp
                     //await Logger?.LogInfoAsync("Hardware clock failed, using built-in clock.");
 
                     // We'll use a software clock instead
-                    Service.Set<IClock>(new Clock());
+                    Service.Set<IClock>(new Clock(settings));
                 }
 
                 // Set up services to be located by other components
                 Service.Set<ILogger>(new Portable.Models.FileSystemLoggerWithVoltage(Windows.Storage.ApplicationData.Current.LocalFolder.Path + "\\"));
-                Service.Set<ISettings>(new Platform.WindowsSettings());
                 Service.Set<IApplicationInfo>(this);
 
                 await Logger.StartSession();
