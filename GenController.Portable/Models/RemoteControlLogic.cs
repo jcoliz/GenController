@@ -16,40 +16,18 @@ namespace GenController.Portable.Models
     /// However, if there is no IRemote (perhaps because the app is running
     /// natively with no actual GPIO), this class will do nothing.
     ///
-    /// Service Dependencies:
-    ///     * IRemote
-    ///     * IController
     /// </remarks>
     public class RemoteControlLogic
     {
         public RemoteControlLogic(IRemote remote, IController controller)
         {
-            Remote = remote;
-            Controller = controller;
+            remote.LineChanged += (s,line) =>
+            {
+                if (line == 1 && remote.IsPressed(1))
+                    controller.Start();
+                else if (line == 2 && remote.IsPressed(2))
+                    controller.Stop();
+            };
         }
-        /// <summary>
-        /// Attach to the underlying hardware
-        /// </summary>
-        /// <remarks>
-        /// Make sure the IRemote service is set first, if there is ever going to be one.
-        /// </remarks>
-        public void AttachToHardware()
-        {
-            // It's OK if there is no hardware remote
-            if (null != Remote)
-                Remote.LineChanged += Remote_LineChanged;
-        }
-
-        private void Remote_LineChanged(object sender, int line)
-        {
-            if (line == 1 && Remote.IsPressed(1))
-                Controller.Start();
-            else if (line == 2 && Remote.IsPressed(2))
-                Controller.Stop();
-        }
-
-        private IRemote Remote;
-
-        private IController Controller;
     }
 }

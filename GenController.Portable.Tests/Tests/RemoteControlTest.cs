@@ -17,13 +17,9 @@ namespace IotHello.Portable.Tests.Tests
         [TestInitialize]
         public void SetUp()
         {
-            Service.Set<ISettings>(new MockSettings());
             Controller = new MockController();
-            Service.Set<IController>(Controller);
             RemoteControlHWI = new MockRemoteControlHWI();
-            Service.Set<IRemote>(RemoteControlHWI);
-            RC = new RemoteControlLogic();
-            RC.AttachToHardware();
+            RC = new RemoteControlLogic(RemoteControlHWI,Controller);
         }
 
         [TestMethod]

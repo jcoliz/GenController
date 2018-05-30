@@ -196,9 +196,7 @@ namespace GenController.Uwp
                 try
                 {
                     var remote = new Platform.HardwareRemote();
-                    Service.Set<Portable.Models.IRemote>(remote);
                     RemoteControlCurrent = new RemoteControlLogic(remote, ControllerCurrent);
-                    RemoteControlCurrent.AttachToHardware();
                 }
                 catch
                 {
